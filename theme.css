@@ -1,0 +1,147 @@
+     html,#container{
+        height:100%
+        width: 100%;
+        background-color:black;
+      }
+      #title{
+        position: relative;
+        height: 70px;
+        width: 80%;
+        background-color:black; 
+        margin-left: 10%;
+      }
+      h6{
+        position:absolute;
+        color: red;
+        font-weight: bold;
+        font-size: 1.0em;
+        left: 85%;
+        top: 10%;
+        margin:none;
+      }
+      #titleName{
+        color: red;
+        text-align: center;
+      }
+      #icon{
+        position: relative;
+        top: 10px;
+        height: 50px;
+        width: 50px;
+      }
+      button.button{
+        background-color: red;
+        font-size: 0.6em;
+        color: black;
+        height:35px;
+    	width:70px;
+       	border-style: none;
+      }
+      
+      button.bigbutton{
+        background-color: red;
+        font-size: 0.7em;
+        color: black;
+        height:35px;
+    	width:70px;
+       	border-style: none;
+      }
+      
+      #user{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 50%;
+  		 left: 90%
+      }
+      
+      #event{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 42%;
+  		 left: 90%
+      }
+      
+      #dona{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 58%;
+  		 left: 90%
+      }
+      
+       #workhours{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 34%;
+  		 left: 90%
+      }
+      
+      #pas{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 66%;
+  		 left: 90%
+      }
+      #msg{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 74%;
+  		 left: 90%
+      }
+      
+       #news{
+         position:absolute;
+   		 top: 80%;
+  		 left: 30%;
+         color: red;
+         font-size: 20px
+      }
+      
+      #log{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 50%;
+  		 left: 90%
+      }
+      
+      #donate{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 58%;
+  		 left: 90%
+      }
+      
+      #contact{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 66%;
+  		 left: 90%
+      }
+      
+      #clockin{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 42%;
+  		 left: 90%
+      }
+      
+      #note{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 58%;
+  		 left: 90%
+      }
+      
+      #clockout{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 50%;
+  		 left: 90%
+      }
+      
+      #pas{
+         position:absolute;
+   		 transition: 0.5s ease;
+   		 top: 67%;
+  		 left: 90%
+      }
+      
