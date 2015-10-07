@@ -85,27 +85,6 @@ function changedate(buttonpressed) {
 }
 
 
-function easter(year) {
-// feed in the year it returns the month and day of Easter using two GLOBAL variables: eastermonth and easterday
-var a = year % 19;
-var b = Math.floor(year/100);
-var c = year % 100;
-var d = Math.floor(b/4);
-var e = b % 4;
-var f = Math.floor((b+8) / 25);
-var g = Math.floor((b-f+1) / 3);
-var h = (19*a + b - d - g + 15) % 30;
-var i = Math.floor(c/4);
-var j = c % 4;
-var k = (32 + 2*e + 2*i - h - j) % 7;
-var m = Math.floor((a + 11*h + 22*k) / 451);
-var month = Math.floor((h + k - 7*m + 114) / 31);
-var day = ((h + k - 7*m +114) % 31) + 1;
-eastermonth = month;
-easterday = day;
-}
-
-
 function createCalendar() {
 	calendarString = '';
 	var daycounter = 0;
@@ -200,80 +179,9 @@ var theevent = "";
 var floater = 0;
 
 	for (var i = 0; i < events.length; i++) {
-		// First we'll process recurring events (if any):
-		if (events[i][0] != "") {
-			if (events[i][0] == "D") {
-			}
-			if (events[i][0] == "W") {
-				if ((events[i][2] == dayofweek)) {
-				theevent += "Events of: \n" + month +'/'+ day +'/'+ year + '\n';
-				theevent += events[i][6] + '\n';
-				theevent += 'Start Time: ' + events[i][4] + '\n';
-				theevent += 'Ending Time: ' + events[i][5] + '\n';
-				theevent += 'Description: ' + events[i][7] + '\n';
-				theevent += '\n -------------- \n\n';
-				document.forms.eventform.eventlist.value = theevent;
-				}
-			}
-			if (events[i][0] == "M") {
-			}
-			if (events[i][0] == "Y") {
-				if ((events[i][2] == day) && (events[i][1] == month)) {
-				theevent += "Events of: \n" + month +'/'+ day +'/'+ year + '\n';
-				theevent += events[i][6] + '\n';
-				theevent += 'Start Time: ' + events[i][4] + '\n';
-				theevent += 'Ending Time: ' + events[i][5] + '\n';
-				theevent += 'Description: ' + events[i][7] + '\n';
-				theevent += '\n -------------- \n\n';
-				document.forms.eventform.eventlist.value = theevent;
-				}
-			}
-			if (events[i][0] == "F") {
-				if ((events[i][1] == 3) && (events[i][2] == 0) && (events[i][3] == 0) ) {
-					if (easterday == day && eastermonth == month) {
-						theevent += "Events of: \n" + month +'/'+ day +'/'+ year + '\n';
-						theevent += events[i][6] + '\n';
-						theevent += 'Start Time: ' + events[i][4] + '\n';
-						theevent += 'Ending Time: ' + events[i][5] + '\n';
-						theevent += 'Description: ' + events[i][7] + '\n';
-						theevent += '\n -------------- \n\n';
-						document.forms.eventform.eventlist.value = theevent;
-					} 
-				} else {
-					floater = floatingholiday(year,events[i][1],events[i][2],events[i][3]);
-
-					if ((month == 5) && (events[i][1] == 5) && (events[i][2] == 4) && (events[i][3] == 2)) {
-						if ((floater + 7 <= 31) && (day == floater + 7)) {
-							theevent += "Events of: \n" + month +'/'+ day +'/'+ year + '\n';
-							theevent += events[i][6] + '\n';
-							theevent += 'Start Time: ' + events[i][4] + '\n';
-							theevent += 'Ending Time: ' + events[i][5] + '\n';
-							theevent += 'Description: ' + events[i][7] + '\n';
-							theevent += '\n -------------- \n\n';
-							document.forms.eventform.eventlist.value = theevent;
-						} else if ((floater + 7 > 31) && (day == floater)) {
-							theevent += "Events of: \n" + month +'/'+ day +'/'+ year + '\n';
-							theevent += events[i][6] + '\n';
-							theevent += 'Start Time: ' + events[i][4] + '\n';
-							theevent += 'Ending Time: ' + events[i][5] + '\n';
-							theevent += 'Description: ' + events[i][7] + '\n';
-							theevent += '\n -------------- \n\n';
-							document.forms.eventform.eventlist.value = theevent;
-						}
-					} else if ((events[i][1] == month) && (floater == day)) {
-						theevent += "Events of: \n" + month +'/'+ day +'/'+ year + '\n';
-						theevent += events[i][6] + '\n';
-						theevent += 'Start Time: ' + events[i][4] + '\n';
-						theevent += 'Ending Time: ' + events[i][5] + '\n';
-						theevent += 'Description: ' + events[i][7] + '\n';
-						theevent += '\n -------------- \n\n';
-						document.forms.eventform.eventlist.value = theevent;
-					}
-				}
-		}
-		}
+		
 		// Now we'll process any One Time events happening on the matching month, day, year:
-		else if ((events[i][2] == day) && (events[i][1] == month) && (events[i][3] == year)) {
+		if ((events[i][2] == day) && (events[i][1] == month) && (events[i][3] == year)) {
 			theevent += "Events of: \n" + month +'/'+ day +'/'+ year + '\n';
 			theevent += events[i][6] + '\n';
 			theevent += 'Start Time: ' + events[i][4] + '\n';
