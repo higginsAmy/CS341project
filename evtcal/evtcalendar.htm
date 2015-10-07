@@ -142,26 +142,7 @@ var numevents = 0;
 var floater = 0;
 
 	for (var i = 0; i < events.length; i++) {
-		if (events[i][0] == "W") {
-			if ((events[i][2] == dayofweek)) numevents++;
-		}
-		else if (events[i][0] == "Y") {
-			if ((events[i][2] == day) && (events[i][1] == month)) numevents++;
-		}
-		else if (events[i][0] == "F") {
-			if ((events[i][1] == 3) && (events[i][2] == 0) && (events[i][3] == 0) ) {
-				easter(year);
-				if (easterday == day && eastermonth == month) numevents++;
-			} else {
-				floater = floatingholiday(year,events[i][1],events[i][2],events[i][3]);
-				if ((month == 5) && (events[i][1] == 5) && (events[i][2] == 4) && (events[i][3] == 2)) {
-					if ((floater + 7 <= 31) && (day == floater + 7)) {
-						numevents++;
-					} else if ((floater + 7 > 31) && (day == floater)) numevents++;
-				} else if ((events[i][1] == month) && (floater == day)) numevents++;
-			}
-		}
-		else if ((events[i][2] == day) && (events[i][1] == month) && (events[i][3] == year)) {
+		if ((events[i][2] == day) && (events[i][1] == month) && (events[i][3] == year)) {
 			numevents++;
 		}
 	}
