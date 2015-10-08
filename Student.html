@@ -3,20 +3,35 @@
   <head>
   	<meta charset="utf-8">
     <title>You are logged as Student</title>
+    <!-- Styles --> 
     <link rel="stylesheet" type="text/css" href="theme.css">
+	<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+	<!-- Scripts -->
+	<script src='fullcalendar/lib/jquery.min.js'></script>
+	<script src='fullcalendar/lib/moment.min.js'></script>
+	<script src='fullcalendar/fullcalendar.js'></script>
+	<script>
+		$(document).ready(function() {
+    		// page is now ready, initialize the calendar...
+    		$('#calendar').fullCalendar({
+        		// put your options and callbacks here
+    		})
+		});
+	</script>
   </head>
   <body>
     <div id="container"> 
-    <div id="title">
-      <h1 id="titleName">
-      	<img id = "icon"src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/calendar-icon.png">
-      	<b>Holmen High School Robotics Club</b>
-      </h1>
-    </div>
-      <button id = "clockin" class="button"  type="button"><b>Clock in</b></button>
-      <button id = "clockout" class="button"  type="button"><b>Clock out</b></button>
-      <button id = "notes" class="bigbutton" type="button"><b>View Notes</b></button>
-      <button id = "change_password" class="bigbutton" type="button"><b>Change Password</b></button>
+    	<div id="title">
+      		<h1 id="titleName">
+      		<img id = "icon"src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/calendar-icon.png">
+      		<b>Holmen High School Robotics Club</b>
+      		</h1>
+    	</div>
+    	<div id='calendar' style="background:white; width:90%;"></div>
+      	<button id = "clockin" class="button"  type="button"><b>Clock in</b></button>
+      	<button id = "clockout" class="button"  type="button"><b>Clock out</b></button>
+      	<button id = "notes" class="bigbutton" type="button"><b>View Notes</b></button>
+      	<button id = "change_password" class="bigbutton" type="button"><b>Change Password</b></button>
     </div>
   </body>
 </html>
