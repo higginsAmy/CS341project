@@ -38,6 +38,16 @@
        	border-style: none;
       }
       
+      input{
+        background-color: red;
+        font-size: 0.6em;
+        color: black;
+        height:35px;
+    	width:70px;
+    	font-weight: bold;
+       	border-style: none;
+      }
+      
       button.bigbutton{
         background-color: red;
         font-size: 0.7em;
