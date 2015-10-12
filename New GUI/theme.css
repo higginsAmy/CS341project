@@ -41,13 +41,55 @@
     background-color: black;
     border-color: white;
     top:55px;
-    left:1000px;
+    left:85%;
     font-size: 25px;
     border-style: solid; 
 }
+
+#changePassword{
+    border: hidden;
+    height:20px;
+	width:100px;
+    color: white;
+    background-color: black;
+    top:30px;
+    left: 85%;
+    font-size: 9px;
+    border: 1px solid white; 
+}
+
+#forgetPassword{
+    border: hidden;
+    height:20px;
+	width:100px;
+    color: white;
+    background-color: black;
+    top:30px;
+    left: 85%;
+    font-size: 9px;
+    border: 1px solid white; 
+}
+
+#logOut{
+    height:40px;
+	width:100px;
+    color: white;
+    background-color: black;
+    border-color: white;
+    top:55px;
+    left:85%;
+    font-size: 25px;
+    border-style: solid; 
+}
+
 #log:hover{
     color: black;
     background-color: white;
+}
+
+.labelButton:hover{
+    color: white;
+    background-color: #3366CC;
 }
 
 .labelButton{
@@ -63,22 +105,64 @@
     height:30px;
 	width:95px;
     top:5px;
-    left:250px;
+    left:25%;
     font-size: 20px;
-}
-#contact:hover{
-    color: white;
-    background-color: #3366CC;
 }
 
 #donate{
     height:30px;
 	width:95px;
     top:5px;
-    left:100px;
+    left:10%;
     font-size: 20px;
 }
-#donate:hover{
-    color: white;
-    background-color: #3366CC;
+
+#viewNote{
+    height:30px;
+	width:120px;
+    top:5px;
+    left:8%;
+    font-size: 20px;
 }
+
+#clockIn{
+    height:30px;
+	width:95px;
+    top:5px;
+    left:25%;
+    font-size: 20px;
+}
+
+#ModifykHours{
+    height:30px;
+	width:180px;
+    top:5px;
+    left:5%;
+    font-size: 12px;
+}#addevent{
+    height:30px;
+	width:110px;
+    top:5px;
+    left:25%;
+    font-size: 12px;
+}#modifyuser{
+    height:30px;
+	width:110px;
+    top:5px;
+    left:40%;
+    font-size: 12px;
+}#modifyItems{
+    height:30px;
+	width:110px;
+    top:5px;
+    left:55%;
+    font-size: 12px;
+}#seeMessage{
+    height:30px;
+	width:110px;
+    top:5px;
+    left:70%;
+    font-size: 12px;
+}
+
+
