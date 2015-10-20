@@ -31,6 +31,10 @@
     top: -45px;
 }
 
+#log:hover,#forgetPassword:hover,#changePassword:hover{
+    color: black;
+    background-color: white;
+}
 .button{
     position: absolute; 
 }
@@ -80,11 +84,6 @@
     left:85%;
     font-size: 25px;
     border-style: solid; 
-}
-
-#log:hover{
-    color: black;
-    background-color: white;
 }
 
 .labelButton:hover{
@@ -165,4 +164,7 @@
     font-size: 12px;
 }
 
-
+#logform{
+    position:relative;
+    top: 30px;
+}

@@ -10,15 +10,30 @@
         Holmen Robotics Club Login
     </h1>
 
-    <form>
+    <div id = "title">
+            <h2 id = "titleName"> 
+                <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
+            </h2>
+            <form action="guest.html"> 
+                <input id = "log" class="button"  type="submit" value="Log out">
+            </form>
+            <form action="changePassword.html">
+                <input id = "changePassword" class="button"  type="submit" value="Change paassword">
+            </form>
+        </div>
+    <div id="label">
+    </div>
+    <form id = "logform">
     	<div align="center">
-        <h3 id="titlename" style="display:inline">Username:
+        <h3 style="display:block">Username:
         <input type="text" name="username" id="username" class="username" />
-        Password:
+        </h3>
+        <h3 style="display:block"> Password:
         <input type="text" name="password" id="password" class="password" />
         </h3>
-        <input type="submit" id="auth" class="button"><b>Login</b></input>
+        <input type="submit" id="auth" class="button"/>
         </div>
+
     </form>
 
 </body>
