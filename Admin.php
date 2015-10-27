@@ -65,7 +65,7 @@ case "V":
 	<h2 id = "titleName">
 		<img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
     </h2>
-    <input id = "logOut" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
+    <input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
     <input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.html'" value="Change password">
   </div>      
   <div id="label">

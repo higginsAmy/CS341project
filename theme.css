@@ -42,7 +42,7 @@
 .button{
     position: absolute; 
 }
-#login{
+#log{
     height:40px;
 	width:100px;
     color: white;
@@ -90,7 +90,7 @@
     border-style: solid; 
 }
 
-#login:hover{
+#log:hover{
     color: black;
     background-color: white;
 }
