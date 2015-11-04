@@ -37,7 +37,8 @@ WHERE username='$username'");
             header("location: Volunteer.php"); // Redirecting To Volunteer Page
 			break;
 		default:
-			header("location: changePassword.html"); // Redirecting To Guest Page
+			header("location: changePasswordWrong.html"); // Redirecting To Guest Page
+            echo "wrong previous paaword.";
 	}
 } 
 
