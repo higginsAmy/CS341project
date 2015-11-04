@@ -33,23 +33,25 @@ case "V":
         		eventSources: [
 				// your event source
 					{
-						events: [ // put the array in the `events` property
-							{
-								title  : 'Lorem ipsum dolor sit amet',
-								start  : '2015-10-01'
-							},
-							{
-								title  : 'consectetur adipiscing elit',
-								start  : '2015-10-05',
-								end    : '2015-10-05'
-							},
-							{
-								title  : 'Ut faucibus pulvinar',
-								start  : '2015-10-09T12:30:00',
-							}
-						],
-						color: 'black',     // an option!
-						textColor: 'yellow' // an option!
+						var events:  [
+   							 <?php
+        						$query = mysql_query("SELECT * FROM Event");
+        						while ($event = mysql_fetch_assoc($query)) {
+									
+            						$title = $event["Title"];
+									
+									echo "{";
+            						echo "title : '$title'";
+									
+									//Other stuff
+									
+									echo "},";
+        						}
+    						?>
+						];
+						,
+						color: 'blue',     // an option!
+						textColor: 'white' // an option!
 					}
 					// any other event sources...
 
