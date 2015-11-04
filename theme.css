@@ -25,11 +25,12 @@
 }
 
 #titleName{
-    position: absolute;
+    position: relative;
     top: 10px;
-    font-size: 40px;
+    font-size: 37px;
     color: white;
     left: 190px;
+    width: 50%; 
 }
 #titleIcon{
     height: 100px;
@@ -78,7 +79,7 @@
     border: 1px solid white; 
 }
 
-#logOut{
+#log{
     height:40px;
 	width:100px;
     color: white;
