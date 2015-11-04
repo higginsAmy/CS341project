@@ -28,34 +28,32 @@ case "V":
 		$(document).ready(function() {
     		// page is now ready, initialize the calendar...
     		$('#calendar').fullCalendar({
-        		editable: true,
+				editable: true,
         		weekmode: 'variable',
         		eventSources: [
+				// your event source
+					{
+						events: [ // put the array in the `events` property
+							{
+								title  : 'Lorem ipsum dolor sit amet',
+								start  : '2015-10-01'
+							},
+							{
+								title  : 'consectetur adipiscing elit',
+								start  : '2015-10-05',
+								end    : '2015-10-05'
+							},
+							{
+								title  : 'Ut faucibus pulvinar',
+								start  : '2015-10-09T12:30:00',
+							}
+						],
+						color: 'black',     // an option!
+						textColor: 'yellow' // an option!
+					}
+					// any other event sources...
 
-        // your event source
-        {
-            events: [ // put the array in the `events` property
-                {
-                    title  : 'Lorem ipsum dolor sit amet',
-                    start  : '2015-10-01'
-                },
-                {
-                    title  : 'consectetur adipiscing elit',
-                    start  : '2015-10-05',
-                    end    : '2015-10-05'
-                },
-                {
-                    title  : 'Ut faucibus pulvinar',
-                    start  : '2015-10-09T12:30:00',
-                }
-            ],
-            color: 'black',     // an option!
-            textColor: 'yellow' // an option!
-        }
-
-        // any other event sources...
-
-    ]
+				]
     		})
 		});
 	</script>

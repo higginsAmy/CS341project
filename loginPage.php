@@ -27,17 +27,11 @@ if(isset($_SESSION['login_user']) && isset($_SESSION['login_auth'])){
         <h2 id = "titleName"> 
             <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
         </h2>
-        <form action="forgetPassword.html">
-            <input id = "forgetPassword" class="button"  type="submit" value="Forget paassword">
-        </form>
+        <input id = "forgetPassword" class="button" type="button" onClick="forgetPassword.html" value="Forget paassword">
     </div>    
-    <div id="label">
-        <form action="contact.html"> 
-            <input id = "contact" class="labelButton"  type="submit" value="Contact">
-        </form>
-        <form action="donate.html"> 
-            <input id = "donate" class="labelButton"  type="submit" value="Donate">
-        </form>
+    <div id="label"> 
+        <input id = "contact" class="labelButton"  type="button" onClick="contact.html" value="Contact">
+        <input id = "donate" class="labelButton" type="button" onClick="donate.html" value="Donate">
     </div>
     <form action="" method="post">
     	<div id="body" align="center">
@@ -62,7 +56,7 @@ if(isset($_SESSION['login_user']) && isset($_SESSION['login_auth'])){
 				</tr>
 			</table>
         </div>
-		<span><?php echo $error; ?></span>
+		<div style="position: absolute; top: 350px; left: 500px;"><?php echo $error; ?></div>
     </form>
 
 </body>
