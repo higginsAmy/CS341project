@@ -40,10 +40,47 @@ case "V":
 									
             						$title = $event["Title"];
 									
+									$StartTime = $event["StartTime"];
+									
+									$EndTime = $event["EndTime"];
+									
+									$StartDate = $event["StartDate"];
+									
+									$EndDate = $event["EndDate"];
+									
+									$MinVols = $event["MinVols"];
+									
+									$MaxVols = $event["MaxVols"];
+									
+									$MinStud = $event["MinStud"];
+									
+									$MaxStud = $event["MaxStud"];
+									
+									$Desc = $event["Desc"];
+								
+									
 									echo "{";
+									
             						echo "title : '$title'";
 									
-									//Other stuff
+									echo "StartTime : '$StartTime'";
+									
+									echo "EndTime : '$EndTime'";
+									
+									echo "StartDate: '$EndDate'";
+									
+									echo "EndDate: '$EndDate'";
+									
+									echo "MinVols: '$MinVols'";
+									
+									echo "MaxVols: '$MaxVols'";
+									
+									echo "MinStud: '$MinStud'";
+									
+									echo "MaxStud: '$MaxStud'";
+									
+									echo "Desc : '$Desc'";
+									
 									
 									echo "},";
         						}
