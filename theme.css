@@ -27,7 +27,7 @@
 #titleName{
     position: relative;
     top: 10px;
-    font-size: 37px;
+    font-size: 30px;
     color: white;
     left: 190px;
     width: 50%; 
@@ -37,7 +37,7 @@
     width: 100px;
     position: absolute;
     left: -110px;
-    top: -45px;
+    top: -35px;
 }
 
 .button{
@@ -180,3 +180,6 @@
     font-size: 12px;
 }
 
+.required{
+    color: red;
+}

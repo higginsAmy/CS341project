@@ -56,8 +56,8 @@ if(isset($_SESSION['login_user']) && isset($_SESSION['login_auth'])){
 				</tr>
 			</table>
         </div>
-		<div style="position: absolute; top: 350px; left: 500px;"><?php echo $error; ?></div>
     </form>
+    <span style="position: absolute; align:center; top: 350px; left: 44%;" class= "required"><?php echo $error; ?></span>
 
 </body>
 </html>
