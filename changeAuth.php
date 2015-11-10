@@ -1,16 +1,17 @@
 <?php
-include('session.php');
-if (!isset($_SESSION['login_auth'])){
-	header("location: Guest.html");
-}
-switch($_SESSION['login_auth']){
-case "S":
-	header("location: Student.php"); // Redirecting To Student Page
-	break;
-case "V":
-	header("location: Volunteer.php"); // Redirecting To Volunteer Page
-	break;			
-}
+	include('session.php');
+	if (!isset($_SESSION['login_auth'])){
+		header("location: Guest.html");
+	}
+	switch($_SESSION['login_auth']){
+		case "S":
+			header("location: Student.php"); // Redirecting To Student Page
+			break;
+		case "V":
+			header("location: Volunteer.php"); // Redirecting To Volunteer Page
+			break;			
+	}
+	$success=''; // Variable to hold reporting of success or failure of mySQL update.
 ?>
 <!doctype html>
 <html>
@@ -56,13 +57,30 @@ case "V":
 		// SQL query to fetch information from target user.
 		$result = mysqli_query($connection, "select * from users where username ='$user'");
 		if ($result) {
-			echo "<div>Change user's authorization to: </div>"
+			echo '<form action="" method="post"><div id="body" align="center"><p></p>'
+				.'<h3 style="display:inline">Change User Type to: '
+				.'<select name="type"><option value="">Select...</option>'
+				.'<option value="A">Admin</option><option value="V">Volunteer</option>'
+				.'<option value="S">Student</option></select></h3> '
+				.'<input id="auth" name="submit" type="submit" value="Change">'
+				.'</div></form>';
 		}
 		else {
 			echo "Zero results.";
 		}
+		// Logic that handles submission of the form
+		if (isset($_POST['submit'])) {
+			$type = $_POST["type"];
+			if(mysqli_query($connection, "UPDATE users SET auth ='$type' where username='$user'")){
+				$success = "Successfully updated user: \"$user\"";
+			}
+			else {
+				$success = 'Update failed.';
+			}
+		}
 		mysql_close($connection); // Closing Connection;
 		?>
+	  <div style="position: absolute; top: 350px; left: 500px;"><?php echo $success; ?></div>
 	  </div>
   </body>
 </html>

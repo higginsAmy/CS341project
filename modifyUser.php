@@ -102,12 +102,23 @@ case "V":
 		$result = mysqli_query($connection, "select * from users where username !='$user'");
 		if ($result) {
 			echo '<table align="center" cellpadding="25"><tr><th>First Name</th><th>Last Name</th><th>Email</th>'
-				.'<th>Username</th><th>Type</th><th colspan="2">Modify</th></tr>';
+				.'<th>Username</th><th>Type</th><th>Password</th><th>Change User Type</th></tr>';
 			// output data of each row
 			while($row = mysqli_fetch_assoc($result)) {
+				switch ($row["auth"]){
+					case "A":
+						$userType = 'Admin';
+						break;
+					case "V":
+						$userType = 'Volunteer';
+						break;
+					default:
+						$userType = 'Student';
+						break;
+				}
 				echo "<tr><td>".$row["first"]."</td><td>".$row["last"]."</td><td>".$row["email"]."</td><td>".$row["username"]."</td><td>"
-					.$row["auth"]."</td><td><a href='resetPassword.php?username=".$row["username"]
-					."'>Reset Password</a></td><td><a href='changeAuth.php?username=".$row["username"]."'>Change Authorization</a></td></tr>";
+					.$userType."</td><td><a href='resetPassword.php?username=".$row["username"]
+					."'>Reset Password</a></td><td><a href='changeAuth.php?username=".$row["username"]."'>Change User Type</a></td></tr>";
 			}
 			echo "</table>";
 		} else {
