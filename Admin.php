@@ -35,6 +35,16 @@ case "V":
 					{
 						var events:  [
    							 <?php
+								
+								// Create connection
+								$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
+								// Check connection
+								if (mysqli_connect_errno($connection)) {
+									echo "<div>";
+									echo "Failed to connect to MySQL: " . mysqli_connect_error();
+									echo "</div>";
+								}
+								
         						$query = mysql_query("SELECT * FROM Event");
         						while ($event = mysql_fetch_assoc($query)) {
 									

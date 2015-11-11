@@ -17,8 +17,8 @@
 	&nbsp;<div id="form_container">
 	
 		<h1><a style="width: 637px">Create a new Event</a></h1>
-		<form id="form_1059751" class="appnitro"  method="post" action="php-form-processor.php">
-					<div class="form_description">
+		<form id="event creator" class="appnitro"  method="post" action="php-form-processor.php">
+	
 		</div>						
 			<ul style="width: 103%; height: 927px" >
 			
@@ -109,17 +109,6 @@
 			<input id="SMin" name="SMin" class="element text " size="2" type="text" maxlength="2" value=""/> : 
 			<label>MM</label>
 		</span>
-		<span>
-			<input id="SSec" name="SSec" class="element text " size="2" type="text" maxlength="2" value=""/>
-			<label>SS</label>
-		</span>
-		<span>
-			<select class="element select" style="width:4em" id="element_5_4" name="element_5_4">
-				<option value="AM" >AM</option>
-				<option value="PM" >PM</option>
-			</select>
-			<label>AM/PM</label>
-		</span> 
 		</li>		
 		
 		<li id="li_6" style="left: 343px; top: -174px; width: 42%" >
@@ -132,18 +121,8 @@
 			<input id="EMin" name="EMin" class="element text " size="2" type="text" maxlength="2" value=""/> : 
 			<label>MM</label>
 		</span>
-		<span>
-			<input id="ESec" name="ESec" class="element text " size="2" type="text" maxlength="2" value=""/>
-			<label>SS</label>
-		</span>
-		<span>
-			<select class="element select" style="width:4em" id="element_6_4" name="element_6_4">
-				<option value="AM" >AM</option>
-				<option value="PM" >PM</option>
-			</select>
-			<label>AM/PM</label>
-		</span> 
-		</li>		
+		</li>
+				
 		
 		<li id="MinVol" style="left: 4px; top: -116px; width: 37%" >
 		<label class="description" for="MinVol">Min Number of Volunteers </label>
@@ -185,6 +164,31 @@
 			    <input type="hidden" name="form_id" value="1059751" />
 			    
 				<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+				
+				<?php
+				if ( ! empty( $_POST )) {
+
+					// Create connection
+					$conn = new mysqli(localhost, root, 091904, "holmenhighschool");
+					// Check connection
+					if ($conn->connect_error) {
+    					die("Connection failed: " . $conn->connect_error);
+					}
+
+					$sql = "INSERT INTO events (title, description, startDateTime, endDateTime, minVolunteers, maxVolunteers, minStudents, maxStudents, creator, removed)
+					VALUES ($_POST[Title], $_POST[Desc], $_POST[StartDate] + $_POST[StartTime], $_POST[EndDate] + $_POST[EndTime], $_POST[MinVol], $_POST[MaxVol], $_POST[MinStud], $_POST[MaxStud], 'Me', 0 )";
+
+					if ($conn->query($sql) === TRUE) {
+    					echo "New record created successfully";
+					} else {
+    					echo "Error: " . $sql . "<br>" . $conn->error;
+					}
+
+					$conn->close();
+					
+				}
+				?> 
+				
 		</li>
 			</ul>
 		</form>	
