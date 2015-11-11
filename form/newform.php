@@ -200,19 +200,16 @@ case "S":
 		<?php 
 		// Logic to handle submission of form
 		if (isset($_POST['submit'])) {
-			if (empty($_POST['Title']) || empty($_POST['MinVol']) || empty($_POST['MaxVol']) || 
-				empty($_POST['SHour']) || empty($_POST['SMin']) || empty($_POST['EYear']) || 
-				empty($_POST['EMonth']) || empty($_POST['EDay']) || empty($_POST['EHour']) || 
-				empty($_POST['EMin']) || empty($_POST['SMin']) || empty($_POST['EYear']) || 
-				empty($_POST['MinStud']) || empty($_POST['MaxStud']) || empty($_POST['Location'])){
-				echo "<div>Please fill out all fields to create new user.</div>";
+			if (empty($_POST['Title'])){ 
+				//|| empty($_POST['MinVol']) || empty($_POST['MaxVol']) || empty($_POST['SMonth']) || empty($_POST['SDay']) || empty($_POST['SYear']) || empty($_POST['EMonth']) || empty($_POST['EDay']) || empty($_POST['EYear']) || empty($_POST['SHour']) || empty($_POST['SMin']) || empty($_POST['EHour']) || empty($_POST['EMin']) || empty($_POST['MinStud']) || empty($_POST['MaxStud']) || empty($_POST['Location'])){
+				echo "<div>Please fill out all fields to create event.</div>";
 			}
 			else{
 				// Get username of person creating event
 				$user = $_SESSION['login_user'];
 				// Set date variables and put into ISO 8601
-				$startDateTime = $_POST['SYear'] . '-' . $_POST['SMonth'] . '-' .$_POST['SDay'] . 'T' . $_POST['SHour'] . ':' . $_POST['SMin'] . ':00';  
-				$endDateTime = $_POST['EYear'] . '-' . $_POST['EMonth'] . '-' . $_POST['EDay'] . 'T' . $_POST['EHour'] . ':' . $_POST['EMin'] . ':00';		
+				$startDateTime = $_POST['SYear']. "-" .$_POST['SMonth']. "-" .$_POST['SDay']. " " .$_POST['SHour']. ":" .$_POST['SMin']. ":00";  
+				$endDateTime = $_POST['EYear']. "-" .$_POST['EMonth']. "-" .$_POST['EDay']. " " .$_POST['EHour']. ":" .$_POST['EMin']. ":00";		
 				// Create connection
 				$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
 				// Check connection
@@ -222,10 +219,12 @@ case "S":
 					echo "</div>";
 				}
 				// Insert event into database
-				$query = "INSERT INTO events (title, location, description, startDateTime, endDateTime, minVolunteers, maxVolunteers, "
-					."minStudents, maxStudents, creator, deleted) VALUES ($_POST['Title'], $_POST['Location'], $_POST['Desc'], "
-					."$startDateTime, $endDateTime, $_POST['MinVol'], $_POST['MaxVol'], $_POST['MinStud'], $_POST['MaxStud'], $user, 0)";
-				if(mysqli_query($connection, $query)){
+				$query = "INSERT INTO events (title, location, description, startDateTime, endDateTime, 
+					minVolunteers, maxVolunteers, minStudents, maxStudents, creator, removed) VALUES 
+					('".$_POST['Title']."', '".$_POST['Location']."', '".$_POST['Desc']."', '$startDateTime', 
+					'$endDateTime', ".$_POST['MinVol'].", ".$_POST['MaxVol'].", ".$_POST['MinStud'].", ".$_POST['MaxStud'].", '$user', 0)";
+				$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+				if($result){
 					echo "<div>Event successfully added to the database.</div>";
 				}
 				else {
@@ -240,7 +239,7 @@ case "S":
 				
 		</li>
 			</ul>
-		</form>	
+		</form>
 	</div>
 	<img id="bottom" src="bottom.png" alt="">
     </div>
