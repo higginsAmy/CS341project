@@ -207,7 +207,7 @@ case "V":
 		
 		
 		//Get username of person creating event
-		$user = $_SERVER['REMOTE_USER'];
+		$user = $_SERVER['login_user'];
 		// Create connection
 		$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
 		// Check connection
