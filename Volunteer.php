@@ -105,7 +105,7 @@ case "S":
             <input id = "changePassword" class="button" type="button" onClick="location.href='changePassword.html'" value="Change password">
         </div>
         <div id=label>
-            <input id = "addevent" class="labelButton"  type="button" onClick="location.href='form/newform.php'" value="Add event">
+            <input id = "addevent" class="labelButton"  type="button" onClick="location.href='forms/newEvent.php'" value="Add event">
         </div>
         
         <div id='calendar' style="background:white; position:relative; top: 10px; width:75%; display:inline-block;"></div>
