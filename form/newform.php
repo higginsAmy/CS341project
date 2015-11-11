@@ -6,10 +6,7 @@ if (!isset($_SESSION['login_auth'])){
 switch($_SESSION['login_auth']){
 case "S":
 	header("location: ../Student.php"); // Redirecting To Student Page
-	break;
-case "V":
-	header("location: ../Volunteer.php"); // Redirecting To Volunteer Page
-	break;			
+	break;		
 }
 ?>
 

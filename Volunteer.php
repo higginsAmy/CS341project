@@ -28,7 +28,68 @@ case "S":
 		$(document).ready(function() {
     		// page is now ready, initialize the calendar...
     		$('#calendar').fullCalendar({
-        		// put your options and callbacks here
+				editable: true,
+        		weekmode: 'variable',
+        		eventSources: [
+				// your event source
+					{
+						events:  [
+   							<?php 
+								// Create connection
+								$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
+        						$query = mysqli_query($connection, "SELECT * FROM events");
+									while ($event = mysqli_fetch_assoc($query)) {
+									
+            						$title = $event["title"];
+									
+									$start = $event["startDateTime"];
+									
+									$end = $event["endDateTime"];
+									
+									//$MinVols = $event["MinVols"];
+									
+									//$MaxVols = $event["MaxVols"];
+									
+									//$MinStud = $event["MinStud"];
+									
+									//$MaxStud = $event["MaxStud"];
+									
+									//$Desc = $event["Desc"];
+								
+									
+									echo "{";
+
+            						echo "title : '$title',";
+									
+									echo "start : '$start',";
+									
+									echo "end : '$endDateTime',";
+									
+									//echo "StartDate: '$EndDate'";
+									
+									//echo "EndDate: '$EndDate'";
+									
+									//echo "MinVols: '$MinVols'";
+									
+									//echo "MaxVols: '$MaxVols'";
+									
+									//echo "MinStud: '$MinStud'";
+									
+									//echo "MaxStud: '$MaxStud'";
+									
+									//echo "Desc : '$Desc'";
+									
+									
+									echo "},";
+        						}
+    						?>
+						]
+                        ,
+						color: 'blue',     // an option!
+						textColor: 'white' // an option!
+					}
+					// any other event sources...
+				]
     		})
 		});
 	</script>
@@ -43,9 +104,10 @@ case "S":
             <input id = "log" class="button" type="button" onClick="location.href='logout.php'" value="Log out">
             <input id = "changePassword" class="button" type="button" onClick="location.href='changePassword.html'" value="Change password">
         </div>
-        
-        <div id="label">
+        <div id=label>
+            <input id = "addevent" class="labelButton"  type="button" onClick="location.href='form/newform.php'" value="Add event">
         </div>
+        
         <div id='calendar' style="background:white; position:relative; top: 10px; width:75%; display:inline-block;"></div>
     </body>
 </html>
