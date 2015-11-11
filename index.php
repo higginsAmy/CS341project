@@ -1,4 +1,4 @@
 <?php  
-header("Location:  /guest.html"); 
+header("Location:  /Guest.html"); 
 exit(0);
 ?>
