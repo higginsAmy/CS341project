@@ -36,7 +36,7 @@ case "V":
         		eventSources: [
 				// your event source
 					{
-						var events:  [
+						events:  [
    							 <?php
                         
         						$query = mysqli_query("SELECT * FROM Event");
@@ -89,8 +89,8 @@ case "V":
 									echo "},";
         						}
     						?>
-						];
-						,
+						]
+                        ,
 						color: 'blue',     // an option!
 						textColor: 'white' // an option!
 					}

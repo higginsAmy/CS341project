@@ -4,16 +4,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Event Creator</title>
 <link rel="stylesheet" type="text/css" href="view.css" media="all">
+<link rel="stylesheet" type="text/css" href="../theme.css">
 <script type="text/javascript" src="view.js"></script>
 <script type="text/javascript" src="calendar.js"></script>
+    
 <style type="text/css">
 .auto-style1 {
 	margin-top: 0;
 }
 </style>
 </head>
-<body id="main_body" >
-	
+<body>
+    <div id = "title">
+    <a href="../Admin.php">
+	<h2 id = "titleName">
+		<img id = "titleIcon" src = "../calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
+    </h2>
+    </a>
+    <input id = "log" class="button"  type="button" onClick="location.href='../logout.php'" value="Log out">
+    <input id = "changePassword" class="button"  type="button" onClick="location.href='../changePassword.html'" value="Change password">
+  </div>      
+  <div id="label">
+    <input id = "ModifykHours" class="labelButton"  type="button" onClick="location.href='../modifyStudentHours.html'" value="Modify student WorkHours ">
+    <input id = "addevent" class="labelButton"  type="button" onClick="location.href='newform.php'" value="Add event">
+    <input id = "modifyuser" class="labelButton"  type="button" onClick="location.href='../modifyUser.php'" value="Modify user">
+    <input id = "modifyItems" class="labelButton"  type="button" onClick="location.href='../modifyItems.html'" value="Modify donation items">
+    <input id = "seeMessage" class="labelButton"  type="button" onClick="location.href='../seeMessage.html'" value="See message">
+  </div>
+	<div id="main_body">
 	&nbsp;<div id="form_container">
 	
 		<h1><a style="width: 637px">Create a new Event</a></h1>
@@ -190,5 +208,6 @@
 		</form>	
 	</div>
 	<img id="bottom" src="bottom.png" alt="">
+    </div>
 	</body>
 </html>
