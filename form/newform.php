@@ -1,3 +1,18 @@
+<?php
+include('../session.php');
+if (!isset($_SESSION['login_auth'])){
+	header("location: ../Guest.html");
+}
+switch($_SESSION['login_auth']){
+case "S":
+	header("location: ../Student.php"); // Redirecting To Student Page
+	break;
+case "V":
+	header("location: ../Volunteer.php"); // Redirecting To Volunteer Page
+	break;			
+}
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
