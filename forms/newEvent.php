@@ -47,7 +47,7 @@ case "S":
 	&nbsp;<div id="form_container">
 	
 		<h1><a style="width: 637px">Create a new Event</a></h1>
-		<form id="form_1059751" class="appnitro"  method="post">
+		<form id="form_1059751" class="appnitro"  method="post" action="addEvent.php">
 					<div class="form_description">
 		</div>						
 			<ul style="width: 103%; height: 927px" >
@@ -196,30 +196,7 @@ case "S":
 			    <input type="hidden" name="form_id" value="1059751" />
 			    
 				<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
-				
-		<?php 
-		//set misc variables and put into ISO 8601
-		$startDateTime = $_POST[SYear] . '-' . $_POST[SMonth] . '-' . $_POST[SDay] . 'T' . $_POST[SHour]. ':' . $_POST[SMin];  
-		$endDateTime = $_POST[EYear] . '-' . $_POST[EMonth] . '-' . $_POST[EDay] . 'T' . $_POST[EHour]. ':' . $_POST[EMin];		
-		
-		
-		//Get username of person creating event
-		$user = $_SERVER['login_user'];
-		// Create connection
-		$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
-		// Check connection
-		if (mysqli_connect_errno($connection)) {
-			echo "<div>";
-			echo "Failed to connect to MySQL: " . mysqli_connect_error();
-			echo "</div>";
-		}
-		// SQL query to fetch information of registerd users and finds user match.
-		$user = $_SESSION['login_user'];
-		$result = mysqli_query($connection, "INSERT INTO events (title, description, startDateTime, endDateTime, minVolunteers, maxVolunteers, minStudents, maxStudents, creator, deleted) 
-		VALUES ($_POST[Title], $_POST[Desc], $startDateTime, $endDateTime, $_POST[MinVol], $_POST[MaxVol], $_POST[MinStud], $_POST[MaxStud], $user, 0)");
-		
-		mysql_close($connection); // Closing Connection;
-		?>
+
 				
 		</li>
 			</ul>
