@@ -27,9 +27,11 @@ case "V":
   </head>
   <body>
 	  <div id = "title">
+          <a href="Admin.php">
 		<h2 id = "titleName">
 		  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
 		</h2>
+          </a>
 		<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
 		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.html'" value="Change password">
 	  </div>      
@@ -39,7 +41,6 @@ case "V":
 		<input id = "modifyuser" class="labelButton" type="button" onClick="location.href='modifyUser.php'" value="Modify user">
 		<input id = "modifyItems" class="labelButton" type="button" onClick="location.href='modifyItems.html'" value="Modify donation items">
 		<input id = "seeMessage" class="labelButton" type="button" onClick="location.href='seeMessage.html'" value="See message">
-		<input id = "adminHome" class="labelButton" type="button" onClick="location.href='Admin.php'" value="Admin Home">
 	  </div>
 	  <div>
 		<?php 

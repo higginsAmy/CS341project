@@ -24,6 +24,9 @@ case "V":
 	<script src='fullcalendar/lib/jquery.min.js'></script>
 	<script src='fullcalendar/lib/moment.min.js'></script>
 	<script src='fullcalendar/fullcalendar.js'></script>
+      
+      
+      
 	<script>
 		$(document).ready(function() {
     		// page is now ready, initialize the calendar...
@@ -84,7 +87,7 @@ case "V":
         						}
     						?>
 						]
-						,
+                        ,
 						color: 'blue',     // an option!
 						textColor: 'white' // an option!
 					}
@@ -96,19 +99,22 @@ case "V":
   </head>
   <body>
   <div id = "title">
+    <a href="Admin.php">
 	<h2 id = "titleName">
 		<img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
     </h2>
+    </a>
     <input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
     <input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.html'" value="Change password">
   </div>      
   <div id="label">
     <input id = "ModifykHours" class="labelButton"  type="button" onClick="location.href='modifyStudentHours.html'" value="Modify student WorkHours ">
-    <input id = "addevent" class="labelButton"  type="button" onClick="location.href='addEvent.html'" value="Add event">
+    <input id = "addevent" class="labelButton"  type="button" onClick="location.href='form/newform.php'" value="Add event">
     <input id = "modifyuser" class="labelButton"  type="button" onClick="location.href='modifyUser.php'" value="Modify user">
     <input id = "modifyItems" class="labelButton"  type="button" onClick="location.href='modifyItems.html'" value="Modify donation items">
     <input id = "seeMessage" class="labelButton"  type="button" onClick="location.href='seeMessage.html'" value="See message">
   </div>
+      
   <div id='calendar' style="background:white; position:relative; top: 10px; width:75%; display:inline-block;"></div>
   </body>
 </html>
