@@ -120,6 +120,7 @@ case "V":
 					.$userType."</td><td><a href='resetPassword.php?username=".$row["username"]
 					."'>Reset Password</a></td><td><a href='changeAuth.php?username=".$row["username"]."'>Change User Type</a></td></tr>";
 			}
+			echo '<tr><td><input id="newUser" class="button" type="button" onClick="location.href=\'newUser.php\'" value="Create New User"></td></tr>';
 			echo "</table>";
 		} else {
 			echo "0 results";

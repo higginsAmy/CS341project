@@ -33,65 +33,62 @@ case "V":
         		eventSources: [
 				// your event source
 					{
-						var events:  [
-   							 <?php
-        						$query = mysql_query("SELECT * FROM Event");
-        						while ($event = mysql_fetch_assoc($query)) {
+						events:  [
+   							<?php 
+								// Create connection
+								$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
+        						$query = mysqli_query($connection, "SELECT * FROM events");
+									while ($event = mysqli_fetch_assoc($query)) {
 									
-            						$title = $event["Title"];
+            						$title = $event["title"];
 									
-									$StartTime = $event["StartTime"];
+									$start = $event["startDateTime"];
 									
-									$EndTime = $event["EndTime"];
+									$end = $event["endDateTime"];
 									
-									$StartDate = $event["StartDate"];
+									//$MinVols = $event["MinVols"];
 									
-									$EndDate = $event["EndDate"];
+									//$MaxVols = $event["MaxVols"];
 									
-									$MinVols = $event["MinVols"];
+									//$MinStud = $event["MinStud"];
 									
-									$MaxVols = $event["MaxVols"];
+									//$MaxStud = $event["MaxStud"];
 									
-									$MinStud = $event["MinStud"];
-									
-									$MaxStud = $event["MaxStud"];
-									
-									$Desc = $event["Desc"];
+									//$Desc = $event["Desc"];
 								
 									
 									echo "{";
+
+            						echo "title : '$title',";
 									
-            						echo "title : '$title'";
+									echo "start : '$start',";
 									
-									echo "StartTime : '$StartTime'";
+									echo "end : '$endDateTime',";
 									
-									echo "EndTime : '$EndTime'";
+									//echo "StartDate: '$EndDate'";
 									
-									echo "StartDate: '$EndDate'";
+									//echo "EndDate: '$EndDate'";
 									
-									echo "EndDate: '$EndDate'";
+									//echo "MinVols: '$MinVols'";
 									
-									echo "MinVols: '$MinVols'";
+									//echo "MaxVols: '$MaxVols'";
 									
-									echo "MaxVols: '$MaxVols'";
+									//echo "MinStud: '$MinStud'";
 									
-									echo "MinStud: '$MinStud'";
+									//echo "MaxStud: '$MaxStud'";
 									
-									echo "MaxStud: '$MaxStud'";
-									
-									echo "Desc : '$Desc'";
+									//echo "Desc : '$Desc'";
 									
 									
 									echo "},";
         						}
     						?>
-						];
+						]
 						,
 						color: 'blue',     // an option!
 						textColor: 'white' // an option!
 					}
 					// any other event sources...
-
 				]
     		})
 		});

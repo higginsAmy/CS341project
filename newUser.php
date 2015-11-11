@@ -11,13 +11,13 @@
 			header("location: Volunteer.php"); // Redirecting To Volunteer Page
 			break;			
 	}
-	$success=''; // Variable to hold reporting of success or failure of mySQL update.
+	$success=''; // Variable to hold reporting of success or failure of mySQL insert.
 ?>
 <!doctype html>
 <html>
   <head>
   	<meta charset="utf-8">
-    <title>Change Authorization</title>
+    <title>Add New User</title>
  	<!-- Styles --> 
     <link rel="stylesheet" type="text/css" href="theme.css">
 	<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
@@ -43,9 +43,52 @@
 		<input id = "adminHome" class="labelButton" type="button" onClick="location.href='Admin.php'" value="Admin Home">
 	  </div>
 	  <div>
+		<table>
+			<tr>
+				<td>
+				// auth
+					<h3 style="display:inline">First Name:
+						<input id="first" name="fist" type="text">
+					</h3>
+				</td>
+				<td>
+					<h3 style="display:inline">Last Name:
+						<input id="last" name="last" type="text">
+					</h3>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h3 style="display:inline">Username:
+						<input id="name" name="username" type="text">
+					</h3>
+				</td>
+				<td>
+					<h3 style="display:inline">Password:
+						<input id="password" name="password" type="text">
+					</h3>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h3 style="display: inline">User Type:
+						<select name="type">
+							<option value="">Select...</option>
+							<option value="A">Admin</option>
+							<option value="V">Volunteer</option>
+							<option value="S">Student</option>
+						</select>
+					</h3>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<input id="addUser" name="submit" type="submit" value="Add User">
+				</td>
+			</tr>
+		</table>
+	  
 		<?php 
-		// Fetch username from GET variable
-		$user = htmlspecialchars($_GET["username"]);
 		// Create connection
 		$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
 		// Check connection
@@ -54,31 +97,20 @@
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 			echo "</div>";
 		}
-		// SQL query to fetch information from target user.
-		$result = mysqli_query($connection, "select * from users where username ='$user'");
-		if ($result) {
-			echo '<form action="" method="post"><div id="body" align="center"><p></p>'
-				.'<h3 style="display:inline">Change User Type to: '
-				.'<select name="type"><option value="">Select...</option>'
-				.'<option value="A">Admin</option><option value="V">Volunteer</option>'
-				.'<option value="S">Student</option></select></h3> '
-				.'<input id="auth" name="submit" type="submit" value="Change">'
-				.'</div></form>';
-		}
-		else {
-			echo "Zero results.";
-		}
 		// Logic that handles submission of the form
 		if (isset($_POST['submit'])) {
-			$type = $_POST["type"];
-			if ($type){
-				if(mysqli_query($connection, "UPDATE users SET auth ='$type' where username='$user'")){
-					$success = "Successfully updated user: \"$user\"";
-				}
-				else {
-					$success = 'Update failed.';
-				}
-			}
+			$first = $_POST['first'];
+			$last = $_POST['last'];
+			$username = $_POST['username'];
+			$password = $_POST['password'];
+			$auth = $_POST['type'];
+			echo "<div>User details: $first , $last , $username , $password , $auth</div>";
+			//if(mysqli_query($connection, "UPDATE users SET auth ='$type' where username='$user'")){
+				//$success = "Successfully updated user: \"$user\"";
+			//}
+			//else {
+				//$success = 'Update failed.';
+			//}
 		}
 		mysql_close($connection); // Closing Connection;
 		?>
