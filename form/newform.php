@@ -63,7 +63,7 @@ case "S":
 		<li id="Location" style="left: 342px; top: -73px; width: 41%; height: 65px" >
 		<label class="description" for="description">Location </label>
 		<div>
-			<input id="description" name="description" class="element text medium" type="text" maxlength="255" value=""/> 
+			<input id="description" name="Location" class="element text medium" type="text" maxlength="255" value=""/> 
 		</div> 
 		</li>		
 		
@@ -198,27 +198,44 @@ case "S":
 				<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
 				
 		<?php 
-		//set misc variables and put into ISO 8601
-		$startDateTime = $_POST[SYear] . '-' . $_POST[SMonth] . '-' . $_POST[SDay] . 'T' . $_POST[SHour]. ':' . $_POST[SMin];  
-		$endDateTime = $_POST[EYear] . '-' . $_POST[EMonth] . '-' . $_POST[EDay] . 'T' . $_POST[EHour]. ':' . $_POST[EMin];		
-		
-		
-		//Get username of person creating event
-		$user = $_SERVER['login_user'];
-		// Create connection
-		$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
-		// Check connection
-		if (mysqli_connect_errno($connection)) {
-			echo "<div>";
-			echo "Failed to connect to MySQL: " . mysqli_connect_error();
-			echo "</div>";
+		// Logic to handle submission of form
+		if (isset($_POST['submit'])) {
+			if (empty($_POST['Title']) || empty($_POST['MinVol']) || empty($_POST['MaxVol']) || 
+				empty($_POST['SHour']) || empty($_POST['SMin']) || empty($_POST['EYear']) || 
+				empty($_POST['EMonth']) || empty($_POST['EDay']) || empty($_POST['EHour']) || 
+				empty($_POST['EMin']) || empty($_POST['SMin']) || empty($_POST['EYear']) || 
+				empty($_POST['MinStud']) || empty($_POST['MaxStud']) || empty($_POST['Location'])){
+				echo "<div>Please fill out all fields to create new user.</div>";
+			}
+			else{
+				// Get username of person creating event
+				$user = $_SESSION['login_user'];
+				// Set date variables and put into ISO 8601
+				$startDateTime = $_POST['SYear'] . '-' . $_POST['SMonth'] . '-' .$_POST['SDay'] . 'T' . $_POST['SHour'] . ':' . $_POST['SMin'] . ':00';  
+				$endDateTime = $_POST['EYear'] . '-' . $_POST['EMonth'] . '-' . $_POST['EDay'] . 'T' . $_POST['EHour'] . ':' . $_POST['EMin'] . ':00';		
+				// Create connection
+				$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
+				// Check connection
+				if (mysqli_connect_errno($connection)) {
+					echo "<div>";
+					echo "Failed to connect to MySQL: " . mysqli_connect_error();
+					echo "</div>";
+				}
+				// Insert event into database
+				$query = "INSERT INTO events (title, location, description, startDateTime, endDateTime, minVolunteers, maxVolunteers, "
+					."minStudents, maxStudents, creator, deleted) VALUES ($_POST['Title'], $_POST['Location'], $_POST['Desc'], "
+					."$startDateTime, $endDateTime, $_POST['MinVol'], $_POST['MaxVol'], $_POST['MinStud'], $_POST['MaxStud'], $user, 0)";
+				if(mysqli_query($connection, $query)){
+					echo "<div>Event successfully added to the database.</div>";
+				}
+				else {
+					echo "<div>Event not added.</div>";
+				}
+				
+				mysqli_close($connection); // Closing Connection
+			}
 		}
-		// SQL query to fetch information of registerd users and finds user match.
-		$user = $_SESSION['login_user'];
-		$result = mysqli_query($connection, "INSERT INTO events (title, description, startDateTime, endDateTime, minVolunteers, maxVolunteers, minStudents, maxStudents, creator, deleted) 
-		VALUES ($_POST[Title], $_POST[Desc], $startDateTime, $endDateTime, $_POST[MinVol], $_POST[MaxVol], $_POST[MinStud], $_POST[MaxStud], $user, 0)");
 		
-		mysql_close($connection); // Closing Connection;
 		?>
 				
 		</li>
