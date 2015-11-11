@@ -73,11 +73,9 @@ case "V":
   </head>
   <body>
 	  <div id = "title">
-          <a href="Admin.php">
 		<h2 id = "titleName">
 		  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
 		</h2>
-          </a>
 		<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
 		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.html'" value="Change password">
 	  </div>      
@@ -87,6 +85,7 @@ case "V":
 		<input id = "modifyuser" class="labelButton" type="button" onClick="location.href='modifyUser.php'" value="Modify user">
 		<input id = "modifyItems" class="labelButton" type="button" onClick="location.href='modifyItems.html'" value="Modify donation items">
 		<input id = "seeMessage" class="labelButton" type="button" onClick="location.href='seeMessage.html'" value="See message">
+		<input id = "adminHome" class="labelButton" type="button" onClick="location.href='Admin.php'" value="Admin Home">
 	  </div>
 	  <div>
 		<?php 
@@ -103,7 +102,7 @@ case "V":
 		$result = mysqli_query($connection, "select * from users where username !='$user'");
 		if ($result) {
 			echo '<table align="center" cellpadding="25"><tr><th>First Name</th><th>Last Name</th><th>Email</th>'
-				.'<th>Username</th><th>Type</th><th>Password</th><th>Change User Type</th></tr>';
+				.'<th>Username</th><th>Type</th><th>Password</th><th>Change User Type</th><th>Delete</th></tr>';
 			// output data of each row
 			while($row = mysqli_fetch_assoc($result)) {
 				switch ($row["auth"]){
@@ -117,9 +116,11 @@ case "V":
 						$userType = 'Student';
 						break;
 				}
-				echo "<tr><td>".$row["first"]."</td><td>".$row["last"]."</td><td>".$row["email"]."</td><td>".$row["username"]."</td><td>"
-					.$userType."</td><td><a href='resetPassword.php?username=".$row["username"]
-					."'>Reset Password</a></td><td><a href='changeAuth.php?username=".$row["username"]."'>Change User Type</a></td></tr>";
+				echo "<tr><td>".$row["first"]."</td><td>".$row["last"]."</td><td>".$row["email"]."</td><td>"
+					.$row["username"]."</td><td>".$userType."</td><td><a href='resetPassword.php?username="
+					.$row["username"]."'>Reset Password</a></td><td><a href='changeAuth.php?username="
+					.$row["username"]."'>Change User Type</a></td><td><a href='deleteUser.php?username="
+					.$row["username"]."'>Delete User</a></td></tr>";
 			}
 			echo '<tr><td><input id="newUser" class="button" type="button" onClick="location.href=\'newUser.php\'" value="Create New User"></td></tr>';
 			echo "</table>";
