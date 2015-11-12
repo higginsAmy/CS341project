@@ -128,14 +128,17 @@ case "V":
 					."('$first', '$last', '$email', '$username', '$password', '$auth')";
 				if(mysqli_query($connection, $query)){
 					$success = "Successfully added user: \"$username\"";
+					echo ("<script>alert('$success');</script>");
 				}
 				else {
 					$success = "Failed to add $username to the database.";
+					echo ("<script>alert('$success');</script>");
 				}
 			}
 		}
 		mysql_close($connection); // Closing Connection;
-		echo ("<script>alert('$success');</script>"); ?>
+		//echo ("<script>alert('$success');</script>"); 
+		?>
 	</div>
   </body>
 </html>

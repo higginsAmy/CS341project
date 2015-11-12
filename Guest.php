@@ -1,25 +1,11 @@
-<?php
-include('session.php');
-if (!isset($_SESSION['login_auth'])){
-	header("location: Guest.php");
-}
-switch($_SESSION['login_auth']){
-case "A":
-	header("location: Admin.php"); // Redirecting To Admin Page
-	break;
-case "S":
-	header("location: Student.php"); // Redirecting To Volunteer Page
-	break;		
-}
-?>
 <!doctype html>
 <html>
   <head>
   	<meta charset="utf-8">
-    <title>You are logged as Volunteer</title>
+    <title>You are viewing this page as a guest</title>
     <!-- Styles --> 
     <link rel="stylesheet" type="text/css" href="theme.css">
-	<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+    <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
 	<!-- Scripts -->
 	<script src='fullcalendar/lib/jquery.min.js'></script>
 	<script src='fullcalendar/lib/moment.min.js'></script>
@@ -96,19 +82,19 @@ case "S":
   </head>
     <body>
         <div id = "title">
-             <a href="Volunteer.php">
+            <a href="Guest.html">
             <h2 id = "titleName"> 
                 <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
             </h2>
             </a>
-            <input id = "log" class="button" type="button" onClick="location.href='logout.php'" value="Log out">
-            <input id = "changePassword" class="button" type="button" onClick="location.href='changePassword.html'" value="Change password">
-        </div>
-        <div id=label>
-            <input id = "addevent" class="labelButton"  type="button" onClick="location.href='forms/newEvent.php'" value="Add event">
-			<input id = "modifyevent" class="labelButton"  type="button" onClick="location.href='modifyEvent.php'" value="Modify event">
+			<input id = "log" class="button" type="button" onClick="location.href='loginPage.php'" value="Log in">
+            <input id = "forgetPassword" class="button"  type="button" onClick="location.href='forgetPassword.html'" value="Forgot your password?">
         </div>
         
-        <div id='calendar' style="background:white; position:relative; top: 10px; width:75%; display:inline-block;"></div>
+        <div id="label">
+            <input id = "contact" class="labelButton"  type="button" onClick="location.href='contact.html'" value="Contact">
+            <input id = "donate" class="labelButton"  type="button" onClick="location.href='donate.html'" value="Donate">
+        </div>
+		<div id='calendar' style="background:white; position:relative; top: 10px; width:75%; display:inline-block;"></div>
     </body>
 </html>
