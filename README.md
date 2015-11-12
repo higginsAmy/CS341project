@@ -18,9 +18,10 @@ TO DO LIST FOR 11/12/15:
 1. GET FORM TO ADD EVENTS TO DATABASE
 	//Adam has created code but it doesn't exactly work yet. No idea why. Debugging is hard.
 2. ALLOW VOLUNTEERS TO ADD EVENTS
+	//Done.
 3. ALLOW STUDENTS TO SIGN UP FOR EVENTS 
-	a. make event clickable 
-	b. after clicked, allow option to sign up for event
+	a. list events student is not signed up for
+	b. selecting event puts it on student calendar, prevents future selection
 4. MAKE EVENTS USER HAS SIGNED UP FOR DISTINGUISHIBLE FROM THOSE THEY HAVE NOT
 5. ALLOW ADMIN/VOLUNTEER TO REMOVE EVENTS
 	a. make event clickable
