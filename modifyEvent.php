@@ -48,7 +48,7 @@
 			echo "</div>";
 		}
 		// SQL query to fetch events created by user
-		$result = mysqli_query($connection, "select * from events where creator='$user' GROUP BY startDateTime");
+		$result = mysqli_query($connection, "select * from events where creator='$user' and removed!=1 GROUP BY startDateTime");
 		if ($result) {
 			echo '<table align="center" cellpadding="25"><tr><th>Event Title</th><th>Starts</th><th>Ends</th>'
 				.'<th>Delete</th></tr>';
@@ -66,6 +66,7 @@
 		if (isset($_POST['submit'])) {
 			if(mysqli_query($connection, "DELETE FROM events WHERE ='$user'")){
 				$success = "Successfully updated event: \"$event\"";
+				echo '<meta http-equiv="refresh" content="0">';
 			}
 			else {
 				$success = 'Update failed.';
