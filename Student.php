@@ -49,7 +49,17 @@ case "V":
                                         
                                         $end = $event["endDateTime"];
                                     
-                                        
+                                        if ($event["username"] === $user && $event["deleted"] === 1) {
+                                            $color = red;
+                                            $textColor = white;
+                                        } else if ($event["username"] === $user && $event["deleted"] === 0) {
+                                            $color = green;
+                                            $textColor = white;
+                                        } else {
+                                            $color = blue;
+                                            $textColor = white;
+                                        }
+                                            
                                         //$MinStud = $event["MinStud"];
                                         
                                         //$MaxStud = $event["MaxStud"];
@@ -64,6 +74,10 @@ case "V":
                                         echo "start : '$start',";
                                         
                                         echo "end : '$endDateTime',";
+                                        
+                                        echo "color : '$color',";
+                                        
+                                        echo "textColor : '$textColor'";
                                         
                                         //echo "StartDate: '$StartDate'";
                                         
@@ -80,9 +94,7 @@ case "V":
         						  }
     						?>
 						]
-                        ,
-						color: 'blue',     // an option!
-						textColor: 'white' // an option!
+                        
 					}
 					// any other event sources...
 				]
