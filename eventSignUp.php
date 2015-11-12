@@ -110,7 +110,7 @@ case "V":
 		if (isset($_POST['submit'])) {
 			$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES(".$_POST['event'].", '$user', 'S')";
 			if (mysqli_query($connection, $sql)){
-				header("Refresh:0");
+				echo '<meta http-equiv="refresh" content="0">';
 			}
 			else {
 				echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';
