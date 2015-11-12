@@ -134,6 +134,14 @@
     font-size: 20px;
 }
 
+#eventSignUp{
+    height:30px;
+    width: 180px;
+    top:5px;
+    left: 40%;
+    font-size: 20px;
+}
+
 #clockIn{
     height:30px;
 	width:95px;
@@ -162,13 +170,13 @@
     font-size: 12px;
 }#modifyItems{
     height:30px;
-	width:110px;
+	width:150px;
     top:5px;
     left:55%;
     font-size: 12px;
 }#seeMessage{
     height:30px;
-	width:110px;
+	width:150px;
     top:5px;
     left:70%;
     font-size: 12px;

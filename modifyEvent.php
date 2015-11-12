@@ -1,7 +1,7 @@
 <?php
 	include('session.php');
 	if (!isset($_SESSION['login_auth'])){
-		header("location: Guest.html");
+		header("location: Guest.php");
 	}
 	switch($_SESSION['login_auth']){
 		case "S":

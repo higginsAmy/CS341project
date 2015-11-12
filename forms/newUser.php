@@ -1,49 +1,59 @@
 <?php
-	include('session.php');
-	if (!isset($_SESSION['login_auth'])){
-		header("location: Guest.html");
-	}
-	switch($_SESSION['login_auth']){
-		case "S":
-			header("location: Student.php"); // Redirecting To Student Page
-			break;
-		case "V":
-			header("location: Volunteer.php"); // Redirecting To Volunteer Page
-			break;			
-	}
-	$success=''; // Variable to hold reporting of success or failure of mySQL insert.
+include('../session.php');
+if (!isset($_SESSION['login_auth'])){
+	header("location: ../Guest.php");
+}
+switch($_SESSION['login_auth']){
+case "S":
+	header("location: ../Student.php"); // Redirecting To Student Page
+	break;		
+case "V":
+	header("location: ../Volunteer.php"); // Redirecting to Volunteer Page
+	break;
+}
 ?>
-<!doctype html>
-<html>
-  <head>
-  	<meta charset="utf-8">
-    <title>Add New User</title>
- 	<!-- Styles --> 
-    <link rel="stylesheet" type="text/css" href="theme.css">
-	<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
-	<!-- Scripts -->
-	<script src='fullcalendar/lib/jquery.min.js'></script>
-	<script src='fullcalendar/lib/moment.min.js'></script>
-	<script src='fullcalendar/fullcalendar.js'></script>
-  </head>
-  <body>
-	  <div id = "title">
-		<h2 id = "titleName">
-		  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
-		</h2>
-		<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
-		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.html'" value="Change password">
-	  </div>      
-	  <div id="label">
-		<input id = "ModifykHours" class="labelButton" type="button" onClick="location.href='modifyStudentHours.html'" value="Modify student WorkHours ">
-		<input id = "addevent" class="labelButton" type="button" onClick="location.href='forms/newEvent.php'" value="Add event">
-		<input id = "modifyuser" class="labelButton" type="button" onClick="location.href='modifyUser.php'" value="Modify user">
-		<input id = "modifyItems" class="labelButton" type="button" onClick="location.href='modifyItems.html'" value="Modify donation items">
-		<input id = "seeMessage" class="labelButton" type="button" onClick="location.href='seeMessage.html'" value="See message">
-		<input id = "adminHome" class="labelButton" type="button" onClick="location.href='Admin.php'" value="Admin Home">
-	  </div>
-	  <div id="body" align="center">
-		<p></p>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Add User</title>
+<link rel="stylesheet" type="text/css" href="view.css" media="all">
+<link rel="stylesheet" type="text/css" href="../theme.css">
+<script type="text/javascript" src="view.js"></script>
+<script type="text/javascript" src="calendar.js"></script>
+    
+<style type="text/css">
+.auto-style1 {
+	margin-top: 0;
+}
+</style>
+</head>
+<body>
+    <div id = "title">
+    <a href="../Admin.php">
+	<h2 id = "titleName">
+		<img id = "titleIcon" src = "../calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
+    </h2>
+    </a>
+    <input id = "log" class="button"  type="button" onClick="location.href='../logout.php'" value="Log out">
+    <input id = "changePassword" class="button"  type="button" onClick="location.href='../changePassword.html'" value="Change password">
+  </div>      
+  <div id="label">
+    <input id = "ModifykHours" class="labelButton"  type="button" onClick="location.href='../modifyStudentHours.html'" value="Modify student WorkHours ">
+    <input id = "addevent" class="labelButton"  type="button" onClick="location.href='newform.php'" value="Add event">
+    <input id = "modifyuser" class="labelButton"  type="button" onClick="location.href='../modifyUser.php'" value="Modify user">
+    <input id = "modifyItems" class="labelButton"  type="button" onClick="location.href='../modifyItems.html'" value="Modify donation items">
+    <input id = "seeMessage" class="labelButton"  type="button" onClick="location.href='../seeMessage.html'" value="See message">
+  </div>
+	<div id="main_body">
+	&nbsp;<div id="form_container">
+	
+		<h1><a style="width: 637px">Add a New User</a></h1>
+		<form id="form_1059751" class="appnitro"  method="post">
+					<div class="form_description">
+		</div>						
+			<p></p>
 		<form action="" method="post">
 			<table cellspacing="50">
 				<tr>
@@ -130,3 +140,4 @@
 	</div>
   </body>
 </html>
+		
