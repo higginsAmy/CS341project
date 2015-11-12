@@ -36,7 +36,7 @@ case "V":
 						events:  [
    							<?php 
                                // figure out student ID to see what events they're doing
-                               $user = $_SERVER['login_user'];
+                               $user = $_SESSION['login_user'];
 								// Create connection
 								$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
         						$query = mysqli_query($connection, "SELECT * FROM events LEFT JOIN eventparticipation 
@@ -49,10 +49,10 @@ case "V":
                                         
                                         $end = $event["endDateTime"];
                                     
-                                        if ($event["username"] === $user && $event["deleted"] === 1) {
+                                        if ($event["username"] === $user && $event["removed"] === 1) {
                                             $color = red;
                                             $textColor = white;
-                                        } else if ($event["username"] === $user && $event["deleted"] === 0) {
+                                        } else if ($event["username"] === $user && $event["removed"] === 0) {
                                             $color = green;
                                             $textColor = white;
                                         } else {
