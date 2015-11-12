@@ -5,7 +5,7 @@ if (!isset($_SESSION['login_auth'])){
 }
 switch($_SESSION['login_auth']){
 case "A":
-	header("location: Admin.php"); // Redirecting To Student Page
+	header("location: Admin.php"); // Redirecting To Admin Page
 	break;
 case "V":
 	header("location: Volunteer.php"); // Redirecting To Volunteer Page
@@ -16,7 +16,7 @@ case "V":
 <html>
   <head>
   	<meta charset="utf-8">
-    <title>Sign up for an Event</title>
+    <title>Student sign up for an Event</title>
  	<!-- Styles --> 
     <link rel="stylesheet" type="text/css" href="theme.css">
 	<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
@@ -86,28 +86,23 @@ case "V":
 		// SQL query to fetch information of registerd users and finds user match.
 		$user = $_SESSION['login_user'];
 		$result = mysqli_query($connection, "select * from events LEFT JOIN eventparticipation 
-		ON (events.eventID = eventparticipation.eventID) where user <> '$user'");
+			ON (events.eventId = eventparticipation.eventId) where eventparticipation.user is null OR eventparticipation.user !='$user'");
 		if ($result) {
 			echo '<table align="center" cellpadding="25"><tr><th>Title</th><th>Starts</th><th>Ends</th>'
 				.'<th>Sign up</th>';
 			// output data of each row
 			while($row = mysqli_fetch_assoc($result)) {
-				echo "<tr><td>".$row["title"]."</td><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]."</td>"
-				.'<td><input id="signup" class="button" type="submit" value="Sign Up"></td></tr>';
-			
-				if (isset($_POST['submit'])) {
-					$sql = "INSERT INTO eventparticipation (eventID, user, type)
-					VALUES('$row[eventID]', '$user', S)";
-		}
-				
-			}
+				echo '<form action="" method="post"><input type="hidden" name="event" value="'.$row["eventId"].'"><tr><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>"
+				.$row["endDateTime"]."</td>".'<td><input id="signup" class="button" type="submit" name="submit" value="Sign Up"></td></tr></form>';
+			}	
 			echo "</table>";
 		} else {
 			echo "0 results";
 		}
-		
-		
-		
+		if (isset($_POST['submit'])) {
+			$sql = "INSERT INTO eventparticipation (eventID, user, type) VALUES('".$_POST["event"]."', '$user', S)";
+			echo '<div style="position: absolute; top: 300px; left: 200px;">'.$sql.'</div>';
+		}
 		mysql_close($connection); // Closing Connection;
 		?>
 	  </div>
