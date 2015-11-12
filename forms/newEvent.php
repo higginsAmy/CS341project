@@ -233,12 +233,12 @@ case "S":
 					minVolunteers, maxVolunteers, minStudents, maxStudents, creator, removed) VALUES 
 					('$title', '$location', '$description', '$startDateTime', '$endDateTime', $minVol, $maxVol, 
 					$minStud, $maxStud, '$user', 0)";
-				$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+				$result = mysqli_query($connection, $query);
 				if($result){
-					echo '<div style="position: absolute; top: 152px; margin: auto;">Event successfully added to the database.</div>';
+					echo '<div style="position: relative; top: -1000px; color: green; left: 250px; margin: auto;">Event successfully added to the database.</div>';
 				}
 				else {
-					echo '<div style="position: absolute; top: 152px; margin: auto;">Event not added.</div>';
+					echo '<div style="position: relative; color: red; top: -1000px; left: 250px; margin: auto;">Event not added.</div>';
 				}
 				
 				mysqli_close($connection); // Closing Connection
