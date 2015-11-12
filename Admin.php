@@ -41,50 +41,27 @@ case "V":
 								// Create connection
 								$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
         						$query = mysqli_query($connection, "SELECT * FROM events");
-									while ($event = mysqli_fetch_assoc($query)) {
-									
-            						$title = $event["title"];
-									
+								while ($event = mysqli_fetch_assoc($query)) {
+									$title = $event["title"];
 									$start = $event["startDateTime"];
-									
 									$end = $event["endDateTime"];
-									
-									//$MinVols = $event["MinVols"];
-									
-									//$MaxVols = $event["MaxVols"];
-									
-									//$MinStud = $event["MinStud"];
-									
-									//$MaxStud = $event["MaxStud"];
-									
-									//$Desc = $event["Desc"];
-								
-									
-									echo "{";
+									$MinVols = $event["MinVols"];
+									$MaxVols = $event["MaxVols"];
+									$MinStud = $event["MinStud"];
+									$MaxStud = $event["MaxStud"];
+									$Desc = $event["Desc"];
 
-            						echo "title : '$title',";
-									
+									echo "{";
+									echo "title : '$title',";
 									echo "start : '$start',";
-									
 									echo "end : '$endDateTime',";
-									
-									//echo "StartDate: '$EndDate'";
-									
-									//echo "EndDate: '$EndDate'";
-									
 									//echo "MinVols: '$MinVols'";
-									
 									//echo "MaxVols: '$MaxVols'";
-									
 									//echo "MinStud: '$MinStud'";
-									
 									//echo "MaxStud: '$MaxStud'";
-									
 									//echo "Desc : '$Desc'";
-									
-									
 									echo "},";
-        						}
+								}
     						?>
 						]
                         ,
