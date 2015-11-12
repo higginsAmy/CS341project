@@ -85,23 +85,36 @@ case "V":
 		}
 		// SQL query to fetch information of registerd users and finds user match.
 		$user = $_SESSION['login_user'];
-		$result = mysqli_query($connection, "select * from events LEFT JOIN eventparticipation 
-			ON (events.eventId = eventparticipation.eventId) where eventparticipation.user is null OR eventparticipation.user !='$user'");
+		$result = mysqli_query($connection, "select * from events");
 		if ($result) {
 			echo '<table align="center" cellpadding="25"><tr><th>Title</th><th>Starts</th><th>Ends</th>'
 				.'<th>Sign up</th>';
-			// output data of each row
+			// output data of each row  
 			while($row = mysqli_fetch_assoc($result)) {
-				echo '<form action="" method="post"><input type="hidden" name="event" value="'.$row["eventId"].'"><tr><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>"
-				.$row["endDateTime"]."</td>".'<td><input id="signup" class="button" type="submit" name="submit" value="Sign Up"></td></tr></form>';
+				$eventsAttended = mysqli_query($connection, "select * from eventparticipation where user = '$user'");
+				$check = true;
+				while ($signedUp = mysqli_fetch_assoc($eventsAttended)){
+					if($signedUp["eventId"] == $row["eventId"]){
+						$check = false;
+					}
+				}
+				if ($check){
+					echo '<tr><form action="" method="post"><input type="hidden" name="event" value="'.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>"
+					.$row["endDateTime"]."</td>".'<td><input id="signup" class="button" type="submit" name="submit" value="Sign Up"></td></tr></form>';
+				}
 			}	
 			echo "</table>";
 		} else {
 			echo "0 results";
 		}
 		if (isset($_POST['submit'])) {
-			$sql = "INSERT INTO eventparticipation (eventID, user, type) VALUES('".$_POST["event"]."', '$user', S)";
-			echo '<div style="position: absolute; top: 300px; left: 200px;">'.$sql.'</div>';
+			$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES(".$_POST['event'].", '$user', 'S')";
+			if (mysqli_query($connection, $sql)){
+				echo '<meta http-equiv="refresh" content="0">';
+			}
+			else {
+				echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';
+			}
 		}
 		mysql_close($connection); // Closing Connection;
 		?>
