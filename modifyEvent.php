@@ -36,8 +36,7 @@
 	  </div>      
 	  <div id="label">
 		<input id = "ModifykHours" class="labelButton" type="button" onClick="location.href='modifyStudentHours.html'" value="Modify student WorkHours ">
-		<input id = "addevent" class="labelButton" type="button" onClick="location.href='addEvent.html'" value="Add event">
-		<input id = "modifyEvent" class="labelButton" type="button" onClick="location.href='modifyEvent.html'" value="Delete event">
+		<input id = "addevent" class="labelButton" type="button" onClick="location.href='forms/newEvent.php'" value="Add event">
 		<input id = "modifyuser" class="labelButton" type="button" onClick="location.href='modifyUser.php'" value="Modify user">
 		<input id = "modifyItems" class="labelButton" type="button" onClick="location.href='modifyItems.html'" value="Modify donation items">
 		<input id = "seeMessage" class="labelButton" type="button" onClick="location.href='seeMessage.html'" value="See message">
@@ -56,14 +55,15 @@
 			echo "</div>";
 		}
 		// SQL query to fetch events created by user
-		$result = mysqli_query($connection, "select * from events where creator ='$user' GROUP BY startTimeDate");
+		$result = mysqli_query($connection, "select * from events where creator='$user' GROUP BY startDateTime");
 		if ($result) {
 			echo '<table align="center" cellpadding="25"><tr><th>Event Title</th><th>Starts</th><th>Ends</th>'
 				.'<th>Delete</th></tr>';
 			// output data of each row
 			while($row = mysqli_fetch_assoc($result)) {
-				echo "<tr><td>".$row["title"]."</td><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]."</td><td>"
-				.$row["username"]."'>Delete Event</a></td><td><a href='deleteEvent.php?eventID="	
+				echo "<tr><td>".$row["title"]."</td><td>".$row["startDateTime"]."</td><td>"
+					.$row["endDateTime"]."</td><td><a href='deleteEvent.php?eventID="
+					.$row["eventId"]."'>Delete Event</a>";	
 		}
 		}
 		else {

@@ -44,7 +44,7 @@
 	  </div>
 	  <div>
 		<?php 
-		// Fetch username from GET variable
+		// Fetch eventID from GET variable
 		$event = htmlspecialchars($_GET["eventID"]);
 		// Create connection
 		$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
@@ -55,24 +55,17 @@
 			echo "</div>";
 		}
 		// SQL query to fetch information from target user.
-		$result = mysqli_query($connection, "select * from users where eventID ='$event'");
+		$result = mysqli_query($connection, "select * from events where eventId=$event");
 		if ($result) {
-			echo '<form action="" method="post"><div id="body" align="center"><p></p>'
-				."<h3 style='display:inline'>Are you sure you want to delete this event? "
-				.'</h3><input id="delete" name="submit" type="submit" value="Delete Event">'
-				.'</div></form>';
-		}
-		else {
-			echo "Zero results.";
-		}
-		// Logic that handles submission of the form
-		if (isset($_POST['submit'])) {
-			if(mysqli_query($connection, "Update events WHERE eventID='$event'")){
+			if(mysqli_query($connection, "Update events SET removed=1 WHERE eventID=$event")){
 				$success = "Successfully updated event";
 			}
 			else {
-				$success = 'Update failed.';
+				$success = "Update failed.";
 			}
+		}
+		else {
+			echo "Zero results.";
 		}
 		mysql_close($connection); // Closing Connection;
 		?>

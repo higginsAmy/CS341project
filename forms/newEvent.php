@@ -38,7 +38,7 @@ case "S":
   </div>      
   <div id="label">
     <input id = "ModifykHours" class="labelButton"  type="button" onClick="location.href='../modifyStudentHours.html'" value="Modify student WorkHours ">
-    <input id = "addevent" class="labelButton"  type="button" onClick="location.href='newform.php'" value="Add event">
+    <input id = "addevent" class="labelButton"  type="button" onClick="location.href='newEvent.php'" value="Add event">
     <input id = "modifyuser" class="labelButton"  type="button" onClick="location.href='../modifyUser.php'" value="Modify user">
     <input id = "modifyItems" class="labelButton"  type="button" onClick="location.href='../modifyItems.html'" value="Modify donation items">
     <input id = "seeMessage" class="labelButton"  type="button" onClick="location.href='../seeMessage.html'" value="See message">
@@ -46,7 +46,7 @@ case "S":
 	<div id="main_body">
 	&nbsp;<div id="form_container">
 	
-		<h1><a style="width: 637px">Create a new Event</a></h1>
+		<h2>&nbsp;<a style="width: 637px">Create a new Event</a></h1>
 		<form id="form_1059751" class="appnitro"  method="post" action="">
 					<div class="form_description">
 		</div>						
@@ -63,7 +63,7 @@ case "S":
 		<li id="Location" style="left: 342px; top: -73px; width: 41%; height: 65px" >
 		<label class="description" for="description">Location </label>
 		<div>
-			<input id="description" name="description" class="element text medium" type="text" maxlength="255" value=""/> 
+			<input id="description" name="Location" class="element text medium" type="text" maxlength="255" value=""/> 
 		</div> 
 		</li>		
 		
@@ -211,7 +211,15 @@ case "S":
 				$user = $_SESSION['login_user'];
 				// Set date variables and put into ISO 8601
 				$startDateTime = $_POST['SYear']. "-" .$_POST['SMonth']. "-" .$_POST['SDay']. " " .$_POST['SHour']. ":" .$_POST['SMin']. ":00";  
-				$endDateTime = $_POST['EYear']. "-" .$_POST['EMonth']. "-" .$_POST['EDay']. " " .$_POST['EHour']. ":" .$_POST['EMin']. ":00";		
+				$endDateTime = $_POST['EYear']. "-" .$_POST['EMonth']. "-" .$_POST['EDay']. " " .$_POST['EHour']. ":" .$_POST['EMin']. ":00";
+				// Parse other variables
+				$title = mysqli_real_escape_string($_POST['Title']);
+				$location = mysqli_real_escape_string($_POST['Location']);
+				$description = mysqli_real_escape_string($_POST['Desc']);
+				$maxVol = $_POST['MaxVol'];
+				$minVol = $_POST['MinVol'];
+				$minStud = $_POST['MinStud'];
+				$maxStud = $_POST['MaxStud'];
 				// Create connection
 				$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
 				// Check connection
@@ -223,14 +231,14 @@ case "S":
 				// Insert event into database
 				$query = "INSERT INTO events (title, location, description, startDateTime, endDateTime, 
 					minVolunteers, maxVolunteers, minStudents, maxStudents, creator, removed) VALUES 
-					('".$_POST['Title']."', '".$_POST['Location']."', '".$_POST['Desc']."', '$startDateTime', 
-					'$endDateTime', ".$_POST['MinVol'].", ".$_POST['MaxVol'].", ".$_POST['MinStud'].", ".$_POST['MaxStud'].", '$user', 0)";
+					('$title', '$location', '$description', '$startDateTime', '$endDateTime', $minVol, $maxVol, 
+					$minStud, $maxStud, '$user', 0)";
 				$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
 				if($result){
-					echo "<div>Event successfully added to the database.</div>";
+					echo '<div style="position: absolute; top: 152px; margin: auto;">Event successfully added to the database.</div>';
 				}
 				else {
-					echo "<div>Event not added.</div>";
+					echo '<div style="position: absolute; top: 152px; margin: auto;">Event not added.</div>';
 				}
 				
 				mysqli_close($connection); // Closing Connection
