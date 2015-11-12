@@ -30,7 +30,7 @@ if(!mysqli_query($connection, $sqlInsert)){
     echo 'error';
 }
 
-echo $result->num_rows;
+header("location: ../Admin.php");
 
 mysql_close($connection); // Closing Connection;
 ?>
