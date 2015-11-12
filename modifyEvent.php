@@ -37,6 +37,7 @@
 	  <div id="label">
 		<input id = "ModifykHours" class="labelButton" type="button" onClick="location.href='modifyStudentHours.html'" value="Modify student WorkHours ">
 		<input id = "addevent" class="labelButton" type="button" onClick="location.href='addEvent.html'" value="Add event">
+		<input id = "modifyEvent" class="labelButton" type="button" onClick="location.href='modifyEvent.html'" value="Delete event">
 		<input id = "modifyuser" class="labelButton" type="button" onClick="location.href='modifyUser.php'" value="Modify user">
 		<input id = "modifyItems" class="labelButton" type="button" onClick="location.href='modifyItems.html'" value="Modify donation items">
 		<input id = "seeMessage" class="labelButton" type="button" onClick="location.href='seeMessage.html'" value="See message">

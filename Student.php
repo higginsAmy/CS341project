@@ -28,7 +28,64 @@ case "V":
 		$(document).ready(function() {
     		// page is now ready, initialize the calendar...
     		$('#calendar').fullCalendar({
-        		// put your options and callbacks here
+				editable: true,
+        		weekmode: 'variable',
+        		eventSources: [
+				// your event source
+					{
+						events:  [
+   							<?php 
+                               // figure out student ID to see what events they're doing
+                               $user = $_SERVER['login_user'];
+								// Create connection
+								$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
+        						$query = mysqli_query($connection, "SELECT * FROM events LEFT JOIN eventparticipation 
+                                ON (events.eventID = eventparticipation.eventID)");
+									while ($event = mysqli_fetch_assoc($query)) {
+									
+                                        $title = $event["title"];
+                                        
+                                        $start = $event["startDateTime"];
+                                        
+                                        $end = $event["endDateTime"];
+                                    
+                                        
+                                        //$MinStud = $event["MinStud"];
+                                        
+                                        //$MaxStud = $event["MaxStud"];
+                                        
+                                        //$Desc = $event["Desc"];
+                                    
+                                        
+                                        echo "{";
+    
+                                        echo "title : '$title',";
+                                        
+                                        echo "start : '$start',";
+                                        
+                                        echo "end : '$endDateTime',";
+                                        
+                                        //echo "StartDate: '$StartDate'";
+                                        
+                                        //echo "EndDate: '$EndDate'";
+                                        
+                                        //echo "MinStud: '$MinStud'";
+                                        
+                                        //echo "MaxStud: '$MaxStud'";
+                                        
+                                        //echo "Desc : '$Desc'";
+                                        
+                                        
+                                        echo "},";
+        						  }
+    						?>
+						]
+                        ,
+						color: 'blue',     // an option!
+						textColor: 'white' // an option!
+					}
+					// any other event sources...
+				]
     		})
 		});
 	</script>
