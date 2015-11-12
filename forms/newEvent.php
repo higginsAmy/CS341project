@@ -179,9 +179,9 @@ case "S":
 				$startDateTime = $_POST['SYear']. "-" .$_POST['SMonth']. "-" .$_POST['SDay']. " " .$_POST['SHour']. ":" .$_POST['SMin']. ":00";  
 				$endDateTime = $_POST['EYear']. "-" .$_POST['EMonth']. "-" .$_POST['EDay']. " " .$_POST['EHour']. ":" .$_POST['EMin']. ":00";
 				// Parse other variables
-				$title = mysqli_real_escape_string($_POST['Title']);
-				$location = mysqli_real_escape_string($_POST['Location']);
-				$description = mysqli_real_escape_string($_POST['Desc']);
+				$title = mysqli_real_escape_string($connection, $_POST['Title']);
+				$location = mysqli_real_escape_string($connection, $_POST['Location']);
+				$description = mysqli_real_escape_string($connection, $_POST['Desc']);
 				$maxVol = $_POST['MaxVol'];
 				$minVol = $_POST['MinVol'];
 				$minStud = $_POST['MinStud'];
