@@ -199,12 +199,11 @@ case "S":
 					minVolunteers, maxVolunteers, minStudents, maxStudents, creator, removed) VALUES 
 					('$title', '$location', '$description', '$startDateTime', '$endDateTime', $minVol, $maxVol, 
 					$minStud, $maxStud, '$user', 0)";
-				$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
-				if($result){
-					echo '<div style="position: absolute; top: 152px; margin: auto;">Event successfully added to the database.</div>';
+				if(mysqli_query($connection, $query)){
+					$success = "Successfully added new event";
 				}
 				else {
-					echo '<div style="position: absolute; top: 152px; margin: auto;">Event not added.</div>';
+					$success = "Failed to add event to the database.";
 				}
 				
 				mysqli_close($connection); // Closing Connection
@@ -215,5 +214,7 @@ case "S":
 	</div>
 	<img id="bottom" src="bottom.png" alt="">
     </div>
+	<div style="position: absolute; top: 350px; left: 500px;"><?php echo ("<script>alert($success);</script>"); ?></div>
+	</div>
 	</body>
 </html>
