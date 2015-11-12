@@ -69,7 +69,6 @@ case "V":
 			echo "0 results";
 		}
 		if (isset($_POST['submit'])) {
-<<<<<<< HEAD
             $overlap = false;
             $event = $_POST[event];
             $addEvent = mysqli_query($connection, "select * from events WHERE eventId = '$event' ");
@@ -93,24 +92,18 @@ case "V":
                 
         } 
            if($overlap == false){
-             $sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES('$event', '$user', 'S')";
-               echo $sql;
-=======
-			$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES(".$_POST['event'].", '$user', 'S')";
->>>>>>> origin/master
+             $sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES($event, '$user', 'S')";
+
 			if (mysqli_query($connection, $sql)){
 				echo '<meta http-equiv="refresh" content="0">';
 			}
 			else {
 				echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';
 			}
-<<<<<<< HEAD
            } else{
                echo '<div style="position: absolute; color: red; top: 155px; left: 450px;">Cannot sign up for event: Scheduling Conflict </div>';
            }
-			
-=======
->>>>>>> origin/master
+
 		}
 		mysql_close($connection); // Closing Connection;
 		?>
