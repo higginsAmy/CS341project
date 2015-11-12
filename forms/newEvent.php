@@ -1,7 +1,7 @@
 <?php
 include('../session.php');
 if (!isset($_SESSION['login_auth'])){
-	header("location: ../Guest.php");
+	header("location: ../Guest.html");
 }
 switch($_SESSION['login_auth']){
 case "S":
@@ -36,7 +36,13 @@ case "S":
     <input id = "log" class="button"  type="button" onClick="location.href='../logout.php'" value="Log out">
     <input id = "changePassword" class="button"  type="button" onClick="location.href='../changePassword.html'" value="Change password">
   </div>      
- 
+  <div id="label">
+    <input id = "ModifykHours" class="labelButton"  type="button" onClick="location.href='../modifyStudentHours.html'" value="Modify student WorkHours ">
+    <input id = "addevent" class="labelButton"  type="button" onClick="location.href='newEvent.php'" value="Add event">
+    <input id = "modifyuser" class="labelButton"  type="button" onClick="location.href='../modifyUser.php'" value="Modify user">
+    <input id = "modifyItems" class="labelButton"  type="button" onClick="location.href='../modifyItems.html'" value="Modify donation items">
+    <input id = "seeMessage" class="labelButton"  type="button" onClick="location.href='../seeMessage.html'" value="See message">
+  </div>
 	<div id="main_body">
 	&nbsp;<div id="form_container">
 	
@@ -75,6 +81,20 @@ case "S":
 	 		<input id="SYear" name="SYear" class="element text" size="4" maxlength="4" value="" type="text">
 			<label for="SYear">YYYY</label>
 		</span>
+	
+		<span id="calendar_3">
+			<img id="cal_img_3" class="datepicker" src="calendar.gif" alt="Pick a date.">	
+		</span>
+		<script type="text/javascript">
+			Calendar.setup({
+			inputField	 : "SYear",
+			baseField    : "StartDate",
+			displayArea  : "calendar_3",
+			button		 : "cal_img_3",
+			ifFormat	 : "%B %e, %Y",
+			onSelect	 : selectDate
+			});
+		</script>
 		 
 		</li>		
 		
@@ -92,6 +112,20 @@ case "S":
 	 		<input id="EYear" name="EYear" class="element text" size="4" maxlength="4" value="" type="text">
 			<label for="EYear">YYYY</label>
 		</span>
+	
+		<span id="calendar_4">
+			<img id="cal_img_4" class="datepicker" src="calendar.gif" alt="Pick a date.">	
+		</span>
+		<script type="text/javascript">
+			Calendar.setup({
+			inputField	 : "EYear",
+			baseField    : "EndDate",
+			displayArea  : "calendar_4",
+			button		 : "cal_img_4",
+			ifFormat	 : "%B %e, %Y",
+			onSelect	 : selectDate
+			});
+		</script>
 		 
 		</li>		
 		
@@ -179,9 +213,9 @@ case "S":
 				$startDateTime = $_POST['SYear']. "-" .$_POST['SMonth']. "-" .$_POST['SDay']. " " .$_POST['SHour']. ":" .$_POST['SMin']. ":00";  
 				$endDateTime = $_POST['EYear']. "-" .$_POST['EMonth']. "-" .$_POST['EDay']. " " .$_POST['EHour']. ":" .$_POST['EMin']. ":00";
 				// Parse other variables
-				$title = mysqli_real_escape_string($_POST['Title']);
-				$location = mysqli_real_escape_string($_POST['Location']);
-				$description = mysqli_real_escape_string($_POST['Desc']);
+				$title = mysqli_real_escape_string($connection, $_POST['Title']);
+				$location = mysqli_real_escape_string($connection, $_POST['Location']);
+				$description = mysqli_real_escape_string($connection, $_POST['Desc']);
 				$maxVol = $_POST['MaxVol'];
 				$minVol = $_POST['MinVol'];
 				$minStud = $_POST['MinStud'];
