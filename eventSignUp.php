@@ -69,48 +69,39 @@ case "V":
 			echo "0 results";
 		}
 		if (isset($_POST['submit'])) {
-<<<<<<< HEAD
             $overlap = false;
             $event = $_POST[event];
             $addEvent = mysqli_query($connection, "select * from events WHERE eventId = '$event' ");
             if($addEvent->num_rows){
                 $row = $addEvent->fetch_object();
-            $end = $row->endDateTime;
-            $start = $row->startDateTime;
-       
-            $signUpEvent = mysqli_query($connection, "select * from eventparticipation WHERE user = '$user'");
-            if($signUpEvent->num_rows){
-            while($rows = $signUpEvent->fetch_object()){
-            $theEvent = mysqli_query($connection, "select * from events WHERE eventId = '$rows->eventId'");
-            $theRow = $theEvent->fetch_object();
-            $end2 = $theRow->endDateTime;
-            $start2 = $theRow->startDateTime;
-            if($start <= $end2 && $end >= $start2){
-               $overlap = true;
-            }
-        }
-        } 
+				$end = $row->endDateTime;
+				$start = $row->startDateTime;
+      
+				$signUpEvent = mysqli_query($connection, "select * from eventparticipation WHERE user = '$user'");
+				if($signUpEvent->num_rows){
+					while($rows = $signUpEvent->fetch_object()){
+						$theEvent = mysqli_query($connection, "select * from events WHERE eventId = '$rows->eventId'");
+						$theRow = $theEvent->fetch_object();
+						$end2 = $theRow->endDateTime;
+						$start2 = $theRow->startDateTime;
+						if($start <= $end2 && $end >= $start2){
+							$overlap = true;
+						}
+					}
+				}		 
                 
-        } 
-           if($overlap == false){
-             $sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES('$event', '$user', 'S')";
-               echo $sql;
-=======
-			$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES(".$_POST['event'].", '$user', 'S')";
->>>>>>> origin/master
-			if (mysqli_query($connection, $sql)){
-				echo '<meta http-equiv="refresh" content="0">';
-			}
-			else {
-				echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';
-			}
-<<<<<<< HEAD
-           } else{
+			} 
+			if($overlap == false){
+				$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES($event, '$user', 'S')";
+				if (mysqli_query($connection, $sql)){
+					echo '<meta http-equiv="refresh" content="0">';
+				}
+				else {
+					echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';
+				}
+			} else{
                echo '<div style="position: absolute; color: red; top: 155px; left: 450px;">Cannot sign up for event: Scheduling Conflict </div>';
-           }
-			
-=======
->>>>>>> origin/master
+			}
 		}
 		mysql_close($connection); // Closing Connection;
 		?>

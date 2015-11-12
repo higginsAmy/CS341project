@@ -37,54 +37,40 @@ case "V":
 				// your event source
 					{
 						events:  [
-   							<?php 
+<?php 
 								// Create connection
 								$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
         						$query = mysqli_query($connection, "SELECT * FROM events");
-									while ($event = mysqli_fetch_assoc($query)) {
-									
-            						$title = $event["title"];
-									
+								while ($event = mysqli_fetch_assoc($query)) {
+									$title = $event["title"];
 									$start = $event["startDateTime"];
-									
 									$end = $event["endDateTime"];
-									
-									//$MinVols = $event["MinVols"];
-									
-									//$MaxVols = $event["MaxVols"];
-									
-									//$MinStud = $event["MinStud"];
-									
-									//$MaxStud = $event["MaxStud"];
-									
-									//$Desc = $event["Desc"];
-								
+									$MinVols = $event["MinVols"];
+									$MaxVols = $event["MaxVols"];
+									$MinStud = $event["MinStud"];
+									$MaxStud = $event["MaxStud"];
+									$Desc = $event["Desc"];
+									if ($event["removed"] == 1) {
+                                        $color = red;
+                                        $textColor = white;
+                                    } else {
+                                        $color = blue;
+                                        $textColor = white;
+                                    }
 									
 									echo "{";
-
-            						echo "title : '$title',";
-									
+									echo "title : '$title',";
 									echo "start : '$start',";
-									
 									echo "end : '$endDateTime',";
-									
-									//echo "StartDate: '$EndDate'";
-									
-									//echo "EndDate: '$EndDate'";
-									
+									echo "color : '$color',";
+                                    echo "textColor : '$textColor'";
 									//echo "MinVols: '$MinVols'";
-									
 									//echo "MaxVols: '$MaxVols'";
-									
 									//echo "MinStud: '$MinStud'";
-									
 									//echo "MaxStud: '$MaxStud'";
-									
 									//echo "Desc : '$Desc'";
-									
-									
 									echo "},";
-        						}
+								}
     						?>
 						]
                         ,

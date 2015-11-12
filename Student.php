@@ -39,56 +39,38 @@ case "V":
                                $user = $_SESSION['login_user'];
 								// Create connection
 								$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
-        						$query = mysqli_query($connection, "SELECT * FROM events LEFT JOIN eventparticipation 
-                                ON (events.eventID = eventparticipation.eventID)");
+        						$query = mysqli_query($connection, "SELECT * FROM events JOIN eventparticipation 
+                                ON (events.eventID = eventparticipation.eventID) where eventparticipation.user='$user'");
 									while ($event = mysqli_fetch_assoc($query)) {
-									
                                         $title = $event["title"];
-                                        
                                         $start = $event["startDateTime"];
-                                        
                                         $end = $event["endDateTime"];
-                                    
-                                        if ($event["username"] === $user && $event["removed"] === 1) {
+										//$MinStud = $event["MinStud"];
+                                        //$MaxStud = $event["MaxStud"];
+										//$Desc = $event["Desc"];
+									
+                                        if ($event["removed"] == 1) {
                                             $color = red;
                                             $textColor = white;
-                                        } else if ($event["username"] === $user && $event["removed"] === 0) {
+                                        } else if ($event["removed"] == 0) {
                                             $color = green;
                                             $textColor = white;
                                         } else {
                                             $color = blue;
                                             $textColor = white;
                                         }
-                                            
-                                        //$MinStud = $event["MinStud"];
-                                        
-                                        //$MaxStud = $event["MaxStud"];
-                                        
-                                        //$Desc = $event["Desc"];
-                                    
-                                        
                                         echo "{";
-    
                                         echo "title : '$title',";
-                                        
-                                        echo "start : '$start',";
-                                        
+										echo "start : '$start',";
                                         echo "end : '$endDateTime',";
-                                        
                                         echo "color : '$color',";
-                                        
                                         echo "textColor : '$textColor'";
-                                        
+                                       
                                         //echo "StartDate: '$StartDate'";
-                                        
                                         //echo "EndDate: '$EndDate'";
-                                        
-                                        //echo "MinStud: '$MinStud'";
-                                        
-                                        //echo "MaxStud: '$MaxStud'";
-                                        
-                                        //echo "Desc : '$Desc'";
-                                        
+										//echo "MinStud: '$MinStud'";
+										//echo "MaxStud: '$MaxStud'";
+										//echo "Desc : '$Desc'";
                                         
                                         echo "},";
         						  }
