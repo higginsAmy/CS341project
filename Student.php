@@ -1,7 +1,7 @@
 <?php
 include('session.php');
 if (!isset($_SESSION['login_auth'])){
-	header("location: Guest.html");
+	header("location: Guest.php");
 }
 switch($_SESSION['login_auth']){
 case "A":
@@ -97,7 +97,8 @@ case "V":
     </div>
     <div id="label">
         <input id = "clockIn" class="labelButton"  type="button" onClick="location.href='clockIn.html'" value="Clock in">            
-        <input id = "viewNote" class="labelButton"  type="button" onClick="location.href='viewNote.html'" value="View Note  ">        
+        <input id = "viewNote" class="labelButton"  type="button" onClick="location.href='viewNote.html'" value="View Note">        
+        <input id = "eventSignUp" class = "labelButton" type = "button" onClick="location.href='eventSignUp.php'" value="Event Sign Up">    
     </div>
     <div id='calendar' style="background:white; position:relative; top: 10px; width:75%; display:inline-block;"></div>
     </body>

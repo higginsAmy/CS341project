@@ -1,7 +1,7 @@
 <?php
 include('session.php');
 if (!isset($_SESSION['login_auth'])){
-	header("location: Guest.html");
+	header("location: Guest.php");
 }
 switch($_SESSION['login_auth']){
 case "S":
@@ -122,7 +122,7 @@ case "V":
 					.$row["username"]."'>Change User Type</a></td><td><a href='deleteUser.php?username="
 					.$row["username"]."'>Delete User</a></td></tr>";
 			}
-			echo '<tr><td><input id="newUser" class="button" type="button" onClick="location.href=\'newUser.php\'" value="Create New User"></td></tr>';
+			echo '<tr><td><input id="newUser" class="button" type="button" onClick="location.href=\'forms/newUser.php\'" value="Create New User"></td></tr>';
 			echo "</table>";
 		} else {
 			echo "0 results";
