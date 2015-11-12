@@ -71,7 +71,7 @@ case "V":
 	  </div>      
 	  <div id="label">
 		
-		<input id = "StudentHome" class="labelButton" type="button" onClick="location.href='Student.php'" value="Admin Home">
+		<input id = "StudentHome" class="labelButton" type="button" onClick="location.href='Student.php'" value="Student Home">
 	  </div>
 	  <div>
 		<?php 
