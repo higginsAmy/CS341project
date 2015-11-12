@@ -135,7 +135,8 @@ case "V":
 			}
 		}
 		mysql_close($connection); // Closing Connection;
-		echo ("<script>alert('$success');</script>"); ?>
+		//echo ("<script>alert('$success');</script>"); 
+		?>
 	</div>
   </body>
 </html>
