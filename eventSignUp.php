@@ -21,45 +21,6 @@ case "V":
     <link rel="stylesheet" type="text/css" href="theme.css">
 	<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
 	<!-- Scripts -->
-	<script src='fullcalendar/lib/jquery.min.js'></script>
-	<script src='fullcalendar/lib/moment.min.js'></script>
-	<script src='fullcalendar/fullcalendar.js'></script>
-	<script>
-		$(document).ready(function() {
-    		// page is now ready, initialize the calendar...
-    		$('#calendar').fullCalendar({
-        		editable: true,
-        		weekmode: 'variable',
-        		eventSources: [
-
-        // your event source
-        {
-            events: [ // put the array in the `events` property
-                {
-                    title  : 'Lorem ipsum dolor sit amet',
-                    start  : '2015-10-01'
-                },
-                {
-                    title  : 'consectetur adipiscing elit',
-                    start  : '2015-10-05',
-                    end    : '2015-10-05'
-                },
-                {
-                    title  : 'Ut faucibus pulvinar',
-                    start  : '2015-10-09T12:30:00',
-                }
-            ],
-            color: 'black',     // an option!
-            textColor: 'yellow' // an option!
-        }
-
-        // any other event sources...
-
-    ]
-    		})
-		});
-		
-	</script>
   </head>
   <body>
 	  <div id = "title">
@@ -85,27 +46,67 @@ case "V":
 		}
 		// SQL query to fetch information of registerd users and finds user match.
 		$user = $_SESSION['login_user'];
-		$result = mysqli_query($connection, "select * from events LEFT JOIN eventparticipation 
-			ON (events.eventId = eventparticipation.eventId) where eventparticipation.user is null OR eventparticipation.user !='$user'");
+		$result = mysqli_query($connection, "select * from events");
 		if ($result) {
 			echo '<table align="center" cellpadding="25"><tr><th>Title</th><th>Starts</th><th>Ends</th>'
 				.'<th>Sign up</th>';
-			// output data of each row
+			// output data of each row  
 			while($row = mysqli_fetch_assoc($result)) {
-				echo '<form action="" method="post"><input type="hidden" name="event" value="'.$row["eventId"].'"><tr><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>"
-				.$row["endDateTime"]."</td>".'<td><input id="signup" class="button" type="submit" name="submit" value="Sign Up"></td></tr></form>';
+				$eventsAttended = mysqli_query($connection, "select * from eventparticipation where user = '$user'");
+				$check = true;
+				while ($signedUp = mysqli_fetch_assoc($eventsAttended)){
+					if($signedUp["eventId"] == $row["eventId"]){
+						$check = false;
+					}
+				}
+				if ($check){
+					echo '<tr><form action="" method="post"><input type="hidden" name="event" value="'.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>"
+					.$row["endDateTime"]."</td>".'<td><input id="signup" class="button" type="submit" name="submit" value="Sign Up"></td></tr></form>';
+				}
 			}	
 			echo "</table>";
 		} else {
 			echo "0 results";
 		}
 		if (isset($_POST['submit'])) {
-			$sql = "INSERT INTO eventparticipation (eventID, user, type) VALUES('".$_POST["event"]."', '$user', S)";
-			echo '<div style="position: absolute; top: 300px; left: 200px;">'.$sql.'</div>';
+            $overlap = false;
+            $event = $_POST[event];
+            $addEvent = mysqli_query($connection, "select * from events WHERE eventId = '$event' ");
+            if($addEvent->num_rows){
+                $row = $addEvent->fetch_object();
+            $end = $row->endDateTime;
+            $start = $row->startDateTime;
+       
+            $signUpEvent = mysqli_query($connection, "select * from eventparticipation WHERE user = '$user'");
+            if($signUpEvent->num_rows){
+            while($rows = $signUpEvent->fetch_object()){
+            $theEvent = mysqli_query($connection, "select * from events WHERE eventId = '$rows->eventId'");
+            $theRow = $theEvent->fetch_object();
+            $end2 = $theRow->endDateTime;
+            $start2 = $theRow->startDateTime;
+            if($start <= $end2 && $end >= $start2){
+               $overlap = true;
+            }
+        }
+        } 
+                
+        } 
+           if($overlap == false){
+             $sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES('$event', '$user', 'S')";
+               echo $sql;
+			if (mysqli_query($connection, $sql)){
+				echo '<meta http-equiv="refresh" content="0">';
+			}
+			else {
+				echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';
+			}
+           } else{
+               echo '<div style="position: absolute; color: red; top: 155px; left: 450px;">Cannot sign up for event: Scheduling Conflict </div>';
+           }
+			
 		}
 		mysql_close($connection); // Closing Connection;
 		?>
 	  </div>
 	</div>
-  </body>
-</html>
+  </body
