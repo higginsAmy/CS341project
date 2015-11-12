@@ -201,10 +201,10 @@ case "S":
 					$minStud, $maxStud, '$user', 0)";
 				$result = mysqli_query($connection, $query);
 				if($result){
-					echo '<div style="position: relative; top: 152px; left: 250px; margin: auto;">Event successfully added to the database.</div>';
+					echo '<div style="position: relative; top: -1000px; color: green; left: 250px; margin: auto;">Event successfully added to the database.</div>';
 				}
 				else {
-					echo '<div style="position: relative; top: 152px; left: 250px; margin: auto;">Event not added.</div>';
+					echo '<div style="position: relative; color: red; top: -1000px; left: 250px; margin: auto;">Event not added.</div>';
 				}
 				
 				mysqli_close($connection); // Closing Connection
