@@ -94,12 +94,20 @@ case "V":
 			while($row = mysqli_fetch_assoc($result)) {
 				echo "<tr><td>".$row["title"]."</td><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]."</td>"
 				.'<td><input id="signup" class="button" type="submit" value="Sign Up"></td></tr>';
+			
+				if (isset($_POST['submit'])) {
+					$sql = "INSERT INTO eventparticipation (eventID, user, type)
+					VALUES('$row[eventID]', '$user', S)";
+		}
 				
 			}
 			echo "</table>";
 		} else {
 			echo "0 results";
 		}
+		
+		
+		
 		mysql_close($connection); // Closing Connection;
 		?>
 	  </div>
