@@ -201,15 +201,17 @@ case "S":
 					$minStud, $maxStud, '$user', 0)";
 				if(mysqli_query($connection, $query)){
 					$success = "Successfully added new event";
+					echo ("<script>alert('$success');</script>");
 				}
 				else {
 					$success = "Failed to add event to the database.";
+					echo ("<script>alert('$success');</script>");
 				}
 				
 				mysqli_close($connection); // Closing Connection
 			}
 		}
-		echo ("<script>alert('$success');</script>"); 
+		 
 		?>
 	</div>
 	<img id="bottom" src="bottom.png" alt="">

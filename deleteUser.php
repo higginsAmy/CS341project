@@ -59,7 +59,7 @@
 		if ($result) {
 			echo '<form action="" method="post"><div id="body" align="center"><p></p>'
 				."<h3 style='display:inline'>Are you sure you want to delete $user? "
-				.'</h3><input id="delete" name="submit" type="submit" value="Delete User">'
+				.'</h3><input id="delete" name="submit" type="submit" onClick="location.href="Admin.php"" value="Delete User">'
 				.'</div></form>';
 		}
 		else {
