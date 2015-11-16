@@ -41,25 +41,24 @@ include('session.php');
 			// SQL query to fetch information from target user.
 			$result = mysqli_query($connection, "select * from events where eventId=$eventID");
 			if ($result) {
-				echo '<h2 align="center">Event Details</h2><div id="form_container">
-					<div style="position: relative; left: 20px; top: 0px; width: 20%; display: inline-block; float: left;">
-					<label class="description">Title</label></div><div style="width: 27%; display: inline-block; float: left;">
-					<label class="description">Start Date/Time</label></div><div style="width: 27%; display: inline-block; float: left;">
-					<label class="description">End Date/Time</label></div><div style="width: 26%; display: inline-block; float: left;">
-					<label class="description">Description</label></div>';
 				while ($row = mysqli_fetch_assoc($result)){
-					echo '<table cellpadding="25" style="width: 90%;"><tr><td>'.$row["title"].'</td>
-					<td>'.$row["startDateTime"].'</td><td>'.$row["endDateTime"].'</td><td>'.$row["description"].'</td></tr></table>
-					<p></p>
-					<div style="position: relative; left: 10px; top: 0px; width: 25%; display: inline-block; float: left;">
-					<label class="description">Min Volunteers</label></div>
-					<div style="width: 25%; display: inline-block; float: left;"><label class="description">Max Volunteers</label></div>
-					<div style="width: 25%; display: inline-block; float: left;"><label class="description">Min Students</label></div>
-					<div style="width: 25%; display: inline-block; float: left;"><label class="description">Max Students</label></div>
-					<table cellpadding="25" style="width: 90%; text-align: center;"><tr><td>'.$row["minVolunteers"].'</td>
-					<td>'.$row["maxVolunteers"].'</td><td>'.$row["minStudents"].'</td><td>'.$row["maxStudents"].'</td></tr></table>';
+					echo '<h2 align="center">'.$row["title"].'</h2><div id="form_container">
+						<div style="position: relative; left: 30px; top: 0px; width: 38%; display: inline-block; float: left;">
+						<label class="description">Start Date/Time</label></div><div style="width: 34%; display: inline-block; float: left;">
+						<label class="description">End Date/Time</label></div><div style="width: 28%; display: inline-block; float: left;">
+						<label class="description">Description</label></div>';
+
+					echo '<table cellpadding="25" style="width: 90%;"><tr><td>'.$row["startDateTime"].'</td>
+						<td>'.$row["endDateTime"].'</td><td>'.$row["description"].'</td></tr></table>
+						<p></p>
+						<div style="position: relative; left: 10px; top: 0px; width: 25%; display: inline-block; float: left;">
+						<label class="description">Min Volunteers</label></div>
+						<div style="width: 25%; display: inline-block; float: left;"><label class="description">Max Volunteers</label></div>
+						<div style="width: 25%; display: inline-block; float: left;"><label class="description">Min Students</label></div>
+						<div style="width: 25%; display: inline-block; float: left;"><label class="description">Max Students</label></div>
+						<table cellpadding="25" style="width: 90%; text-align: center;"><tr><td>'.$row["minVolunteers"].'</td>
+						<td>'.$row["maxVolunteers"].'</td><td>'.$row["minStudents"].'</td><td>'.$row["maxStudents"].'</td></tr></table>';
 				}
-				echo '';
 			}
 			else {
 				echo "Zero results.";

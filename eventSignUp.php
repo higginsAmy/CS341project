@@ -47,7 +47,9 @@ case "V":
 			}
 			// SQL query to fetch information of registerd users and finds user match.
 			$user = $_SESSION['login_user'];
-			$result = mysqli_query($connection, "select * from events");
+			// Gets results for events that have not been removed and have not reached their maximum number of students
+			// (decremented upon signup).
+			$result = mysqli_query($connection, "select * from events where removed != 1 AND maxStudents > 0");
 			if ($result) {
 				echo '<div style="position: relative; left: 20px; top: 0px; width: 35%; display: inline-block; float: left;"><label class="description">Title</label></div>
 					<div style="float: left; width: 25%; display: inline-block;"><label class="description">Starts</label></div>
@@ -63,6 +65,7 @@ case "V":
 							$check = false;
 						}
 					}
+					// Only displays events that the students are not already signed up for.
 					if ($check){
 						echo '<tr><form action="" class="appnitro" method="post"><input type="hidden" name="event" value="'.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>"
 						.$row["endDateTime"]."</td>".'<td><input id="signup" class="button" type="submit" name="submit" value="Sign Up"></td></tr></form>';
@@ -72,7 +75,9 @@ case "V":
 			} else {
 				echo "0 results";
 			}
+			// Handles submission of form - event signup
 			if (isset($_POST['submit'])) {
+				$maxStud = 0;
 				$overlap = false;
 				$event = $_POST[event];
 				$addEvent = mysqli_query($connection, "select * from events WHERE eventId = '$event' ");
@@ -80,7 +85,9 @@ case "V":
 					$row = $addEvent->fetch_object();
 					$end = $row->endDateTime;
 					$start = $row->startDateTime;
+					$maxStud = $row->maxStudents;
 		  
+		  			// Check for schedule conflict
 					$signUpEvent = mysqli_query($connection, "select * from eventparticipation WHERE user = '$user'");
 					if($signUpEvent->num_rows){
 						while($rows = $signUpEvent->fetch_object()){
@@ -97,6 +104,11 @@ case "V":
 				if($overlap == false){
 					$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES($event, '$user', 'S')";
 					if (mysqli_query($connection, $sql)){
+						$maxStud --;
+						echo "<div>$maxStud</div>";
+						if (!mysqli_query($connection, "UPDATE events SET maxStudents=$maxStud where eventId=$event")){
+							echo "<div>Error!!!</div>";
+						}
 						echo '<meta http-equiv="refresh" content="0">';
 					}
 					else {

@@ -32,7 +32,8 @@ case "V":
         		weekmode: 'variable',
 				eventClick: function(event) {
 					if (event.url) {
-						window.open(event.url);
+						window.confirm(event.title + "\n\n" + "Starts: " + event.start.format('LLLL') + "\n" 
+							+ "Ends: " + event.end.format('LLLL') + "\n\n" + event.description);
 						return false;
 					}
 				},
@@ -69,7 +70,7 @@ case "V":
 								echo "{";
 								echo "title : '$title',";
 								echo "start : '$start',";
-								echo "end : '$endDateTime',";
+								echo "end : '$end',";
 								echo "url : 'viewEvent.php?eventID=$eventID',";
 								echo "color : '$color',";
 								echo "textColor : '$textColor'";
