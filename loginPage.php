@@ -24,11 +24,11 @@ if(isset($_SESSION['login_user']) && isset($_SESSION['login_auth'])){
 	</head>
 <body>
     <div id = "title">
-        <a href="Guest.html">
-        <h2 id = "titleName"> 
-            <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
-        </h2>
-        </a>
+		<a href="Guest.php">
+			<h2 id = "titleName"> 
+				<img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
+			</h2>
+		</a>
         <input id = "forgetPassword" class="button" type="button" onClick="forgetPassword.html" value="Forget paassword">
     </div>    
     <div id="label"> 
@@ -58,8 +58,8 @@ if(isset($_SESSION['login_user']) && isset($_SESSION['login_auth'])){
 				</tr>
 			</table>
         </div>
+		<div style="position: absolute; top: 350px; left: 500px;"><?php echo $error; ?></div>
     </form>
-    <span style="position: absolute; align:center; top: 350px; left: 44%;" class= "required"><?php echo $error; ?></span>
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
-	session_start(); // Starting Session
-	$error=''; // Variable To Store Error Message
-	if (isset($_POST['submit'])) {
+session_start(); // Starting Session
+$error=''; // Variable To Store Error Message
+if (isset($_POST['submit'])) {
 	if (empty($_POST['username']) || empty($_POST['password'])) {
 		$error = "Username or Password is missing!";
 	} 
@@ -18,7 +18,7 @@
 			echo "</div>";
 		} 
 		// SQL query to fetch information of registered users and finds user match.
-		$result = mysqli_query($connection, "select * from users where password='$password' AND username='$username'");
+		$result = mysqli_query($connection, "select * from users where username='$username' AND password='$password'");
 		if (mysqli_num_rows($result)!=0) {
 			$row = mysqli_fetch_assoc($result);
 			$auth = $row['auth'];

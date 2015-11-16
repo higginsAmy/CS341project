@@ -1,15 +1,15 @@
 <?php
-	include('session.php');
-	if (!isset($_SESSION['login_auth'])){
-		header("location: Guest.php");
-	}
-	switch($_SESSION['login_auth']){
-		case "S":
-			header("location: Student.php"); // Redirecting To Student Page
-			break;
-	
-	}
-	$success=''; // Variable to hold reporting of success or failure of mySQL update.
+include('session.php');
+if (!isset($_SESSION['login_auth'])){
+	header("location: Guest.php");
+}
+switch($_SESSION['login_auth']){
+	case "S":
+		header("location: Student.php"); // Redirecting To Student Page
+		break;
+
+}
+$success=''; // Variable to hold reporting of success or failure of mySQL update.
 ?>
 <!doctype html>
 <html>
@@ -26,13 +26,13 @@
   </head>
   <body>
 	  <div id = "title">
-        <a href="Admin.php">
-		<h2 id = "titleName">
-		  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
-		</h2>
+        <a href="Volunteer.php">
+			<h2 id = "titleName">
+			  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
+			</h2>
           </a>
 		<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
-		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.html'" value="Change password">
+		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
 	  </div>      
 	
 	  <div>
