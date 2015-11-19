@@ -6,10 +6,14 @@
     <!-- Styles --> 
     <link rel="stylesheet" type="text/css" href="theme.css">
     <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+	<link href='http://fonts.googleapis.com/css?family=Cuprum&amp;subset=latin' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" />
 	<!-- Scripts -->
 	<script src='fullcalendar/lib/jquery.min.js'></script>
 	<script src='fullcalendar/lib/moment.min.js'></script>
 	<script src='fullcalendar/fullcalendar.js'></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script src="jquery.confirm/jquery.confirm.js"></script>
 	<script>
 		$(document).ready(function() {
     		// page is now ready, initialize the calendar...
@@ -17,11 +21,16 @@
 				editable: true,
         		weekmode: 'variable',
 				eventClick: function(event) {
-					if (event.url) {
-						window.confirm(event.title + "\n\n" + "Starts: " + event.start.format('LLLL') + "\n" 
-							+ "Ends: " + event.end.format('LLLL') + "\n\n" + event.description);
-						return false;
-					}
+					$.confirm({
+						'title'		: 'A', //event.title,
+						'message'	: 'A', //"Starts: " + event.start.format('LLLL') + "\n" 
+										//+ "Ends: " + event.end.format('LLLL') + "\n\n" + event.description,
+						'buttons'	: {
+							'Yes'	: {
+										'class'	: 'blue',
+									}
+								},
+					});
 				},
         		eventSources: [
 				// your event source
