@@ -111,11 +111,24 @@ case "V":
 						}
 						echo '<meta http-equiv="refresh" content="0">';
 					}
+<<<<<<< HEAD
+				}		 
+			} 
+			if($overlap == false){
+				$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES($event, '$user', 'S')";
+				if (mysqli_query($connection, $sql)){
+					echo '<meta http-equiv="refresh" content="0">';
+                    echo ("<script>alert('Successfully!');</script>");
+				}
+				else {
+					echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';
+=======
 					else {
 						echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';
 					}
 				} else{
 				   echo '<div style="position: absolute; color: red; top: 155px; left: 450px;">Cannot sign up for event: Scheduling Conflict </div>';
+>>>>>>> origin/master
 				}
 			}
 			mysql_close($connection); // Closing Connection;
