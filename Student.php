@@ -16,7 +16,7 @@ case "V":
 <html>
   <head>
   	<meta charset="utf-8">
-    <title>You are logged as Student</title>
+    <title>Student | Holmen Robotics</title>
     <!-- Styles --> 
     <link rel="stylesheet" type="text/css" href="theme.css">
 	<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
@@ -30,53 +30,61 @@ case "V":
     		$('#calendar').fullCalendar({
 				editable: true,
         		weekmode: 'variable',
+				eventClick: function(event) {
+					if (event.url) {
+						window.confirm(event.title + "\n\n" + "Starts: " + event.start.format('LLLL') + "\n" 
+							+ "Ends: " + event.end.format('LLLL') + "\n\n" + event.description);
+						return false;
+					}
+				},
         		eventSources: [
 				// your event source
 					{
 						events:  [
-   							<?php 
-                               // figure out student ID to see what events they're doing
-                               $user = $_SESSION['login_user'];
-								// Create connection
-								$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
-        						$query = mysqli_query($connection, "SELECT * FROM events JOIN eventparticipation 
-                                ON (events.eventID = eventparticipation.eventID) where eventparticipation.user='$user'");
-									while ($event = mysqli_fetch_assoc($query)) {
-                                        $title = $event["title"];
-                                        $start = $event["startDateTime"];
-                                        $end = $event["endDateTime"];
-										//$MinStud = $event["MinStud"];
-                                        //$MaxStud = $event["MaxStud"];
-										//$Desc = $event["Desc"];
-									
-                                        if ($event["removed"] == 1) {
-                                            $color = red;
-                                            $textColor = white;
-                                        } else if ($event["removed"] == 0) {
-                                            $color = green;
-                                            $textColor = white;
-                                        } else {
-                                            $color = blue;
-                                            $textColor = white;
-                                        }
-                                        echo "{";
-                                        echo "title : '$title',";
-										echo "start : '$start',";
-                                        echo "end : '$endDateTime',";
-                                        echo "color : '$color',";
-                                        echo "textColor : '$textColor'";
-                                       
-                                        //echo "StartDate: '$StartDate'";
-                                        //echo "EndDate: '$EndDate'";
-										//echo "MinStud: '$MinStud'";
-										//echo "MaxStud: '$MaxStud'";
-										//echo "Desc : '$Desc'";
-                                        
-                                        echo "},";
-        						  }
+							<?php 
+							// figure out student ID to see what events they're doing
+							$user = $_SESSION['login_user'];
+							// Create connection
+							$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
+							$query = mysqli_query($connection, "SELECT * FROM events JOIN eventparticipation 
+							ON (events.eventID = eventparticipation.eventID) where eventparticipation.user='$user'");
+							while ($event = mysqli_fetch_assoc($query)) {
+								$eventID = $event["eventId"];
+								$title = $event["title"];
+								$start = $event["startDateTime"];
+								$end = $event["endDateTime"];
+								//$MinStud = $event["MinStud"];
+								//$MaxStud = $event["MaxStud"];
+								//$Desc = $event["Desc"];
+							
+								if ($event["removed"] == 1) {
+									$color = red;
+									$textColor = white;
+								} else if ($event["removed"] == 0) {
+									$color = green;
+									$textColor = white;
+								} else {
+									$color = blue;
+									$textColor = white;
+								}
+								echo "{";
+								echo "title : '$title',";
+								echo "start : '$start',";
+								echo "end : '$end',";
+								echo "url : 'viewEvent.php?eventID=$eventID',";
+								echo "color : '$color',";
+								echo "textColor : '$textColor'";
+							   
+								//echo "StartDate: '$StartDate'";
+								//echo "EndDate: '$EndDate'";
+								//echo "MinStud: '$MinStud'";
+								//echo "MaxStud: '$MaxStud'";
+								//echo "Desc : '$Desc'";
+								
+								echo "},";
+							}
     						?>
-						]
-                        
+						],
 					}
 					// any other event sources...
 				]
@@ -87,12 +95,12 @@ case "V":
   <body>
     <div id = "title">
         <a href="Student.php">
-        <h2 id = "titleName"> 
-            <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
-        </h2>
+			<h2 id = "titleName"> 
+				<img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
+			</h2>
         </a>
         <input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
-		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.html'" value="Change password">
+		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
     </div>
     <div id="label">
         <input id = "clockIn" class="labelButton"  type="button" onClick="location.href='clockIn.html'" value="Clock in">            

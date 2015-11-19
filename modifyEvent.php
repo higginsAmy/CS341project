@@ -1,15 +1,16 @@
 <?php
-	include('session.php');
-	if (!isset($_SESSION['login_auth'])){
-		header("location: Guest.php");
-	}
-	switch($_SESSION['login_auth']){
-		case "S":
-			header("location: Student.php"); // Redirecting To Student Page
-			break;
-	
-	}
-	$success=''; // Variable to hold reporting of success or failure of mySQL update.
+error_reporting(E_ALL);
+include('session.php');
+if (!isset($_SESSION['login_auth'])){
+	header("location: Guest.php");
+}
+switch($_SESSION['login_auth']){
+	case "S":
+		header("location: Student.php"); // Redirecting To Student Page
+		break;
+
+}
+$success=''; // Variable to hold reporting of success or failure of mySQL update.
 ?>
 <!doctype html>
 <html>
@@ -26,13 +27,13 @@
   </head>
   <body>
 	  <div id = "title">
-        <a href="Admin.php">
-		<h2 id = "titleName">
-		  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
-		</h2>
+        <a href="Volunteer.php">
+			<h2 id = "titleName">
+			  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
+			</h2>
           </a>
 		<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
-		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.html'" value="Change password">
+		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
 	  </div>      
 	
 	  <div>
@@ -50,14 +51,30 @@
 		// SQL query to fetch events created by user
 		$result = mysqli_query($connection, "select * from events where creator='$user' and removed!=1 GROUP BY startDateTime");
 		if ($result) {
-			echo '<table align="center" cellpadding="25"><tr><th>Event Title</th><th>Starts</th><th>Ends</th>'
-				.'<th>Delete</th></tr>';
+			echo '<table align="center" cellpadding="25"><tr><th>Event Title</th><th># Students</th>
+				<th># Volunteers</th><th>Starts</th><th>Ends</th><th>Delete</th></tr>';
 			// output data of each row
 			while($row = mysqli_fetch_assoc($result)) {
-				echo "<tr><td>".$row["title"]."</td><td>".$row["startDateTime"]."</td><td>"
+				$id = $row['eventId'];
+				$numStudents = 0;
+				$numVolunteers = 0;
+				if (!$result2 = mysqli_query($connection, "SELECT * FROM eventParticipation WHERE eventId=$id AND type='S'")){
+					echo "<div>Database error finding student count</div>";
+				}
+				else {
+					$numStudents = mysqli_num_rows($result2);
+				}
+				if (!$result2 = mysqli_query($connection, "SELECT * FROM eventParticipation WHERE eventId=$id AND type='V'")){
+					echo "<div>Database error finding volunteer count</div>";
+				}
+				else {
+					$numVolunteers = mysqli_num_rows($result2);
+				}
+				echo "<tr><td>".$row["title"]."</td><td>".$numStudents."</td><td>".$numVolunteers
+					."</td><td>".$row["startDateTime"]."</td><td>"
 					.$row["endDateTime"]."</td><td><a href='deleteEvent.php?eventID="
 					.$row["eventId"]."'>Delete Event</a>";	
-		}
+			}
 		}
 		else {
 			echo "Zero results.";

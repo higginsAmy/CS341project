@@ -32,6 +32,7 @@
     left: 190px;
     width: 50%; 
 }
+
 #titleIcon{
     height: 100px;
     width: 100px;
@@ -43,6 +44,7 @@
 .button{
     position: absolute; 
 }
+
 #log{
     height:40px;
 	width:100px;
@@ -110,6 +112,7 @@
     border-style:hidden;
     border-bottom: 2px solid #3366CC;
 }
+
 #contact{
     height:30px;
 	width:95px;
@@ -150,54 +153,67 @@
     font-size: 20px;
 }
 
-#ModifykHours{
+#modifyHours{
     height:30px;
 	width:180px;
     top:5px;
     left:5%;
     font-size: 12px;
-}#addevent{
+}
+
+#addevent{
     height:30px;
 	width:110px;
     top:5px;
     left:25%;
     font-size: 12px;
 
-}#modifyevent{
+}
+
+#modifyevent{
     height:30px;
 	width:110px;
     top:5px;
     left:40%;
     font-size: 12px;    
-    
-}#modifyuser{
+}
+
+#modifyuser{
     height:30px;
 	width:110px;
     top:5px;
     left:40%;
     font-size: 12px;
-}#modifyItems{
+}
+
+#modifyItems{
     height:30px;
 	width:150px;
     top:5px;
     left:55%;
     font-size: 12px;
-}#seeMessage{
+}
+
+#seeMessage{
     height:30px;
 	width:150px;
     top:5px;
     left:70%;
     font-size: 12px;
-}#adminHome{
+}
+
+#adminHome{
     height:30px;
 	width:110px;
     top:5px;
     left:85%;
     font-size: 12px;
 }
-a{
+
+a {
     text-decoration: none;
 }
+
 .required{
     color: red;
 }
