@@ -67,7 +67,8 @@ case "V":
 						break;
 				}
 				echo "<tr><td>".$row["first"]."</td><td>".$row["last"]."</td><td>".$row["email"]."</td><td>"
-					.$row["username"]."</td><td>".$userType."</td><td><a href='resetPassword.php?username="
+					.$row["username"]."<a href='changeUsername.php?username="
+					.$row["username"]."'> (Change)</a></td><td>".$userType."</td><td><a href='resetPassword.php?username="
 					.$row["username"]."'>Reset Password</a></td><td><a href='changeAuth.php?username="
 					.$row["username"]."'>Change User Type</a></td><td><a href='deleteUser.php?username="
 					.$row["username"]."'>Delete User</a></td></tr>";

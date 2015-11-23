@@ -116,8 +116,9 @@ case "V":
 						$userType = 'Student';
 						break;
 				}
-				echo "<tr><td>".$row["first"]."</td><td>".$row["last"]."</td><td>".$row["email"]."</td><td>"
-					.$row["username"]."</td><td>".$userType."</td><td><a href='resetPassword.php?username="
+				echo "<tr><td>".$row["first"]."</td><td>".$row["last"]."</td><td>".$row["email"]."</td><td><a href='resetPassword.php?username="
+					.$row["username"]."'>"
+					.$row["username"]."</a></td><td>".$userType."</td><td><a href='resetPassword.php?username="
 					.$row["username"]."'>Reset Password</a></td><td><a href='changeAuth.php?username="
 					.$row["username"]."'>Change User Type</a></td><td><a href='deleteUser.php?username="
 					.$row["username"]."'>Delete User</a></td></tr>";
