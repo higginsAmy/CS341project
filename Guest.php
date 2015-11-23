@@ -4,7 +4,7 @@
   	<meta charset="utf-8">
     <title>Guest | Holmen Robotics</title>
     <!-- Styles --> 
-    <link rel="stylesheet" type="text/css" href="theme.css">
+    <link rel="stylesheet" type="text/css" href="theme.css" />
     <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
 	<link href='http://fonts.googleapis.com/css?family=Cuprum&amp;subset=latin' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" />
@@ -12,7 +12,6 @@
 	<script src='fullcalendar/lib/jquery.min.js'></script>
 	<script src='fullcalendar/lib/moment.min.js'></script>
 	<script src='fullcalendar/fullcalendar.js'></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 	<script src="jquery.confirm/jquery.confirm.js"></script>
 	<script>
 		$(document).ready(function() {
@@ -21,16 +20,20 @@
 				editable: true,
         		weekmode: 'variable',
 				eventClick: function(event) {
-					$.confirm({
-						'title'		: 'A', //event.title,
-						'message'	: 'A', //"Starts: " + event.start.format('LLLL') + "\n" 
-										//+ "Ends: " + event.end.format('LLLL') + "\n\n" + event.description,
-						'buttons'	: {
-							'Yes'	: {
-										'class'	: 'blue',
-									}
-								},
-					});
+					if (event.url){
+						$.confirm({
+							'title'		: event.title,
+							'message'	: "<p>Starts: " + event.start.format('LLLL')
+											+ "<br>Ends: " + event.end.format('LLLL')
+											+ "<br><br>" + event.description,
+							'buttons'	: {
+								'OK'	: {
+											'class'	: 'blue',
+										}
+									},
+						});
+						return false;
+					}
 				},
         		eventSources: [
 				// your event source
@@ -49,7 +52,7 @@
 								$MaxVols = $event["MaxVols"];
 								$MinStud = $event["MinStud"];
 								$MaxStud = $event["MaxStud"];
-								$Desc = $event["Desc"];
+								$Desc = $event["description"];
 
 								if ($event["removed"] == 1) {
 									$color = red;
@@ -59,18 +62,22 @@
 									$textColor = white;
 								}
 								
+								if (!$Desc){
+									$Desc = '';
+								}
+								
 								echo "{";
 								echo "title : '$title',";
 								echo "start : '$start',";
 								echo "end : '$end',";
 								echo "url : 'viewEvent.php?eventID=$eventID',";
 								echo "color : '$color',";
-								echo "textColor : '$textColor'";
-								//echo "MinVols: '$MinVols'";
-								//echo "MaxVols: '$MaxVols'";
-								//echo "MinStud: '$MinStud'";
-								//echo "MaxStud: '$MaxStud'";
-								//echo "Desc : '$Desc'";
+								echo "textColor : '$textColor',";
+								echo "minVols: '$MinVols',";
+								echo "maxVols: '$MaxVols',";
+								echo "minStud: '$MinStud',";
+								echo "maxStud: '$MaxStud',";
+								echo "description : '$Desc',";
 								echo "},";
 							}
     						?>
@@ -78,7 +85,7 @@
 					}
 					// any other event sources...
 				]
-    		})
+    		});
 		});
 	</script>
   </head>

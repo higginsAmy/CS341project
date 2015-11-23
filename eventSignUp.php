@@ -100,38 +100,26 @@ case "V":
 							}
 						}
 					}		 
-				} 
+				}
 				if($overlap == false){
 					$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES($event, '$user', 'S')";
 					if (mysqli_query($connection, $sql)){
+						echo '<meta http-equiv="refresh" content="0">';
 						$maxStud --;
 						echo "<div>$maxStud</div>";
 						if (!mysqli_query($connection, "UPDATE events SET maxStudents=$maxStud where eventId=$event")){
 							echo "<div>Error!!!</div>";
 						}
-						echo '<meta http-equiv="refresh" content="0">';
+						echo ("<script>alert('Signup successful!');</script>");
 					}
-<<<<<<< HEAD
-				}		 
-			} 
-			if($overlap == false){
-				$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES($event, '$user', 'S')";
-				if (mysqli_query($connection, $sql)){
-					echo '<meta http-equiv="refresh" content="0">';
-                    echo ("<script>alert('Successfully!');</script>");
-				}
-				else {
-					echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';
-=======
 					else {
 						echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';
 					}
 				} else{
-				   echo '<div style="position: absolute; color: red; top: 155px; left: 450px;">Cannot sign up for event: Scheduling Conflict </div>';
->>>>>>> origin/master
+					echo '<div style="position: absolute; color: red; top: 155px; left: 450px;">Cannot sign up for event: Scheduling Conflict </div>';
 				}
+				mysql_close($connection); // Closing Connection;
 			}
-			mysql_close($connection); // Closing Connection;
 			?>
 	  </div>
 	</div>

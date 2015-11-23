@@ -18,12 +18,15 @@ case "S":
   	<meta charset="utf-8">
     <title>Volunteer | Holmen Robotics</title>
     <!-- Styles --> 
-    <link rel="stylesheet" type="text/css" href="theme.css">
-	<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+    <link rel="stylesheet" type="text/css" href="theme.css" />
+    <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+	<link href='http://fonts.googleapis.com/css?family=Cuprum&amp;subset=latin' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" />
 	<!-- Scripts -->
 	<script src='fullcalendar/lib/jquery.min.js'></script>
 	<script src='fullcalendar/lib/moment.min.js'></script>
 	<script src='fullcalendar/fullcalendar.js'></script>
+	<script src="jquery.confirm/jquery.confirm.js"></script>
 	<script>
 		$(document).ready(function() {
     		// page is now ready, initialize the calendar...
@@ -31,11 +34,21 @@ case "S":
 				editable: true,
         		weekmode: 'variable',
 				eventClick: function(event) {
-					if (event.url) {
-						window.confirm(event.title + "\n\n" + "Starts: " + event.start.format('LLLL') + "\n" 
-							+ "Ends: " + event.end.format('LLLL') + "\n\n" + event.description);
+					if (event.url){
+						$.confirm({
+							'title'		: event.title,
+							'message'	: "<p>Starts: " + event.start.format('LLLL')
+											+ "<br>Ends: " + event.end.format('LLLL')
+											+ "<br><br>" + event.description,
+							'buttons'	: {
+								'OK'	: {
+											'class'	: 'blue',
+										}
+									},
+						});
 						return false;
 					}
+					
 				},
         		eventSources: [
 				// your event source
@@ -55,15 +68,20 @@ case "S":
 								$MinStud = $event["MinStud"];
 								$MaxStud = $event["MaxStud"];
 								$Desc = $event["Desc"];
+								
 								if ($event["removed"] == 1) {
 									$color = red;
 									$textColor = white;
-								} else if ($event["removed"] == 0) {
+								} else if ($event["removed"] == 0 && $MaxVols > 0) {
 										$color = green;
 										$textColor = white;
 								} else {
 									$color = blue;
 									$textColor = white;
+								}
+								
+								if (!$Desc){
+									$Desc = '';
 								}
 								
 								echo "{";
@@ -72,19 +90,16 @@ case "S":
 								echo "end : '$end',";
 								echo "url : 'viewEvent.php?eventID=$eventID',";
 								echo "color : '$color',";
-								echo "textColor : '$textColor'";
-								//echo "MinVols: '$MinVols'";
-								//echo "MaxVols: '$MaxVols'";
-								//echo "MinStud: '$MinStud'";
-								//echo "MaxStud: '$MaxStud'";
-								//echo "Desc : '$Desc'";
+								echo "textColor : '$textColor',";
+								echo "minVols: '$MinVols',";
+								echo "maxVols: '$MaxVols',";
+								echo "minStud: '$MinStud',";
+								echo "maxStud: '$MaxStud',";
+								echo "description : '$Desc',";
 								echo "},";
 							}
     						?>
-						]
-                        ,
-						color: 'blue',     // an option!
-						textColor: 'white' // an option!
+						],
 					}
 					// any other event sources...
 				]
