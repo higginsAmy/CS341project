@@ -203,9 +203,9 @@ case "S":
 								echo "</div>";
 							}
 							// Insert event into database
-							$query = "INSERT INTO events (title, location, description, startDateTime, endDateTime,
+							$query = "INSERT INTO events (title, description, startDateTime, endDateTime,
 								minVolunteers, maxVolunteers, minStudents, maxStudents, creator, removed) VALUES
-								('$title', '$location', '$description', '$startDateTime', '$endDateTime', $minVol, $maxVol,
+								('$title', '$description', '$startDateTime', '$endDateTime', $minVol, $maxVol,
 								$minStud, $maxStud, '$user', 0)";
 							if(mysqli_query($connection, $query)){
 								$success = "Successfully added new event";
