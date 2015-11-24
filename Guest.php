@@ -97,7 +97,7 @@
 				</h2>
             </a>
 			<input id = "log" class="button" type="button" onClick="location.href='loginPage.php'" value="Log in">
-            <input id = "forgetPassword" class="button"  type="button" onClick="location.href='forgetPassword.html'" value="Forgot your password?">
+            <input id = "forgetPassword" class="button"  type="button" onClick="location.href='forgetPassword.php'" value="Forgot your password?">
         </div>
         
         <div id="label">

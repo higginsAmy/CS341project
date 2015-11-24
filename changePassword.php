@@ -1,5 +1,10 @@
 <?php
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler("var_dump");
+
 include('session.php');
+require_once('PHPMailer/class.phpmailer.php');
 if (!isset($_SESSION['login_auth'])){
 	header("location: Guest.php");
 }
@@ -10,7 +15,7 @@ $success = '';
 		<!-- Styles --> 
 		<link rel="stylesheet" type="text/css" href="theme.css">
 		<!-- Scripts -->
-		<title>Holmen Robotics Login</title>
+		<title>Change Password</title>
 	</head>
 	<body>
 		<div id = "title">
@@ -59,6 +64,26 @@ $success = '';
 				if ($result) {
 					if($newPassword == $confirm){
 						mysqli_query($connection,"UPDATE users SET password='$newPassword' WHERE username='$user'");
+						// Setup to send email
+						$mail = new PHPMailer(); // defaults to using php "mail()"
+						$mail->IsSendmail(); // telling the class to use SendMail transport
+						// Construct email message
+						$line1 = "Hello from the Holmen High School Robotics team!";
+						$line2 = "The password for your username " .$user. " has been reset to " .$newPassword;
+						$line3 = "If you did not request this change, please notify an administrator immediately.";
+						$line4 = "Have a good day!";
+						$line5 = "- Holmen High School Robotics Web Team";
+						$message = $line1. "\r\n\r\n" .$line2. "\r\n" .$line3. "\r\n\r\n" .$line4. "\r\n" .$line5;
+
+						$mail->SetFrom('higgins.amy@uwlax.edu', 'Holmen Robotics Web Team');
+						$mail->AddReplyTo("higgins.amy@uwlax.edu","Holmen Robotics Web Team");
+						$mail->AddAddress($email, $first. " " .$last);
+						$mail->Subject    = "[Auto-Notification] Holmen Robotics Password Reset";
+						$mail->Body = $message;
+
+						if(!$mail->Send()) {
+							echo "Message failed! Mailer Error: " . $mail->ErrorInfo;
+						}
 						$success = "Password update successful.";
 					}
 					else {

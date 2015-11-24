@@ -29,7 +29,7 @@ if(isset($_SESSION['login_user']) && isset($_SESSION['login_auth'])){
 				<img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
 			</h2>
 		</a>
-        <input id = "forgetPassword" class="button" type="button" onClick="forgetPassword.html" value="Forget paassword">
+        <input id = "forgetPassword" class="button"  type="button" onClick="location.href='forgetPassword.php'" value="Forgot your password?">
     </div>    
     <div id="label"> 
         <input id = "contact" class="labelButton"  type="button" onClick="contact.html" value="Contact">
