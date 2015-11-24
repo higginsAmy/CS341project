@@ -50,6 +50,12 @@ case "V":
 			// Gets results for events that have not been removed and have not reached their maximum number of students
 			// (decremented upon signup).
 			$result = mysqli_query($connection, "select * from events where removed != 1 AND maxStudents > 0");
+            
+             //get user id
+                $userObject = mysqli_query($connection, "select * from users WHERE username = '$user' ");
+                $row = $userObject->fetch_object();
+                $userid = $row->id;
+            
 			if ($result) {
 				echo '<div style="position: relative; left: 20px; top: 0px; width: 35%; display: inline-block; float: left;"><label class="description">Title</label></div>
 					<div style="float: left; width: 25%; display: inline-block;"><label class="description">Starts</label></div>
@@ -58,7 +64,7 @@ case "V":
 					<table cellpadding="25" style="width: 90%;">';
 				// output data of each row  
 				while($row = mysqli_fetch_assoc($result)) {
-					$eventsAttended = mysqli_query($connection, "select * from eventparticipation where user = '$user'");
+					$eventsAttended = mysqli_query($connection, "select * from eventparticipation where user = '$userid'");
 					$check = true;
 					while ($signedUp = mysqli_fetch_assoc($eventsAttended)){
 						if($signedUp["eventId"] == $row["eventId"]){
@@ -81,6 +87,8 @@ case "V":
 				$overlap = false;
 				$event = $_POST[event];
 				$addEvent = mysqli_query($connection, "select * from events WHERE eventId = '$event' ");
+                
+                
 				if($addEvent->num_rows){
 					$row = $addEvent->fetch_object();
 					$end = $row->endDateTime;
@@ -88,7 +96,7 @@ case "V":
 					$maxStud = $row->maxStudents;
 		  
 		  			// Check for schedule conflict
-					$signUpEvent = mysqli_query($connection, "select * from eventparticipation WHERE user = '$user'");
+					$signUpEvent = mysqli_query($connection, "select * from eventparticipation WHERE user = '$userid'");
 					if($signUpEvent->num_rows){
 						while($rows = $signUpEvent->fetch_object()){
 							$theEvent = mysqli_query($connection, "select * from events WHERE eventId = '$rows->eventId'");
@@ -102,7 +110,8 @@ case "V":
 					}		 
 				}
 				if($overlap == false){
-					$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES($event, '$user', 'S')";
+                    
+					$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES($event,  $userid, 'S')";
 					if (mysqli_query($connection, $sql)){
 						echo '<meta http-equiv="refresh" content="0">';
 						$maxStud --;
@@ -111,6 +120,7 @@ case "V":
 							echo "<div>Error!!!</div>";
 						}
 						echo ("<script>alert('Signup successful!');</script>");
+                        
 					}
 					else {
 						echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';

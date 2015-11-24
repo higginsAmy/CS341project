@@ -73,8 +73,7 @@ $user = htmlspecialchars($_GET["username"]);
 						if(mysqli_query($connection,"UPDATE users SET username='$newUsernameConfirm' WHERE username='$user'")){
                             $success = "Changed username successfully.";
                             echo ("<script>alert('$success');</script>");
-                            echo "<script> window.location.replace('modifyUser.php') </script>";
-                            echo "Password update successful.";  
+                            echo "<script> window.location.replace('modifyUser.php') </script>";  
                             
                         }else{
                             $success =  "New username has been taken.";
