@@ -1,4 +1,8 @@
 <?php
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler("var_dump");
+
 include('login.php'); // Includes Login Script
 
 if(isset($_SESSION['login_user']) && isset($_SESSION['login_auth'])){

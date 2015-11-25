@@ -1,4 +1,8 @@
 <?php
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler("var_dump");
+
 include('session.php');
 if (!isset($_SESSION['login_auth'])){
 	header("location: Guest.php");
@@ -67,8 +71,9 @@ case "V":
 					}
 					// Only displays events that the students are not already signed up for.
 					if ($check){
-						echo '<tr><form action="" class="appnitro" method="post"><input type="hidden" name="event" value="'.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>"
-						.$row["endDateTime"]."</td>".'<td><input id="signup" class="button" type="submit" name="submit" value="Sign Up"></td></tr></form>';
+						echo '<tr><form action="" class="appnitro" method="post"><input type="hidden" name="event" value="'
+						.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]
+						."</td>".'<td><input id="signup" class="button" type="submit" name="submit" value="Sign Up"></td></tr></form>';
 					}
 				}	
 				echo "</table>";
@@ -106,7 +111,6 @@ case "V":
 					if (mysqli_query($connection, $sql)){
 						echo '<meta http-equiv="refresh" content="0">';
 						$maxStud --;
-						echo "<div>$maxStud</div>";
 						if (!mysqli_query($connection, "UPDATE events SET maxStudents=$maxStud where eventId=$event")){
 							echo "<div>Error!!!</div>";
 						}
@@ -123,4 +127,5 @@ case "V":
 			?>
 	  </div>
 	</div>
-  </body
+  </body>
+</html>

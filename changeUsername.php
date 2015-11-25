@@ -1,6 +1,9 @@
 <?php
-include('login.php'); // Includes Login Script
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler("var_dump");
 
+include('session.php');
 if(isset($_SESSION['login_user']) && isset($_SESSION['login_auth'])){
 	switch($_SESSION['login_auth']){
 	case "S":
@@ -17,7 +20,6 @@ $user = htmlspecialchars($_GET["username"]);
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="Javascript/changePassword.js"></script>
 <link rel="stylesheet" type="text/css" href="theme.css">
 <title>Holmen Robotics Login</title>
 </head>
@@ -33,10 +35,10 @@ $user = htmlspecialchars($_GET["username"]);
     <form id = "logForm" method="post">
     	<div align="center">
         <h3 style="display:block"> New Username:
-        <input name="currentUsername"  class="password" />
+        <input name="newUsername"  class="password" />
             <span id="currentPassword" class="required"></span>
         </h3>
-        <h3 style="display:block"> New Username comfirm:
+        <h3 style="display:block"> New Username confirm:
         <input name="newUsernameConfirm" class="password" />
             <span id="newPassword" class="required"></span>
         </h3>
@@ -51,40 +53,38 @@ $user = htmlspecialchars($_GET["username"]);
 </body>
 </html>
 
-    <?php
-            $user = htmlspecialchars($_GET["username"]);
-    
-			if (isset($_POST['submit'])) {
-				$password=$_POST['password'];
-				$currentUsername=$_POST['currentUsername'];
-				$newUsernameConfirm=$_POST['newUsernameConfirm'];
-				// Create connection
-				$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
-				// Check connection
-				if (mysqli_connect_errno($connection)) {
-					echo "<div>";
-					echo "Failed to connect to MySQL: " . mysqli_connect_error();
-					echo "</div>";
-				}
-				// SQL query to fetch information of registered users and finds user match.
-				$result = mysqli_query($connection, "select * from users where username='$user'");
-				if ($result) {
-					if($currentUsername == $newUsernameConfirm){
-						if(mysqli_query($connection,"UPDATE users SET username='$newUsernameConfirm' WHERE username='$user'")){
-                            $success = "Changed username successfully.";
-                            echo ("<script>alert('$success');</script>");
-                            echo "<script> window.location.replace('modifyUser.php') </script>";
-                            echo "Password update successful.";  
-                            
-                        }else{
-                            $success =  "New username has been taken.";
-                            echo ("<script>alert('$success');</script>");
-                        }
-					}else{
-                        $success = "Usernames are not consistent.";
-                        echo ("<script>alert('$success');</script>");
-                    }
-				}
-			mysqli_close($connection); // Closing Connection
+<?php
+$user = htmlspecialchars($_GET["username"]);
+
+if (isset($_POST['submit'])) {
+	$newUsername=$_POST['newUsername'];
+	$newUsernameConfirm=$_POST['newUsernameConfirm'];
+	// Create connection
+	$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
+	// Check connection
+	if (mysqli_connect_errno($connection)) {
+		echo "<div>";
+		echo "Failed to connect to MySQL: " . mysqli_connect_error();
+		echo "</div>";
+	}
+	// SQL query to fetch information of registered users and finds user match.
+	$result = mysqli_query($connection, "select * from users where username='$user'");
+	if ($result) {
+		if($newUsername == $newUsernameConfirm){
+			if(mysqli_query($connection,"UPDATE users SET username='$newUsernameConfirm' WHERE username='$user'")){
+				$success = "Changed username successfully.";
+				echo ("<script>alert('$success');</script>");
+				echo "<script> window.location.replace('modifyUser.php') </script>";
+				
+			}else{
+				$success =  "New username has been taken.";
+				echo ("<script>alert('$success');</script>");
 			}
-			?>
+		}else{
+			$success = "Usernames are not consistent.";
+			echo ("<script>alert('$success');</script>");
+		}
+	}
+mysqli_close($connection); // Closing Connection
+}
+?>
