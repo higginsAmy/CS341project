@@ -56,7 +56,9 @@ if ($result) {
 	  }
 	  $i++;
 	}
-	$sql = "UPDATE Users SET password='$newPassword' WHERE username='$user'";
+	// Hash password
+	$hash = password_hash($newPassword, PASSWORD_DEFAULT);
+	$sql = "UPDATE Users SET password='$hash' WHERE username='$user'";
 	if (!mysqli_query($connection, $sql)) {
 		echo "Error updating record: " . mysqli_error($conn);
 	}
@@ -85,6 +87,4 @@ else {
 	echo "Zero results.";
 }
 mysqli_close($connection); // Closing Connection
-
-header("location: modifyUser.php"); // Redirect To modifyUser Page upon completion
 ?>

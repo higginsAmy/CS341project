@@ -12,15 +12,16 @@ case "V":
 	break;			
 }
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
   	<meta charset="utf-8">
     <title>Admin | Holmen Robotics</title>
-    <!-- Styles --> 
+    <!-- Styles -->
+	<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="theme.css" />
     <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
-	<link href='http://fonts.googleapis.com/css?family=Cuprum&amp;subset=latin' rel='stylesheet' type='text/css'>
+	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cuprum&amp;subset=latin' />
 	<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" />
 	<!-- Scripts -->
 	<script src='fullcalendar/lib/jquery.min.js'></script>
@@ -33,7 +34,7 @@ case "V":
   <div id = "title">
     <a href="Admin.php">
 		<h2 id = "titleName">
-			<img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
+			<img id = "titleIcon" src = "img/bot2.jpg"  alt="icon"> Holmen High School Robotics Club 
 		</h2>
     </a>
     <input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
@@ -41,12 +42,14 @@ case "V":
   </div>      
   <div id="label">
     <input id = "modifyHours" class="labelButton"  type="button" onClick="location.href='modifyStudentHours.html'" value="Modify student WorkHours ">
-    <input id = "addevent" class="labelButton"  type="button" onClick="location.href='forms/newEvent.php'" value="Add event">
+    <input id = "addEvent" class="labelButton"  type="button" onClick="location.href='newEvent.php'" value="Add event">
 	<input id = "modifyevent" class="labelButton"  type="button" onClick="location.href='modifyEvent.php'" value="Modify event">
-    <input id = "modifyuser" class="labelButton"  type="button" onClick="location.href='modifyUser.php'" value="Modify user">
+    <input id = "modifyUser" class="labelButton"  type="button" onClick="location.href='modifyUser.php'" value="Modify user">
     <input id = "modifyItems" class="labelButton"  type="button" onClick="location.href='modifyItems.html'" value="Modify donation items">
     <input id = "seeMessage" class="labelButton"  type="button" onClick="location.href='seeMessage.html'" value="See message">
   </div>
-  <div id='calendar' style="background:white; position:relative; top: 10px; width:75%; display:inline-block;"></div>
+  <div id="body" style="margin: 0 5px 5px 5px;">
+	<div id='calendar' style="background:white; position:relative; top: 10px; width:75%; display:inline-block;"></div>
+  </div>
   </body>
 </html>

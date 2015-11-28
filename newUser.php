@@ -4,129 +4,163 @@ ini_set('display_errors', 'On');
 set_error_handler("var_dump");
 
 include('session.php');
-	if (!isset($_SESSION['login_auth'])){
-		header("location: Guest.html");
-	}
-	switch($_SESSION['login_auth']){
-		case "S":
-			header("location: Student.php"); // Redirecting To Student Page
-			break;
-		case "V":
-			header("location: Volunteer.php"); // Redirecting To Volunteer Page
-			break;			
-	}
-	$success=''; // Variable to hold reporting of success or failure of mySQL insert.
+if (!isset($_SESSION['login_auth'])){
+	header("location: Guest.html");
+}
+switch($_SESSION['login_auth']){
+	case "S":
+		header("location: Student.php"); // Redirecting To Student Page
+		break;
+	case "V":
+		header("location: Volunteer.php"); // Redirecting To Volunteer Page
+		break;			
+}
 ?>
 <!doctype html>
 <html>
-  <head>
-  	<meta charset="utf-8">
-    <title>Add New User</title>
- 	<!-- Styles --> 
-    <link rel="stylesheet" type="text/css" href="theme.css">
-  </head>
-  <body>
-	  <div id = "title">
+	<head>
+		<meta charset="utf-8">
+		<title>Add New User</title>
+		<!-- Styles --> 
+		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="theme.css" />
+		<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cuprum&amp;subset=latin' />
+		<link rel="stylesheet" type="text/css" href="forms/view.css" media="all">
+		<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" />
+		<!-- Scripts -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script type="text/javascript" src="forms/view.js"></script>
+		<script src="jquery.confirm/jquery.confirm.js"></script>
+	</head>
+	<body>
+		<div id = "title">
 		<a href="Admin.php">
 			<h2 id = "titleName">
-			  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
+			  <img id = "titleIcon" src = "img/bot2.jpg"  alt="icon"> Holmen High School Robotics Club 
 			</h2>
 		</a>
 		<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
 		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
-	  </div>      
-	  <div id="label">
-		<input id = "modifyHours" class="labelButton" type="button" onClick="location.href='modifyStudentHours.html'" value="Modify student WorkHours ">
-		<input id = "addevent" class="labelButton" type="button" onClick="location.href='newEvent.php'" value="Add event">
-		<input id = "modifyuser" class="labelButton" type="button" onClick="location.href='modifyUser.php'" value="Modify user">
-		<input id = "modifyItems" class="labelButton" type="button" onClick="location.href='modifyItems.html'" value="Modify donation items">
-		<input id = "seeMessage" class="labelButton" type="button" onClick="location.href='seeMessage.html'" value="See message">
-	  </div>
-	  <div id="body" align="center">
-		<p></p>
-		<form action="" method="post">
-			<table cellspacing="50">
-				<tr>
-					<td>
-						<h3 style="display:inline">First Name:
-							<input id="first" name="first" type="text">
-						</h3>
-					</td>
-					<td>
-						<h3 style="display:inline">Last Name:
-							<input id="last" name="last" type="text">
-						</h3>
-					</td>
-					<td>
-						<h3 style="display:inline">Email:
-							<input id="email" name="email" type="email">
-						</h3>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<h3 style="display:inline">Username:
-							<input id="name" name="username" type="text">
-						</h3>
-					</td>
-					<td>
-						<h3 style="display:inline">Password:
-							<input id="password" name="password" type="text">
-						</h3>
-					</td>
-					<td>
-						<h3 style="display: inline">User Type:
-							<select name="type">
-								<option value="">Select...</option>
-								<option value="A">Admin</option>
-								<option value="V">Volunteer</option>
-								<option value="S">Student</option>
-							</select>
-						</h3>
-					</td>
-				</tr>
-				<tr>
-					<td align="center">
-						<input id="addUser" name="submit" type="submit" value="Add User">
-					</td>
-				</tr>
-			</table>
-		</form>
-		<?php 
-		// Create connection
-		$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
-		// Check connection
-		if (mysqli_connect_errno($connection)) {
-			echo "<div>";
-			echo "Failed to connect to MySQL: " . mysqli_connect_error();
-			echo "</div>";
-		}
-		// Logic that handles submission of the form
-		if (isset($_POST['submit'])) {
-			if (empty($_POST['first']) || empty($_POST['last']) || empty($_POST['email']) || 
-				empty($_POST['username']) || empty($_POST['password']) || empty($_POST['type'])){
-				echo "<div>Please fill out all fields to create new user.</div>";
-			}
-			else{
-				$first = $_POST['first'];
-				$last = $_POST['last'];
-				$email = $_POST['email'];
-				$username = $_POST['username'];
-				$password = $_POST['password'];
-				$auth = $_POST['type'];
-				$query = "INSERT INTO users (first, last, email, username, password, auth) VALUES "
-					."('$first', '$last', '$email', '$username', '$password', '$auth')";
-				if(mysqli_query($connection, $query)){
-					$success = "Successfully added user: \"$username\"";
-				}
-				else {
-					$success = "Failed to add $username to the database.";
-				}
-			}
-		}
-		mysql_close($connection); // Closing Connection;
-		?>
-		<div style="position: absolute; top: 350px; left: 500px;"><?php echo $success; ?></div>
-	</div>
-  </body>
+		</div>      
+		<div id="label">
+			<input id = "modifyHours" class="labelButton" type="button" onClick="location.href='modifyStudentHours.html'" value="Modify student WorkHours ">
+			<input id = "addEvent" class="labelButton" type="button" onClick="location.href='newEvent.php'" value="Add event">
+			<input id = "modifyUser" class="labelButton" type="button" onClick="location.href='modifyUser.php'" value="Modify user">
+			<input id = "modifyItems" class="labelButton" type="button" onClick="location.href='modifyItems.html'" value="Modify donation items">
+			<input id = "seeMessage" class="labelButton" type="button" onClick="location.href='seeMessage.html'" value="See message">
+		</div>
+		<div id="main_body">&nbsp;
+			<div id="form_container" style="height: 400px;">
+				<h2>&nbsp;<a style="width: 637px">Create new user</a></h2>
+				<form class="appnitro" method="post" action="">
+					<div class="form_description">
+					</div>
+					<ul style="width: 103%;">
+						<li style="left: 0px; top: -3px; width: 45%; height: 65px">
+							<label class="description">First Name </label>
+							<div>
+								<input id="first" name="first" class="element text medium" type="text" maxlength="255" value="" required/>
+							</div>
+						</li>
+			
+						<li style="left: 342px; top: -74px; width: 41%; height: 65px" >
+							<label class="description">Last Name </label>
+							<div>
+								<input id="last" name="last" class="element text medium" type="text" maxlength="255" value="" required/>
+							</div>
+						</li>
+
+						<li style="left: 4px; top: -48px; width: 44%; height: 65px">
+							<label class="description">Email </label>
+							<div>
+								<input id="email" name="email" class="element text medium" type="email" maxlength="255" value="" required/>
+							</div>
+						</li>
+
+						<li style="left: 343px; top: -119px; width: 42%; height: 65px">
+							<label class="description">Username </label>
+							<div>
+								<input id="name" name="username" class="element text" maxlength="255" value="" type="text" required/>
+							</div>
+						</li>
+						
+						<li style="left: 4px; top: -107px; width: 42%; height: 65px">
+							<label class="description">Password </label>
+							<div>
+								<input id="password" name="password" class="element text " type="text" maxlength="255" value="" required/> 
+							</div>
+						</li>
+
+						<li style="left: 343px; top: -176px; width: 42%; height: 65px">
+							<label class="description">User Type </label>
+							<div>
+								<select name="type">
+									<option value="">Select...</option>
+									<option value="A">Admin</option>
+									<option value="V">Volunteer</option>
+									<option value="S">Student</option>
+								</select>
+							</div>
+						</li>
+						
+						<li class="buttons" style="left: 4px; top: -165px">
+							<input id="addUser" class="button_text" type="submit" name="submit" value="Add User" />
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</body>
 </html>
+
+<?php 
+// Create connection
+$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
+// Check connection
+if (mysqli_connect_errno($connection)) {
+	echo "<div>";
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	echo "</div>";
+}
+// Logic that handles submission of the form
+if (isset($_POST['submit'])) {
+	if (empty($_POST['first']) || empty($_POST['last']) || empty($_POST['email']) || 
+		empty($_POST['username']) || empty($_POST['password']) || empty($_POST['type'])){
+		echo "<div>Please fill out all fields to create new user.</div>";
+	}
+	else{
+		$first = $_POST['first'];
+		$last = $_POST['last'];
+		$email = $_POST['email'];
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		$auth = $_POST['type'];
+		$query = "INSERT INTO users (first, last, email, username, password, auth) VALUES "
+			."('$first', '$last', '$email', '$username', '$password', '$auth')";
+		if(mysqli_query($connection, $query)){
+			echo ("<script>$.confirm({
+					'title'		: '',
+					'message'	: '<div align=\"center\">User created successfully.</div>',
+					'buttons'	: {
+						'OK'	: {
+									'class'	: 'blue',
+								}
+							},
+					});</script>");
+			echo "<script> window.location.replace('modifyUser.php') </script>";
+		}
+		else {
+			echo ("<script>$.confirm({
+					'title'		: '',
+					'message'	: '<div align=\"center\">User not created.</div>',
+					'buttons'	: {
+						'OK'	: {
+									'class'	: 'blue',
+								}
+							},
+					});</script>");
+		}
+	}
+}
+mysqli_close($connection); // Closing Connection;
+?>

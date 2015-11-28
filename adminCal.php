@@ -1,6 +1,3 @@
-<link href='http://fonts.googleapis.com/css?family=Cuprum&amp;subset=latin' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" />
-<script src="jquery.confirm/jquery.confirm.js"></script>
 <script>
 $(document).ready(function() {
 	// page is now ready, initialize the calendar...
@@ -68,6 +65,7 @@ $(document).ready(function() {
 						echo "description : '$Desc',";
 						echo "},";
 					}
+					mysqli_close($connection);
 					?>
 				],
 			}

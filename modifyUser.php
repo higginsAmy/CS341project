@@ -22,13 +22,15 @@ case "V":
   	<meta charset="utf-8">
     <title>Modify User Accounts</title>
  	<!-- Styles --> 
-    <link rel="stylesheet" type="text/css" href="theme.css">
+    <link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="theme.css" />
+	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cuprum&amp;subset=latin' />
   </head>
   <body>
 	  <div id = "title">
         <a href="Admin.php">
 			<h2 id = "titleName">
-			  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
+			  <img id = "titleIcon" src = "img/bot2.jpg"  alt="icon"> Holmen High School Robotics Club 
 			</h2>
         </a>
 		<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
@@ -36,12 +38,12 @@ case "V":
 	  </div>      
 	  <div id="label">
 		<input id = "modifyHours" class="labelButton" type="button" onClick="location.href='modifyStudentHours.html'" value="Modify student WorkHours ">
-		<input id = "addevent" class="labelButton" type="button" onClick="location.href='forms/newEvent.php'" value="Add event">
-		<input id = "modifyuser" class="labelButton" type="button" onClick="location.href='modifyUser.php'" value="Modify user">
+		<input id = "addEvent" class="labelButton" type="button" onClick="location.href='newEvent.php'" value="Add event">
+		<input id = "modifyUser" class="labelButton" type="button" onClick="location.href='modifyUser.php'" value="Modify user">
 		<input id = "modifyItems" class="labelButton" type="button" onClick="location.href='modifyItems.html'" value="Modify donation items">
 		<input id = "seeMessage" class="labelButton" type="button" onClick="location.href='seeMessage.html'" value="See message">
 	  </div>
-	  <div>
+	  <div id="body">
 		<?php 
 		// Create connection
 		$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
@@ -55,7 +57,7 @@ case "V":
 		$user = $_SESSION['login_user'];
 		$result = mysqli_query($connection, "select * from users where username !='$user'");
 		if ($result) {
-			echo '<table align="center" cellpadding="25"><tr><th>First Name</th><th>Last Name</th><th>Email</th>'
+			echo '<table><tr><th>First Name</th><th>Last Name</th><th>Email</th>'
 				.'<th>Username</th><th>Type</th><th>Password</th><th>Change User Type</th><th>Delete</th></tr>';
 			// output data of each row
 			while($row = mysqli_fetch_assoc($result)) {
@@ -77,7 +79,7 @@ case "V":
 					.$row["username"]."'>Change User Type</a></td><td><a href='deleteUser.php?username="
 					.$row["username"]."'>Delete User</a></td></tr>";
 			}
-			echo '<tr><td><input id="newUser" class="button" type="button" onClick="location.href=\'forms/newUser.php\'" value="Create New User"></td></tr>';
+			echo '<tr style="height: 50px;"><td><input id="newUser" class="button" type="button" onClick="location.href=\'newUser.php\'" value="Create New User"></td></tr>';
 			echo "</table>";
 		} else {
 			echo "0 results";
