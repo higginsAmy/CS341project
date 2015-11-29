@@ -62,10 +62,14 @@ case "V":
 				}
 				// SQL query to fetch information of registerd users and finds user match.
 				$user = $_SESSION['login_user'];
+				//get user id
+                $userObject = mysqli_query($connection, "select * from users WHERE username = '$user' ");
+                $row = $userObject->fetch_object();		+					echo "</div>";
+                $userid = $row->id;
 				// Gets results for events that have not been removed and have not reached their maximum number of students
 				// (decremented upon signup).
 				$result = mysqli_query($connection, "select * from events where removed != 1 AND maxStudents > 0");
-				if ($result) {
+				if (mysql_num_rows($result)) {
 					echo '<div style="position: relative; left: 25px; top: 0px; width: 30%; display: inline-block; float: left;"><label class="description">Title</label></div>
 						<div style="float: left; width: 25%; display: inline-block;"><label class="description">Starts</label></div>
 						<div style="float: left; width: 25%; display: inline-block;"><label class="description">Ends</label></div>
@@ -73,7 +77,7 @@ case "V":
 						<table cellpadding="25" style="width: 90%;">';
 					// output data of each row  
 					while($row = mysqli_fetch_assoc($result)) {
-						$eventsAttended = mysqli_query($connection, "select * from eventparticipation where user = '$user'");
+						$eventsAttended = mysqli_query($connection, "select * from eventparticipation where userId = '$userid'");
 						$check = true;
 						while ($signedUp = mysqli_fetch_assoc($eventsAttended)){
 							if($signedUp["eventId"] == $row["eventId"]){
@@ -126,14 +130,24 @@ if (isset($_POST['submit'])) {
 		}		 
 	}
 	if($overlap == false){
-		$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES($event, '$user', 'S')";
+		$sql = "INSERT INTO eventparticipation (eventId, user, type) VALUES($event, $userid, 'S')";
 		if (mysqli_query($connection, $sql)){
 			echo '<meta http-equiv="refresh" content="0">';
 			$maxStud --;
 			if (!mysqli_query($connection, "UPDATE events SET maxStudents=$maxStud where eventId=$event")){
 				echo "<div>Error!!!</div>";
 			}
-			echo ("<script>alert('Signup successful!');</script>");
+			else { 
+				echo ("<script>$.confirm({
+					'title'		: '',
+					'message'	: '<div align=\"center\">Signup successful</div>',
+					'buttons'	: {
+							'OK'	: {
+										'class'	: 'blue',
+									}
+								},
+					});</script>");
+			}
 		}
 		else {
 			echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';
