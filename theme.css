@@ -140,19 +140,27 @@ body {
     font-size: 15px;
 }
 
-#eventSignUp{
-    height:30px;
-    width: 180px;
-    top:5px;
-    left: 40%;
-    font-size: 15px;
-}
-
 #clockIn{
     height:30px;
 	width:95px;
     top:5px;
     left:25%;
+    font-size: 15px;
+}
+
+#eventSignUp{
+    height:30px;
+    width: 160px;
+    top:5px;
+    left: 40%;
+    font-size: 15px;
+}
+
+#eventUnEnroll{
+    height:30px;
+    width: 160px;
+    top:5px;
+    left: 60%;
     font-size: 15px;
 }
 

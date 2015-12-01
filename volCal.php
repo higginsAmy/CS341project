@@ -34,11 +34,11 @@
 							$title = $event["title"];
 							$start = $event["startDateTime"];
 							$end = $event["endDateTime"];
-							$MinVols = $event["MinVols"];
-							$MaxVols = $event["MaxVols"];
-							$MinStud = $event["MinStud"];
-							$MaxStud = $event["MaxStud"];
-							$Desc = $event["Desc"];
+							$MinVols = $event["minVolunteers"];
+							$MaxVols = $event["maxVolunteers"];
+							$MinStud = $event["minStudents"];
+							$MaxStud = $event["maxStudents"];
+							$Desc = $event["description"];
 							
 							if ($event["removed"] == 1) {
 								$color = red;

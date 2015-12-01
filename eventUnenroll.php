@@ -21,7 +21,7 @@ case "V":
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="utf-8">
-		<title>Student Event SignUp</title>
+		<title>Student Event Unenroll</title>
 		<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="theme.css" />
@@ -51,7 +51,7 @@ case "V":
 		</div>
 		<div id="main_body">
 			<div id="form_container">
-				<h2>&nbsp;<a style="width: 637px">Event Signup</a></h2>
+				<h2>&nbsp;<a style="width: 637px">Events you are signed up for</a></h2>
 				<?php 
 				// Create connection
 				$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
@@ -66,9 +66,10 @@ case "V":
                 $userObject = mysqli_query($connection, "select * from users WHERE username = '$user' ");
                 $row = $userObject->fetch_object();
                 $userid = $row->id;
-				// Gets results for events that have not been removed and have not reached their maximum number of students
-				// (decremented upon signup).
-				$result = mysqli_query($connection, "select * from events where removed != 1 AND maxStudents > 0");
+				// Gets results for events that have not been removed that students have signed up for
+				$result = mysqli_query($connection, "select * from events join eventParticipation on 
+										events.eventId = eventParticipation.eventId where events.removed != 1 
+										AND eventParticipation.removed != 1 AND eventParticipation.userId = $userid");
 				if (mysqli_num_rows($result)) {
 					echo '<div style="position: relative; left: 25px; top: 0px; width: 30%; display: inline-block; float: left;"><label class="description">Title</label></div>
 						<div style="float: left; width: 25%; display: inline-block;"><label class="description">Starts</label></div>
@@ -77,23 +78,14 @@ case "V":
 						<table cellpadding="25" style="width: 90%;">';
 					// output data of each row  
 					while($row = mysqli_fetch_assoc($result)) {
-						$eventsAttended = mysqli_query($connection, "select * from eventParticipation where userId = '$userid' AND removed!=1");
-						$check = true;
-						while ($signedUp = mysqli_fetch_assoc($eventsAttended)){
-							if($signedUp["eventId"] == $row["eventId"]){
-								$check = false;
-							}
-						}
-						// Only displays events that the students are not already signed up for.
-						if ($check){
-							echo '<tr><form action="" class="appnitro" method="post"><input type="hidden" name="event" value="'
-							.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]
-							."</td>".'<td><input id="signup" class="button_text" type="submit" name="submit" value="Sign Up"></td></form></tr>';
-						}
+						$eventid = $row["eventId"];
+						echo '<tr><form action="" class="appnitro" method="post"><input type="hidden" name="event" value="'
+						.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]
+						."</td>".'<td><input id="signup" class="button_text" type="submit" name="submit" value="Unenroll"></td></form></tr>';
 					}	
 					echo "</table>";
 				} else {
-					echo "0 results";
+					echo "You are not currently signed up for any events.";
 				}
 				?>
 			</div>
@@ -103,52 +95,26 @@ case "V":
 </html>
 			
 <?php 
-// Handles submission of form - event signup
+// Handles submission of form - event unenroll
 if (isset($_POST['submit'])) {
-	$maxStud = 0;
-	$overlap = false;
 	$event = $_POST['event'];
-	$addEvent = mysqli_query($connection, "select * from events where eventId = $event");
-	if($addEvent->num_rows){
-		$row = $addEvent->fetch_object();
-		$end = $row->endDateTime;
-		$start = $row->startDateTime;
+	$eventData = mysqli_query($connection, "select * from events where eventId = $event");
+	
+	if($eventData->num_rows){
+		$row = $eventData->fetch_object();
 		$maxStud = $row->maxStudents;
-
-		// Check for schedule conflict
-		$signUpEvent = mysqli_query($connection, "select * from eventParticipation WHERE userId = '$userid' AND removed != 1");
-		if($signUpEvent->num_rows){
-			while($rows = $signUpEvent->fetch_object()){
-				$theEvent = mysqli_query($connection, "select * from events WHERE eventId = '$rows->eventId'");
-				$theRow = $theEvent->fetch_object();
-				$end2 = $theRow->endDateTime;
-				$start2 = $theRow->startDateTime;
-				if($start <= $end2 && $end >= $start2){
-					$overlap = true;
-				}
-			}
-		}
-	}
-	if($overlap == false){
-		// Check if student previously signed up and then cancelled
-		$sql = "SELECT eventId FROM eventParticipation WHERE eventId=$event AND userId=$userid";
-		$result = mysqli_query($connection, $sql);
-		if (mysqli_num_rows($result)){
-			$sql = "UPDATE eventParticipation SET removed=0 where eventId=$event AND userId=$userid";
-		}
-		else {
-			$sql = "INSERT INTO eventParticipation (eventId, userId, type, removed) VALUES($event, $userid, 'S', 0)";
-		}
+		$sql = "UPDATE eventParticipation SET removed=1 where (eventId=$event AND userId=$userid)";
+		
 		if (mysqli_query($connection, $sql)){
 			echo '<meta http-equiv="refresh" content="0">';
 			$maxStud --;
 			if (!mysqli_query($connection, "UPDATE events SET maxStudents=$maxStud where eventId=$event")){
-				echo "<div>Error!!!</div>";
+				echo "<div>Events Database Error!!!</div>";
 			}
 			else { 
 				echo ("<script>$.confirm({
 					'title'		: '',
-					'message'	: '<div align=\"center\">Signup successful</div>',
+					'message'	: '<div align=\"center\">Unenrolled successfully</div>',
 					'buttons'	: {
 							'OK'	: {
 										'class'	: 'blue',
@@ -158,10 +124,8 @@ if (isset($_POST['submit'])) {
 			}
 		}
 		else {
-			echo '<div style="position: absolute; top: 150; left: 100;">Signup not completed.</div>';
+			echo '<div style="position: absolute; top: 150; left: 100;">Unenroll not completed.</div>';
 		}
-	} else{
-		echo '<div style="position: absolute; color: red; top: 155px; left: 450px;">Cannot sign up for event: Scheduling Conflict </div>';
 	}
 	mysqli_close($connection); // Closing Connection;
 }

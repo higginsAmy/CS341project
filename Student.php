@@ -43,7 +43,8 @@ case "V":
     <div id="label">
         <input id = "clockIn" class="labelButton"  type="button" onClick="location.href='clockIn.html'" value="Clock in">            
         <input id = "viewNote" class="labelButton"  type="button" onClick="location.href='viewNote.html'" value="View Note">        
-        <input id = "eventSignUp" class = "labelButton" type = "button" onClick="location.href='eventSignUp.php'" value="Event Sign Up">    
+        <input id = "eventSignUp" class = "labelButton" type = "button" onClick="location.href='eventSignUp.php'" value="Event Sign Up">
+		<input id = "eventUnEnroll" class = "labelButton" type = "button" onClick="location.href='eventUnenroll.php'" value="Event Unenroll">		
     </div>
 	<div id="body" style="margin: 0 5px 5px 5px;">
 		<div id='calendar' style="background:white; position:relative; top: 10px; width:75%; display:inline-block;"></div>
