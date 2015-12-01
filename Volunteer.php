@@ -43,6 +43,7 @@ case "S":
         <div id=label>
             <input id = "addEvent" class="labelButton"  type="button" onClick="location.href='newEvent.php'" value="Add event">
 			<input id = "modifyevent" class="labelButton"  type="button" onClick="location.href='modifyEvent.php'" value="Modify event">
+			<input id = "eventSignUp" class="labelButton"  type="button" onClick="location.href='volunteerSignUp.php'" value="Sign up for event">			 
         </div>
 		<div id="body" style="margin: 0 5px 5px 5px;">
 			<div id='calendar' style="background:white; position:relative; top: 10px; width:75%; display:inline-block;"></div>
