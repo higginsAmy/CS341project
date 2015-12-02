@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Nov 28, 2015 at 05:08 PM
+-- Generation Time: Dec 01, 2015 at 04:56 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.5.30
 
@@ -30,15 +30,16 @@ CREATE TABLE IF NOT EXISTS `eventparticipation` (
   `id` int(11) NOT NULL,
   `eventId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
-  `type` varchar(1) NOT NULL COMMENT '''V'' or ''S'' for type of user signed up'
-) ENGINE=InnoDB AUTO_INCREMENT=216 DEFAULT CHARSET=utf8;
+  `type` varchar(1) NOT NULL COMMENT '''V'' or ''S'' for type of user signed up',
+  `removed` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=217 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `eventparticipation`
 --
 
-INSERT INTO `eventparticipation` (`id`, `eventId`, `userId`, `type`) VALUES
-(215, 19, 10, 'S');
+INSERT INTO `eventparticipation` (`id`, `eventId`, `userId`, `type`, `removed`) VALUES
+(216, 18, 6, 'S', 1);
 
 -- --------------------------------------------------------
 
@@ -65,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `events` (
 --
 
 INSERT INTO `events` (`eventId`, `title`, `description`, `startDateTime`, `endDateTime`, `minVolunteers`, `maxVolunteers`, `minStudents`, `maxStudents`, `creator`, `removed`) VALUES
-(18, 'Overlap1', '22', '2015-12-12 10:20:00', '2015-12-12 20:20:00', 22, 22, 22, 20, 'admin', 0),
+(18, 'Overlap1', '22', '2015-12-12 10:20:00', '2015-12-12 20:20:00', 22, 22, 22, 16, 'admin', 0),
 (19, 'Overlap2', '2123', '2015-12-12 11:00:00', '2015-12-12 14:00:00', 1, 11, 11, 9, 'admin', 0),
 (20, 'Overlap3', '123', '2015-12-12 16:22:00', '2015-12-12 18:22:00', 1, 11, 11, 9, 'admin', 0);
 
@@ -82,18 +83,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` text NOT NULL,
   `username` varchar(20) NOT NULL DEFAULT '' COMMENT 'username',
   `password` varchar(60) NOT NULL COMMENT 'password',
-  `auth` varchar(1) NOT NULL COMMENT 'authorization {A, S, V}'
+  `auth` varchar(1) NOT NULL COMMENT 'authorization {A, S, V}',
+  `removed` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='User data';
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first`, `last`, `email`, `username`, `password`, `auth`) VALUES
-(6, 'Amy', 'Higgins', 'higgins.amy@uwlax.edu', 'student', '$2y$10$JXhcX6aF3ZkkGroTtxtA3epiqbLgLmjUG09KXcvOj4XlqNrcRnF.6', 'S'),
-(11, 'Amy', 'Higgins', 'higgins.amy@uwlax.edu', 'admin', '$2y$10$kbZcA44A6omlB1vyxti7NeRxEuBOhSxUjGmjvH/dv6fOTtQ/NwVn.', 'A'),
-(12, 'Amy', 'Higgins', 'higgins.amy@uwlax.edu', 'volunteer', '$2y$10$06ixhuen.ylN5yx20chfy.WpJAkP5Jg4.d/5ne19TDS4JMQPdhCg6', 'V'),
-(13, 'Amy', 'Higgins', 'higgins.amy@uwlax.edu', 'admin2', '$2y$10$Sl8rN1/X5xbbFwqWNjCBneRkOAW17Qbxdb.57/BWQTm.HUPQBBkLi', 'A');
+INSERT INTO `users` (`id`, `first`, `last`, `email`, `username`, `password`, `auth`, `removed`) VALUES
+(6, 'Amy', 'Higgins', 'higgins.amy@uwlax.edu', 'student', '$2y$10$JXhcX6aF3ZkkGroTtxtA3epiqbLgLmjUG09KXcvOj4XlqNrcRnF.6', 'S', 0),
+(11, 'Amy', 'Higgins', 'higgins.amy@uwlax.edu', 'admin', '$2y$10$kbZcA44A6omlB1vyxti7NeRxEuBOhSxUjGmjvH/dv6fOTtQ/NwVn.', 'A', 0),
+(12, 'Amy', 'Higgins', 'higgins.amy@uwlax.edu', 'volunteer', '$2y$10$06ixhuen.ylN5yx20chfy.WpJAkP5Jg4.d/5ne19TDS4JMQPdhCg6', 'V', 0),
+(13, 'Amy', 'Higgins', 'higgins.amy@uwlax.edu', 'admin2', '$2y$10$Sl8rN1/X5xbbFwqWNjCBneRkOAW17Qbxdb.57/BWQTm.HUPQBBkLi', 'A', 0);
 
 --
 -- Indexes for dumped tables
@@ -127,7 +129,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `eventparticipation`
 --
 ALTER TABLE `eventparticipation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=216;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=217;
 --
 -- AUTO_INCREMENT for table `events`
 --

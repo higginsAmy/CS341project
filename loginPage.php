@@ -71,14 +71,13 @@ if(isset($_SESSION['login_user']) && isset($_SESSION['login_auth'])){
 						</li>
 						
 						<li class="buttons" style="left: 4px; top: -80px">
-							<input type="hidden" name="form_id" value="1059751" />
 							<input id="saveForm" class="button_text" type="submit" name="submit" value="Login" />
 						</li>
 					</ul>
 				</form>
+				<div class="required" style="position: relative; top: -65px; left: 50px;"><?php echo $error; ?></div>
 			</div>
 			<img id="bottom" src="forms/bottom.png" alt="">
         </div>
-		<div style="position: absolute; top: 350px; left: 500px;"><?php echo $error; ?></div>
 	</body>
 </html>

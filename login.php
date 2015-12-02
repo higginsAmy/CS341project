@@ -24,8 +24,8 @@ if (isset($_POST['submit'])) {
 		echo "</div>";
 	}
 	else{
-		$hash = password_hash($password, PASSWORD_DEFAULT);
-		echo "<div style='position: absolute; top: 200px;'>$hash</div>";
+		//$hash = password_hash($password, PASSWORD_DEFAULT);
+		//echo "<div style='position: absolute; top: 200px;'>$hash</div>";
 		// Create connection
 		$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
 		// Check connection
