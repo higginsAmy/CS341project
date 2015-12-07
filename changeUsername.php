@@ -76,6 +76,7 @@ $user = htmlspecialchars($_GET["username"]);
 					<div id="message">
 						<?php if(isset($message)){ echo $message; } ?>
 					</div>
+					<img id="bottom" src="forms/bottom.png" alt="">
 				</form>
 			</div>
 		</div>

@@ -110,6 +110,7 @@ $user = htmlspecialchars($_GET["username"]);
 				mysqli_close($connection); // Closing Connection;
 				?>
 			</div>
+			<img id="bottom" src="forms/bottom.png" alt="">
 		</div>
 	</body>
 </html>

@@ -31,7 +31,7 @@
 						$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
 						$query = mysqli_query($connection, "SELECT * FROM events JOIN eventParticipation 
 												ON (events.eventID = eventParticipation.eventID) where 
-												eventParticipation.user='$user' AND eventParticipation.removed != 1");
+												eventParticipation.user='$user'");
 						while ($event = mysqli_fetch_assoc($query)) {
 							$eventID = $event["eventId"];
 							$title = $event["title"];

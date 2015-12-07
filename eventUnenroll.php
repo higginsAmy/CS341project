@@ -103,11 +103,11 @@ if (isset($_POST['submit'])) {
 	if($eventData->num_rows){
 		$row = $eventData->fetch_object();
 		$maxStud = $row->maxStudents;
-		$sql = "UPDATE eventParticipation SET removed=1 where (eventId=$event AND userId=$userid)";
+		$sql = "DELETE FROM eventParticipation where (eventId=$event AND userId=$userid)";
 		
 		if (mysqli_query($connection, $sql)){
 			echo '<meta http-equiv="refresh" content="0">';
-			$maxStud --;
+			$maxStud ++;
 			if (!mysqli_query($connection, "UPDATE events SET maxStudents=$maxStud where eventId=$event")){
 				echo "<div>Events Database Error!!!</div>";
 			}

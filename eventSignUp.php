@@ -77,7 +77,7 @@ case "V":
 						<table cellpadding="25" style="width: 90%;">';
 					// output data of each row  
 					while($row = mysqli_fetch_assoc($result)) {
-						$eventsAttended = mysqli_query($connection, "select * from eventParticipation where userId = '$userid' AND removed!=1");
+						$eventsAttended = mysqli_query($connection, "select * from eventParticipation where userId = '$userid'");
 						$check = true;
 						while ($signedUp = mysqli_fetch_assoc($eventsAttended)){
 							if($signedUp["eventId"] == $row["eventId"]){
@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
 		$maxStud = $row->maxStudents;
 
 		// Check for schedule conflict
-		$signUpEvent = mysqli_query($connection, "select * from eventParticipation WHERE userId = '$userid' AND removed != 1");
+		$signUpEvent = mysqli_query($connection, "select * from eventParticipation WHERE userId = '$userid'");
 		if($signUpEvent->num_rows){
 			while($rows = $signUpEvent->fetch_object()){
 				$theEvent = mysqli_query($connection, "select * from events WHERE eventId = '$rows->eventId'");
@@ -131,14 +131,7 @@ if (isset($_POST['submit'])) {
 	}
 	if($overlap == false){
 		// Check if student previously signed up and then cancelled
-		$sql = "SELECT eventId FROM eventParticipation WHERE eventId=$event AND userId=$userid";
-		$result = mysqli_query($connection, $sql);
-		if (mysqli_num_rows($result)){
-			$sql = "UPDATE eventParticipation SET removed=0 where eventId=$event AND userId=$userid";
-		}
-		else {
-			$sql = "INSERT INTO eventParticipation (eventId, userId, type, removed) VALUES($event, $userid, 'S', 0)";
-		}
+		$sql = "INSERT INTO eventParticipation (eventId, userId, type, removed) VALUES($event, $userid, 'S')";
 		if (mysqli_query($connection, $sql)){
 			echo '<meta http-equiv="refresh" content="0">';
 			$maxStud --;
