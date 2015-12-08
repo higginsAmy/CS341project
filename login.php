@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
 			$auth = $row['auth'];
 			$pwd = $row['password'];
 			// Verify plaintext password against hash
-			if (password_verify($password, $pwd)){
+			if ($password==$pwd){
 				$_SESSION['login_user']=$username; // Initializing Session
 				$_SESSION['login_auth']=$auth;
 				switch($auth){
