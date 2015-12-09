@@ -1,7 +1,7 @@
 <?php
-error_reporting(-1);
-ini_set('display_errors', 'On');
-set_error_handler("var_dump");
+//error_reporting(-1);
+//ini_set('display_errors', 'On');
+//set_error_handler("var_dump");
 
 include('session.php');
 if (!isset($_SESSION['login_auth'])){
@@ -14,32 +14,40 @@ case "S":
 }
 
 $event = htmlspecialchars($_GET["event"]);
+
 $connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
-$eventObject = mysqli_query($connection, "select * from events WHERE eventId = $event");
-$row = $eventObject->fetch_object();
-$eventTitle = $row->title;
-$minVolunteers = $row->minVolunteers;
-$maxVolunteers = $row->maxVolunteers;
-$minStudents = $row->minStudents;
-$maxStudents = $row->maxStudents;
-$description = $row->description;
-$location = $row->location;
+if($connection){
+	$eventObject = mysqli_query($connection, "SELECT * FROM events WHERE eventId =".$event);
+	if($eventObject){
+		$row = $eventObject->fetch_object();
+		$eventTitle = $row->title;
+		$minVolunteers = $row->minVolunteers;
+		$maxVolunteers = $row->maxVolunteers;
+		$minStudents = $row->minStudents;
+		$maxStudents = $row->maxStudents;
+		$description = $row->description;
+		$location = $row->location;
 
-$startDateTime = $row->startDateTime;
-$endDateTime = $row->endDateTime;
+		$startDateTime = $row->startDateTime;
+		$endDateTime = $row->endDateTime;
 
-$SYear = $startDateTime{0}.$startDateTime{1}.$startDateTime{2}.$startDateTime{3};
-$SMonth = $startDateTime{5}.$startDateTime{6};
-$SDay = $startDateTime{8}.$startDateTime{9};
-$SHour = $startDateTime{11}.$startDateTime{12};
-$SMin = $startDateTime{14}.$startDateTime{15};
+		$SYear = $startDateTime{0}.$startDateTime{1}.$startDateTime{2}.$startDateTime{3};
+		$SMonth = $startDateTime{5}.$startDateTime{6};
+		$SDay = $startDateTime{8}.$startDateTime{9};
+		$SHour = $startDateTime{11}.$startDateTime{12};
+		$SMin = $startDateTime{14}.$startDateTime{15};
 
-$EYear = $endDateTime{0}.$endDateTime{1}.$endDateTime{2}.$endDateTime{3};
-$EMonth = $endDateTime{5}.$endDateTime{6};
-$EDay = $endDateTime{8}.$endDateTime{9};
-$EHour = $endDateTime{11}.$endDateTime{12};
-$EMin = $endDateTime{14}.$endDateTime{15};
-mysqli_close($connection);
+		$EYear = $endDateTime{0}.$endDateTime{1}.$endDateTime{2}.$endDateTime{3};
+		$EMonth = $endDateTime{5}.$endDateTime{6};
+		$EDay = $endDateTime{8}.$endDateTime{9};
+		$EHour = $endDateTime{11}.$endDateTime{12};
+		$EMin = $endDateTime{14}.$endDateTime{15};
+	}
+	mysqli_close($connection);
+}else{
+
+}
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -239,7 +247,7 @@ if (isset($_POST['submit'])) {
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 			echo "</div>";
 		}
-		
+
 		$title = mysqli_real_escape_string($connection, $_POST['Title']);
 		$location = mysqli_real_escape_string($connection, $_POST['Location']);
 		$description = mysqli_real_escape_string($connection, $_POST['Desc']);
@@ -247,7 +255,7 @@ if (isset($_POST['submit'])) {
 		// Insert event into database
 		$newQuery = "UPDATE events SET title='$title', description='$description', location='$location', startDateTime='$startDateTime',
 			endDateTime='$endDateTime', minVolunteers=$minVol, maxVolunteers=$maxVol, minStudents=$minStud, maxStudents=$maxStud where eventId=$event";
-			
+
 		if(mysqli_query($connection, $newQuery)){
 			echo ("<script>$.confirm({
 					'title'		: '',
