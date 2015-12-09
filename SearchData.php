@@ -43,12 +43,10 @@ case "V":
 			<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
 		</div>      
 		<div id="label">
-			<input id = "SearchData" class="labelButton"  type="button" onClick="location.href='SearchData.php'" value="Search for Events">
+			<input id = "searchData" class="labelButton"  type="button" onClick="location.href='SearchData.php'" value="Search for Events">
 			<input id = "addEvent" class="labelButton"  type="button" onClick="location.href='newEvent.php'" value="Add event">
-			<input id = "modifyevent" class="labelButton"  type="button" onClick="location.href='modifyEvent.php'" value="Modify event">
+			<input id = "modifyEvent" class="labelButton"  type="button" onClick="location.href='modifyEvent.php'" value="Modify event">
 			<input id = "modifyUser" class="labelButton"  type="button" onClick="location.href='modifyUser.php'" value="Modify user">
-			<input id = "modifyItems" class="labelButton"  type="button" onClick="location.href='modifyItems.html'" value="Modify donation items">
-			<input id = "seeMessage" class="labelButton"  type="button" onClick="location.href='seeMessage.html'" value="See message">
 		</div>
 	  
 		<div id="main_body">

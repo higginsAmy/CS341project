@@ -107,7 +107,7 @@ case "S":
 								<label>HH</label>
 							</span>
 							<span>
-								<input id="SMin" name="SMin" class="element text " size="3" type="text" maxlength="2" value="" required/>
+								<input id="SMin" name="SMin" class="element text " size="3" type="text" maxlength="2" value="" required/> 
 								<label>MM</label>
 							</span>
 						</li>
@@ -119,7 +119,7 @@ case "S":
 								<label>HH</label>
 						</span>
 							<span>
-								<input id="EMin" name="EMin" class="element text " size="3" type="text" maxlength="2" value="" required/>
+								<input id="EMin" name="EMin" class="element text " size="3" type="text" maxlength="2" value="" required/> 
 								<label>MM</label>
 							</span>
 						</li>
@@ -213,14 +213,11 @@ if (isset($_POST['submit'])) {
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 			echo "</div>";
 		}
-		$userObject = mysqli_query($connection, "select * from users WHERE username = '$user' ");
-		$row = $userObject->fetch_object();
-		$userid = $row->id;
 		// Insert event into database
-		$query = "INSERT INTO events (title, description, startDateTime, endDateTime,
+		$query = "INSERT INTO events (title, description, location, startDateTime, endDateTime,
 			minVolunteers, maxVolunteers, minStudents, maxStudents, creator, removed) VALUES
-			('$title', '$description', '$startDateTime', '$endDateTime', $minVol,
-			$maxVol, $minStud, $maxStud, $userid, 0)";
+			('$title', '$description', '$location', '$startDateTime', '$endDateTime', $minVol, 
+			$maxVol, $minStud, $maxStud, '$user', 0)";
 		if(mysqli_query($connection, $query)){
 			echo ("<script>$.confirm({
 					'title'		: '',

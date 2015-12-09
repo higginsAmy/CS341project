@@ -181,11 +181,11 @@ body {
 
 }
 
-#modifyevent{
+#modifyEvent{
     height:30px;
 	width:110px;
     top:5px;
-    left:40%;
+    left:55%;
     font-size: 15px;    
 }
 
@@ -205,7 +205,7 @@ body {
     font-size: 15px;
 }
 
-#seeMessage{
+#searchData{
     height:30px;
 	width:150px;
     top:5px;
