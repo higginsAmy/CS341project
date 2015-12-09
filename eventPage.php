@@ -23,6 +23,7 @@ $maxVolunteers = $row->maxVolunteers;
 $minStudents = $row->minStudents;
 $maxStudents = $row->maxStudents;
 $description = $row->description;
+$location = $row->location;
 
 $startDateTime = $row->startDateTime;
 $endDateTime = $row->endDateTime;
@@ -91,7 +92,7 @@ mysqli_close($connection);
 						<li id="Location" style="left: 342px; top: -73px; width: 41%; height: 65px" >
 							<label class="description" for="description">Location </label>
 							<div>
-								<input id="description" name="Location" class="element text medium" type="text" maxlength="255" value="" required/>
+								<input id="description" name="Location" class="element text medium" type="text" maxlength="255" value="<?=$location?>" required/>
 							</div>
 						</li>
 
@@ -227,9 +228,6 @@ if (isset($_POST['submit'])) {
 		echo "<div>End Date is before Start Date.</div>";
 	}
 	else{
-		$title = mysqli_real_escape_string($connection, $_POST['Title']);
-		$location = mysqli_real_escape_string($connection, $_POST['Location']);
-		$description = mysqli_real_escape_string($connection, $_POST['Desc']);
 		// Create connection
 		$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
 		// Check connection
@@ -238,10 +236,15 @@ if (isset($_POST['submit'])) {
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 			echo "</div>";
 		}
-		// Insert event into database
-		$newQuery = "UPDATE events SET title='$title', description='$description', startDateTime='$startDateTime',
-			endDateTime='$endDateTime', minVolunteers=$minVol, maxVolunteers=$maxVol, minStudents=$minStud, maxStudents=$maxStud where eventId=$event";
+		
+		$title = mysqli_real_escape_string($connection, $_POST['Title']);
+		$location = mysqli_real_escape_string($connection, $_POST['Location']);
+		$description = mysqli_real_escape_string($connection, $_POST['Desc']);
 
+		// Insert event into database
+		$newQuery = "UPDATE events SET title='$title', description='$description', location='$location', startDateTime='$startDateTime',
+			endDateTime='$endDateTime', minVolunteers=$minVol, maxVolunteers=$maxVol, minStudents=$minStud, maxStudents=$maxStud where eventId=$event";
+			
 		if(mysqli_query($connection, $newQuery)){
 			echo ("<script>$.confirm({
 					'title'		: '',

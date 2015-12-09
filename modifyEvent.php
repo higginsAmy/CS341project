@@ -99,7 +99,7 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 						echo '<tr><form class="appnitro" method="post" action=""><input type="hidden" name="event" value="'
 							.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$numStudents."</td><td>".$numVolunteers
 							."</td><td>".$row["startDateTime"]."</td><td>"
-							.$row["endDateTime"].'</td><td><input id="delete" class="button_text" type="submit" name="delete" 
+							.$row["endDateTime"].'</td><td><input id="delete" class="button_text" type="submit" name="submit" 
 							value="Delete Event"></td></form><td><input onClick="location.href=\'eventPage.php?event='
 							.$id.'\'" id="signup2" class="button_text" type="submit" name="EditSubmit"
 							value="Edit Event"></td></tr>';	
@@ -125,6 +125,7 @@ if (isset($_POST['submit'])) {
 	$result = mysqli_query($connection, "select * from events where eventId=$event");
 	if (mysqli_num_rows($result)) {
 		if(mysqli_query($connection, "Update events SET removed=1 WHERE eventID=$event")){
+			echo '<meta http-equiv="refresh" content="0">';
 			echo ("<script>$.confirm({
 				'title'		: '',
 				'message'	: '<div align=\"center\">Successfully updated event</div>',

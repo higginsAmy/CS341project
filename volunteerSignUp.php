@@ -44,9 +44,9 @@ case "S":
 			<input id="changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
 		</div>
 		<div id="label">
-			<input id = "clockIn" class="labelButton"  type="button" onClick="location.href='clockIn.html'" value="Clock in">
-			<input id = "viewNote" class="labelButton"  type="button" onClick="location.href='viewNote.html'" value="View Note">
-			<input id = "eventSignUp" class = "labelButton" type = "button" onClick="location.href='volunteerSignUp.php'" value="Event Sign Up">
+			<input id = "addEvent" class="labelButton"  type="button" onClick="location.href='newEvent.php'" value="Add event">
+			<input id = "modifyEvent" class="labelButton"  type="button" onClick="location.href='modifyEvent.php'" value="Modify event">
+			<input id = "eventSignUp" class="labelButton"  type="button" onClick="location.href='volunteerSignUp.php'" value="Sign up for event">
 		</div>
 		<div id="main_body">
 			<div id="form_container">
