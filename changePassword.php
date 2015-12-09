@@ -72,7 +72,7 @@ if (!isset($_SESSION['login_auth'])){
 	</body>
 </html>
 <?php
-$user = $_SESSION['login_user'];
+$userid = $_SESSION['login_id'];
 if (isset($_POST['submit'])) {
 	$password=$_POST['currentPassword'];
 	$newPassword=$_POST['newPassword'];
@@ -86,8 +86,9 @@ if (isset($_POST['submit'])) {
 		echo "</div>";
 	}
 	// SQL query to fetch information of registered users and finds user match.
-	$result = mysqli_query($connection, "select * from users where username='$user'");
+	$result = mysqli_query($connection, "select * from users where id=$userid");
 	if ($userRow = mysqli_fetch_assoc($result)) {
+		$user = $userRow['username'];
 		$email = $userRow['email'];
 		$first = $userRow['first'];
 		$last = $userRow['last'];
@@ -96,7 +97,7 @@ if (isset($_POST['submit'])) {
 		if (password_verify($password, $pwd)){
 			if($newPassword == $confirm){
 				$hash = password_hash($newPassword, PASSWORD_DEFAULT);
-				mysqli_query($connection,"UPDATE users SET password='$hash' WHERE username='$user'");
+				mysqli_query($connection,"UPDATE users SET password='$hash' WHERE id=$userid");
 				// Setup to send email
 				$mail = new PHPMailer(); // defaults to using php "mail()"
 				$mail->IsSendmail(); // telling the class to use SendMail transport

@@ -52,7 +52,7 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 				</div>
 				<?php 
 				// Fetch username from session
-				$user = $_SESSION['login_user'];
+				$userid = $_SESSION['login_id'];
 				$type = $_SESSION['login_auth'];
 				// Create connection
 				$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
@@ -62,9 +62,7 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 					echo "Failed to connect to MySQL: " . mysqli_connect_error();
 					echo "</div>";
 				}
-				$userObject = mysqli_query($connection, "select * from users WHERE username = '$user' ");
-				$row = $userObject->fetch_object();
-				$userid = $row->id;
+				
 				// SQL query to fetch events created by user
 				if ($type == 'A'){
 					$query = "select * from events where removed !=1 GROUP BY startDateTime";

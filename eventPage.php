@@ -78,7 +78,7 @@ mysqli_close($connection);
 				<h2>&nbsp;<a style="width: 637px">Edit Event</a></h2>
 				<form id="form_1059751" class="appnitro" method="post" action="">
 					<div class="form_description">
-						Fill in event details to create an event.
+						Fill in event details to edit the event.
 					</div>
 					<ul style="width: 103%; height: 927px" >
 						<li id="Title" style="left: 0px; top: -3px; width: 45%; height: 65px" >
@@ -201,8 +201,6 @@ mysqli_close($connection);
 <?php
 // Logic to handle submission of form
 if (isset($_POST['submit'])) {
-	// Get username of person creating event
-	$user = $_SESSION['login_user'];
 	// Set date variables and put into ISO 8601
 	$maxVol = $_POST['MaxVol'];
 	$minVol = $_POST['MinVol'];
@@ -240,17 +238,14 @@ if (isset($_POST['submit'])) {
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 			echo "</div>";
 		}
-		$userObject = mysqli_query($connection, "select * from users WHERE username = '$user' ");
-		$row = $userObject->fetch_object();
-		$userid = $row->id;
 		// Insert event into database
-    $newQuery = "UPDATE events SET title='$title', description='$description', startDateTime='$startDateTime',
-    endDateTime='$endDateTime', minVolunteers=$minVol, maxVolunteers=$maxVol, minStudents=$minStud, maxStudents=$maxStud  where eventId=$event";
+		$newQuery = "UPDATE events SET title='$title', description='$description', startDateTime='$startDateTime',
+			endDateTime='$endDateTime', minVolunteers=$minVol, maxVolunteers=$maxVol, minStudents=$minStud, maxStudents=$maxStud where eventId=$event";
 
 		if(mysqli_query($connection, $newQuery)){
 			echo ("<script>$.confirm({
 					'title'		: '',
-					'message'	: '<div align=\"center\">Successfully added new event</div>',
+					'message'	: '<div align=\"center\">Successfully modified event</div>',
 					'buttons'	: {
 							'OK'	: {
 										'class'	: 'blue',
@@ -261,7 +256,7 @@ if (isset($_POST['submit'])) {
 		else {
 			echo ("<script>$.confirm({
 					'title'		: '',
-					'message'	: '<div align=\"center\">Failed to add event to the database</div>',
+					'message'	: '<div align=\"center\">Failed modify event in the database</div>',
 					'buttons'	: {
 							'OK'	: {
 										'class'	: 'blue',

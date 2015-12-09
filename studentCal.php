@@ -26,12 +26,12 @@
 					events:  [
 						<?php 
 						// figure out student ID to see what events they're doing
-						$user = $_SESSION['login_user'];
+						$userid = $_SESSION['login_id'];
 						// Create connection
 						$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
 						$query = mysqli_query($connection, "SELECT * FROM events JOIN eventParticipation 
 												ON (events.eventID = eventParticipation.eventID) where 
-												eventParticipation.user='$user'");
+												eventParticipation.userId=$userid");
 						while ($event = mysqli_fetch_assoc($query)) {
 							$eventID = $event["eventId"];
 							$title = $event["title"];
@@ -47,7 +47,7 @@
 								$color = red;
 								$textColor = white;
 							} else if ($event["removed"] == 0 && $MaxStud > 0) {
-								$color = green;
+								$color = blue;
 								$textColor = white;
 							} else {
 								$color = blue;

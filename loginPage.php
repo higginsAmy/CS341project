@@ -5,7 +5,7 @@ set_error_handler("var_dump");
 
 include('login.php'); // Includes Login Script
 
-if(isset($_SESSION['login_user']) && isset($_SESSION['login_auth'])){
+if(isset($_SESSION['login_id']) && isset($_SESSION['login_auth'])){
 	switch($_SESSION['login_auth']){
 	case "A":
 		header("location: Admin.php"); // Redirecting To Admin Page

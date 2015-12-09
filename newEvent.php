@@ -174,8 +174,8 @@ case "S":
 <?php
 // Logic to handle submission of form
 if (isset($_POST['submit'])) {
-	// Get username of person creating event
-	$user = $_SESSION['login_user'];
+	// Get userid of person creating event
+	$userid = $_SESSION['login_id'];
 	// Set date variables and put into ISO 8601
 	$maxVol = $_POST['MaxVol'];
 	$minVol = $_POST['MinVol'];
@@ -217,7 +217,7 @@ if (isset($_POST['submit'])) {
 		$query = "INSERT INTO events (title, description, location, startDateTime, endDateTime,
 			minVolunteers, maxVolunteers, minStudents, maxStudents, creator, removed) VALUES
 			('$title', '$description', '$location', '$startDateTime', '$endDateTime', $minVol, 
-			$maxVol, $minStud, $maxStud, '$user', 0)";
+			$maxVol, $minStud, $maxStud, $userid, 0)";
 		if(mysqli_query($connection, $query)){
 			echo ("<script>$.confirm({
 					'title'		: '',

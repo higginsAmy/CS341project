@@ -4,17 +4,18 @@ ini_set('display_errors', 'On');
 set_error_handler("var_dump");
 
 include('session.php');
-if(isset($_SESSION['login_user']) && isset($_SESSION['login_auth'])){
-	switch($_SESSION['login_auth']){
-	case "S":
-		header("location: Student.php"); // Redirecting To Student Page
-		break;
-	case "V":
-		header("location: Volunteer.php"); // Redirecting To Volunteer Page
-		break;
-	}
+if (!isset($_SESSION['login_auth'])){
+	header("location: Guest.php");
 }
-$user = htmlspecialchars($_GET["username"]);
+switch($_SESSION['login_auth']){
+case "S":
+	header("location: Student.php"); // Redirecting To Student Page
+	break;
+case "V":
+	header("location: Volunteer.php"); // Redirecting To Volunteer Page
+	break;			
+}
+$userid = htmlspecialchars($_GET["userid"]);
 ?>
 
 <html>
@@ -96,10 +97,10 @@ if (isset($_POST['submit'])) {
 		echo "</div>";
 	}
 	// SQL query to fetch information of registered users and finds user match.
-	$result = mysqli_query($connection, "select * from users where username='$user'");
+	$result = mysqli_query($connection, "select * from users where id=$userid");
 	if ($result) {
 		if($newUsername == $newUsernameConfirm){
-			if(mysqli_query($connection,"UPDATE users SET username='$newUsernameConfirm' WHERE username='$user'")){
+			if(mysqli_query($connection,"UPDATE users SET username='$newUsernameConfirm' WHERE id=$userid")){
 				echo ("<script>$.confirm({
 							'title'		: '',
 							'message'	: '<div align=\"center\">Changed username successfully.</div>',

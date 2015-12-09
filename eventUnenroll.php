@@ -61,11 +61,10 @@ case "V":
 					echo "Failed to connect to MySQL: " . mysqli_connect_error();
 					echo "</div>";
 				}
-				$user = $_SESSION['login_user'];
+
 				//get user id
-                $userObject = mysqli_query($connection, "select * from users WHERE username = '$user' ");
-                $row = $userObject->fetch_object();
-                $userid = $row->id;
+                $userid = $_SESSION['login_id'];
+				
 				// Gets results for events that have not been removed that students have signed up for
 				$result = mysqli_query($connection, "select * from events join eventParticipation on 
 										events.eventId = eventParticipation.eventId where events.removed != 1 

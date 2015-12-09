@@ -61,11 +61,9 @@ case "V":
 					echo "Failed to connect to MySQL: " . mysqli_connect_error();
 					echo "</div>";
 				}
-				$user = $_SESSION['login_user'];
-				//get user id
-                $userObject = mysqli_query($connection, "select * from users WHERE username = '$user' ");
-                $row = $userObject->fetch_object();
-                $userid = $row->id;
+				// Get userId
+				$userid = $_SESSION['login_id'];
+				
 				// Gets results for events that have not been removed and have not reached their maximum number of students
 				// (decremented upon signup).
 				$result = mysqli_query($connection, "select * from events where removed != 1 AND maxStudents > 0");
@@ -77,7 +75,7 @@ case "V":
 						<table cellpadding="25" style="width: 90%;">';
 					// output data of each row  
 					while($row = mysqli_fetch_assoc($result)) {
-						$eventsAttended = mysqli_query($connection, "select * from eventParticipation where userId = '$userid'");
+						$eventsAttended = mysqli_query($connection, "select * from eventParticipation where userId = $userid");
 						$check = true;
 						while ($signedUp = mysqli_fetch_assoc($eventsAttended)){
 							if($signedUp["eventId"] == $row["eventId"]){
@@ -116,10 +114,10 @@ if (isset($_POST['submit'])) {
 		$maxStud = $row->maxStudents;
 
 		// Check for schedule conflict
-		$signUpEvent = mysqli_query($connection, "select * from eventParticipation WHERE userId = '$userid'");
+		$signUpEvent = mysqli_query($connection, "select * from eventParticipation WHERE userId = $userid");
 		if($signUpEvent->num_rows){
 			while($rows = $signUpEvent->fetch_object()){
-				$theEvent = mysqli_query($connection, "select * from events WHERE eventId = '$rows->eventId'");
+				$theEvent = mysqli_query($connection, "select * from events WHERE eventId = $rows->eventId");
 				$theRow = $theEvent->fetch_object();
 				$end2 = $theRow->endDateTime;
 				$start2 = $theRow->startDateTime;

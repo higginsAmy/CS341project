@@ -53,7 +53,7 @@ case "V":
 			echo "</div>";
 		}
 		// SQL query to fetch information of registerd users and finds user match.
-		$user = $_SESSION['login_user'];
+		$user = $_SESSION['login_id'];
 		$result = mysqli_query($connection, "select * from users where username !='$user'");
 		if ($result) {
 			echo '<table><tr><th>First Name</th><th>Last Name</th><th>Email</th>'
@@ -72,11 +72,11 @@ case "V":
 						break;
 				}
 				echo "<tr><td>".$row["first"]."</td><td>".$row["last"]."</td><td>".$row["email"]."</td><td>"
-					.$row["username"]."<a href='changeUsername.php?username="
-					.$row["username"]."'> (Change)</a></td><td>".$userType."</td><td><a href='resetPassword.php?username="
-					.$row["username"]."'>Reset Password</a></td><td><a href='changeAuth.php?username="
-					.$row["username"]."'>Change User Type</a></td><td><a href='deleteUser.php?username="
-					.$row["username"]."'>Delete User</a></td></tr>";
+					.$row["username"]."<a href='changeUsername.php?userid="
+					.$row["id"]."'> (Change)</a></td><td>".$userType."</td><td><a href='resetPassword.php?userid="
+					.$row["id"]."'>Reset Password</a></td><td><a href='changeAuth.php?userid="
+					.$row["id"]."'>Change User Type</a></td><td><a href='deleteUser.php?userid="
+					.$row["id"]."'>Delete User</a></td></tr>";
 			}
 			echo '<tr style="height: 50px;"><td><input id="newUser" class="button" type="button" onClick="location.href=\'newUser.php\'" value="Create New User"></td></tr>';
 			echo "</table>";

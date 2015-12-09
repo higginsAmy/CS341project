@@ -40,9 +40,10 @@ if (isset($_POST['submit'])) {
 			$row = mysqli_fetch_assoc($result);
 			$auth = $row['auth'];
 			$pwd = $row['password'];
+			$userid = $row['id'];
 			// Verify plaintext password against hash
-			if (password_verify($hash, $pwd)){
-				$_SESSION['login_user']=$username; // Initializing Session
+			if (password_verify($password, $pwd)){
+				$_SESSION['login_id']=$userid; // Initializing Session
 				$_SESSION['login_auth']=$auth;
 				switch($auth){
 					case "A":
@@ -60,10 +61,7 @@ if (isset($_POST['submit'])) {
 			}
 		}
 		else {
-			$result = mysqli_query($connection, "select * from users where username='$username'");
-			if (mysqli_num_rows($result) == 0){
-				$error = "Username is invalid.";
-			}
+			$error = "Username is invalid.";
 		}
 		mysqli_close($connection); // Closing Connection
 	}
