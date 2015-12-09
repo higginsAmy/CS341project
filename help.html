@@ -18,25 +18,53 @@
 					<img id = "titleIcon" src = "img/bot2.jpg"  alt="icon"> Holmen High School Robotics Club 
 				</h2>
             </a>
-			<input id = "log" class="button" type="button" onClick="location.href='loginPage.php'" value="Log in">
-            <input id = "forgetPassword" class="button"  type="button" onClick="location.href='forgetPassword.php'" value="Forgot your password?">
-        </div>        
+			</div>        
         <div id="label">
             <input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">
             <input id = "contact" class="labelButton"  type="button" onClick="location.href='contact.html'" value="Contact">
-            <input id = "donate" class="labelButton"  type="button" onClick="location.href='donate.html'" value="Donate">
         </div>
+		
 		<div id="MainMenu">
-			<h2><strong>Main Menu</strong></h2>
-			<ul>
+			<h2><strong><font size=16px>Main Menu</font></strong></h2>
+			<ol>
+			<li><strong>General</strong>
+				<ul>
 				<li><a href="help.html#TheCalendar">The Calendar</a></li>
-				<li><a href="help.html#CreateEvent">Creating an Event</a></li>
-				<li><a href="help.html#ModEvent">Modifying an Event</a></li>
-				<li><a href="help.html#AddUser">Adding Users</a></li>
-				<li><a href="help.html#ModUser">Modifying User Information</a></li>
 				<li><a href="help.html#Passwords">Passwords</a></li>
 				<li><a href="help.html#Donations">Donations</a></li>
 			</ul>
+			</li>
+			<br>
+			
+			<li><strong>Volunteers/Students</strong>
+			<ul>
+				<li><a href="help.html#EventSignUp">Signing up for an Event</a></li>
+				<li><a href="help.html#EventUnenroll">Unenrolling for an Event</a></li>
+			</ul>
+			</li>
+			<br>
+			
+			<li><strong>Adminstrator/Volunteers</strong>
+			<ul>
+				<li><a href="help.html#CreateEvent">Creating an Event</a></li>
+				<li><a href="help.html#ModEvent">Modifying an Event</a></li>		
+			</ul></li>
+			<br>
+			
+			<li><strong>Administrator</strong>
+			<ul>
+				<li><a href="help.html#SearchEvent">Searching Events</a></li>
+				<li><a href="help.html#AddUser">Adding Users</a></li>
+				<li><a href="help.html#ModUser">Modifying User Information</a></li>
+			</ul></li>
+			</ul></ol>
+			
+			<br><br><br><br><br><br>
+		
+		<div id="MainMenu">
+			<h2><strong><font size=16px>Index:</font></strong></h2>
+		</div>
+		
 		<div id ="TheCalendar">
 			<h3><strong>The Calendar</strong></h3>
 				<div id="paragraphBodyLong">
@@ -52,6 +80,57 @@
 					</p>
 				</div>	
 		</div>
+		
+<!--Section 1: General--> 	
+
+		<div id="Passwords">
+			<h3><strong>Altering User Passwords</strong></h3>
+				<div id="paragraphBodyShort">
+					Only the administrator has access to user passwords, thus if a user wishes to reset their password they must contact the
+					administrator. The administrator's responsibility for modifying a user's password and other user information can be found 
+					in the section titled: <a href="help.html#ModUser">Modifying User Information</a>.
+				</div>
+		</div>	
+		
+		<div id="Donations">
+			<h3><strong>Donations</strong></h3>
+				<div id="paragraphBodyLong">
+						With PayPal, making a donation to the Holmen Robotics Team is now easier than ever! From the guest page, 
+						simply click the "Donate" button in the top utility bar, which will lead you the <a href="donate.html">donations page</a> 
+						to a clickable PayPal link. The link will allow you to use your PayPal account or any 
+						supported credit card to donate any amount you choose. 
+						Every dollar counts!
+					<p>
+						Think you have something we could use? Tools, parts, or any other physical item can be donated to the team by 
+						shipping it to the school or by visiting the high school's front office. Your generosity is appreciated!
+					</p>
+				</div>
+		
+<!--Section 2: Students/Volunteers--> 	
+
+	<div id="EventSignUp">
+			<h3><strong>Signing up for an Event</strong></h3>
+				<div id="paragraphBodyShort">
+						Ready to get some work done? Click on the "Event Sign Up" button on the top utility bar and select an event
+						from the list of openings. The system will let you know if there are any scheduling complications between it and
+						an event you've already signed up for.
+			
+					</div>
+		</div>
+
+
+		<div id="EventUnenroll">
+			<h3><strong>Unenrolling for an Event</strong></h3>
+				<div id="paragraphBodyShort">
+			
+						Change your mind about an event you signed up for? You can remove your sign-up obligations easily by clicking the
+						"Event Unenroll" button in the top utility bar, then select the event you'd like to remove from your calendar. It's that easy!
+				</div>
+		</div>
+
+
+<!--Section 3: Administrator/Volunteer -->
+
 		
 		<div id="CreateEvent">
 			<h3><strong>Creating an Event</strong></h3>
@@ -76,6 +155,28 @@
 					</p>
 				</div>
 		</div>
+		
+		
+		
+<!--Section 4: administrator-->	
+		
+		<div id="SearchEvent">
+			<h3><strong>Searching for an Event</strong></h3>
+				<div id="paragraphBodyLong">
+					
+						While the calendar is meant to make looking at events simple, the administrator has the ability to search for events
+						based on who created them, the date they are created on, or both. This is done by clicking the "search for events" button
+						on the top utility bar, choosing your search type, and entering your search parameters accordingly.
+					<p>
+						Upon submitting the form, the administrator will be able to modify the events that match their search parameters.
+						While it is impossible obtain no results when searching only by user, obtaining no results when searching by date
+						or the comprehensive search can mean that there are either no events on the specified date, or no events by the specified
+						user on the specified date.
+					</p>
+				</div>
+		</div>
+		
+		
 		
 		<div id="AddUser">
 			<h3><strong>Adding Users</strong></h3>
@@ -107,28 +208,7 @@
 				</div>
 			</div>
 					
-		<div id="Passwords">
-			<h3><strong>Altering User Passwords</strong></h3>
-				<div id="paragraphBodyShort">
-					Only the administrator has access to user passwords, thus if a user wishes to reset their password they must contact the
-					administrator. The administrator's responsibility for modifying a user's password and other user information can be found 
-					in the section titled: <a href="help.html#ModUser">Modifying User Information</a>.
-				</div>
-		</div>	
 		
-		<div id="Donations">
-			<h3><strong>Donations</strong></h3>
-				<div id="paragraphBodyLong">
-						With PayPal, making a donation to the Holmen Robotics Team is now easier than ever! From the guest page, 
-						simply click the "Donate" button in the top utility bar, which will lead you the <a href="donate.html">donations page</a> 
-						to a clickable PayPal link. The link will allow you to use your PayPal account or any 
-						supported credit card to donate any amount you choose. 
-						Every dollar counts!
-					<p>
-						Think you have something we could use? Tools, parts, or any other physical item can be donated to the team by 
-						shipping it to the school or by visiting the high school's front office. Your generosity is appreciated!
-					</p>
-				</div>
 		</div>		
 	</body>
 </html>
