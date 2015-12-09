@@ -127,7 +127,6 @@ if (isset($_POST['submit'])) {
 		}
 	}
 	if($overlap == false){
-		// Check if student previously signed up and then cancelled
 		$sql = "INSERT INTO eventParticipation (eventId, userId, type) VALUES($event, $userid, 'S')";
 		if (mysqli_query($connection, $sql)){
 			echo '<meta http-equiv="refresh" content="0">';

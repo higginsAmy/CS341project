@@ -49,10 +49,10 @@ $success='';
 			<div id="form_container">
 				<h2>&nbsp;<a style="width: 637px">Delete Conflict Event</a></h2>
 				<div class="form_description">
-					You only can see the events are conflicted.
+					You only can see conflicting events.
 				</div>
 				<?php
-				// Fetch username from session
+				// Fetch userid from session
 				$userid = $_SESSION['login_id'];
 				$type = $_SESSION['login_auth'];
 				// Create connection

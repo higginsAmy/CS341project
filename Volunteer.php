@@ -8,7 +8,7 @@ case "A":
 	header("location: Admin.php"); // Redirecting To Admin Page
 	break;
 case "S":
-	header("location: Student.php"); // Redirecting To Volunteer Page
+	header("location: Student.php"); // Redirecting To Student Page
 	break;
 }
 ?>
