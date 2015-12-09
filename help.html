@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+    <title>Site Help | Holmen Robotics</title>
+    <!-- Styles --> 
+    <link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="theme.css" />
+    <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+	<link href='http://fonts.googleapis.com/css?family=Cuprum&amp;subset=latin' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" />
+	<!-- Scripts -->
+	<script src='fullcalendar/lib/jquery.min.js'></script>
+	<script src='fullcalendar/lib/moment.min.js'></script>
+	<script src='fullcalendar/fullcalendar.js'></script>
+	<script src="jquery.confirm/jquery.confirm.js"></script>
+	
+  </head>
+    <body>
+        <div id = "title">
+            <a href="Guest.php">
+				<h2 id = "titleName"> 
+					<img id = "titleIcon" src = "img/bot2.jpg"  alt="icon"> Holmen High School Robotics Club 
+				</h2>
+            </a>
+			<input id = "log" class="button" type="button" onClick="location.href='loginPage.php'" value="Log in">
+            <input id = "forgetPassword" class="button"  type="button" onClick="location.href='forgetPassword.php'" value="Forgot your password?">
+        </div>
+        
+        <div id="label">
+            <input id = "contact" class="labelButton"  type="button" onClick="location.href='contact.html'" value="Contact">
+            <input id = "donate" class="labelButton"  type="button" onClick="location.href='donate.php'" value="Donate">
+        </div>
+		<div id="MainMenu">
+			<h2><strong>Main Menu</strong></h2>
+			<ul>
+				<li><a href="help.html#TheCalendar">The Calendar</a></li>
+				<li><a href="help.html#CreateEvent">Creating an Event</a></li>
+				<li><a href="help.html#ModEvent">Modifying an Event</a></li>
+				<li><a href="help.html#AddUser">Adding Users</a></li>
+				<li><a href="help.html#ModUser">Modifying User Information</a></li>
+				<li><a href="help.html#Passwords">Passwords</a></li>
+			</ul>
+		<div id ="TheCalendar">
+			<h3><strong>The Calendar</strong></h3>
+				<div id="body">
+					
+						The calendar is available on the home screen to allow for optimum viewing without taking any extra steps
+						after you log in. The calendar is already preconfigured to show any event you've signed up for. 
+						Typically they are in green, however events cancelled by a volunteer or coach appear red 
+						to let you know that the event is cancelled (rather than simply disappearing).
+					
+					<p>
+						Clicking an event on the calendar allows you to take a closer look at it, allowing you to see details such as 
+						when it starts and ends, how much room is left for new people to participate, and where it is.
+					</p>
+				</div>	
+		</div>
+		
+		<div id="CreateEvent">
+			<h3><strong>Creating an Event</strong></h3>
+				<div id="body">
+			
+						To create an event, simply click the "Add Event" button in the top bar. You will be greeted with a form,
+						which will only be accepted if all applicable fields are filled out correctly. Upon submission,
+						the event will be added to the calendar, and students and volunteers will be able to sign up for the event.
+				<p></p>
+				</div>
+		</div>
+		
+		<div id="ModEvent">
+			<h3><strong>Modifying an Event</strong></h3>
+				<div id="body">
+					
+						After an event is created, the user who created it is able to go back and change any of the event's details,
+						or delete the event altogether. An administrator is allowed to modify or delete any event, even the ones or she
+						is not the author of.
+					<p>
+						When an event is deleted, it will appear in red on the calendar, allowing users to see that the event was
+						cancelled, allowing them to schedule accordingly.
+					</p>
+				</div>
+		</div>
+		
+		<div id="AddUser">
+			<h3><strong>Adding Users</strong></h3>
+				<div id="body">
+						
+						Throughout the course of the FIRST Robotics season, it will be necessary for administrators to add new players or volunteers.
+						Administrators may add volunteers by logging on, clicking the "Modify Users" button in the top utility bar,
+						and selecting the option to add a new user. Administrators are the only users capable of adding users, and it is assumed that all students
+						participating will be added at the beginning of the season. 
+					<p>
+						New students or volunteers may be added later by contacting the Administrator.
+						Because students and volunteers will have different user privileges, it is important that the administrator chooses
+						the proper classification for each user.
+					</p>
+				</div>
+		</div>
+		
+		
+						
+	</body>
+</html>
