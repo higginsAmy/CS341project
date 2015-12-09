@@ -43,11 +43,11 @@ switch($_SESSION['login_auth']){
 		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
 		</div>      
 		<div id="label">
-			<input id = "modifyHours" class="labelButton" type="button" onClick="location.href='modifyStudentHours.html'" value="Modify student WorkHours ">
-			<input id = "addEvent" class="labelButton" type="button" onClick="location.href='newEvent.php'" value="Add event">
-			<input id = "modifyUser" class="labelButton" type="button" onClick="location.href='modifyUser.php'" value="Modify user">
-			<input id = "modifyItems" class="labelButton" type="button" onClick="location.href='modifyItems.html'" value="Modify donation items">
-			<input id = "seeMessage" class="labelButton" type="button" onClick="location.href='seeMessage.html'" value="See message">
+			<input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">
+			<input id = "searchData" class="labelButton"  type="button" onClick="location.href='SearchData.php'" value="Search for Events">
+			<input id = "addEvent" class="labelButton"  type="button" onClick="location.href='newEvent.php'" value="Add event">
+			<input id = "modifyEvent" class="labelButton"  type="button" onClick="location.href='modifyEvent.php'" value="Modify event">
+			<input id = "modifyUser" class="labelButton"  type="button" onClick="location.href='modifyUser.php'" value="Modify user">
 		</div>
 		<div id="main_body">&nbsp;
 			<div id="form_container" style="height: 400px;">
@@ -124,8 +124,7 @@ if (mysqli_connect_errno($connection)) {
 }
 // Logic that handles submission of the form
 if (isset($_POST['submit'])) {
-	if (empty($_POST['first']) || empty($_POST['last']) || empty($_POST['email']) || 
-		empty($_POST['username']) || empty($_POST['password']) || empty($_POST['type'])){
+	if (empty($_POST['type'])){
 		echo "<div>Please fill out all fields to create new user.</div>";
 	}
 	else{
@@ -135,8 +134,9 @@ if (isset($_POST['submit'])) {
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		$auth = $_POST['type'];
+		$hash = password_hash($password, PASSWORD_DEFAULT);
 		$query = "INSERT INTO users (first, last, email, username, password, auth) VALUES "
-			."('$first', '$last', '$email', '$username', '$password', '$auth')";
+			."('$first', '$last', '$email', '$username', '$hash', '$auth')";
 		if(mysqli_query($connection, $query)){
 			echo ("<script>$.confirm({
 					'title'		: '',

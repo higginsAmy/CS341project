@@ -36,7 +36,8 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
 	  </div>      
 	  <div id="label">
-	  </div>
+			<input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">
+		</div>
 	  <div id="body">
 		<?php 
 		// Fetch eventID from GET variable

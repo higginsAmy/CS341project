@@ -33,6 +33,9 @@ if (!isset($_SESSION['login_auth'])){
 			</a>
 			<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
         </div>
+		<div id="label">
+			<input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">
+		</div>
 		<div id="main_body">&nbsp;
 			<div id="form_container" style="height: 300px;">
 				<h2>Change Password</h2>

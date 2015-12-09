@@ -74,6 +74,9 @@ mysqli_close($connection);
 			<input id="log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
 			<input id="changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
 		</div>
+		<div id="label">
+			<input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">
+		</div>
 		<div id="main_body">&nbsp;
 			<div id="form_container">
 				<h2>&nbsp;<a style="width: 637px">Edit Event</a></h2>

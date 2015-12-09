@@ -45,8 +45,9 @@ if(isset($_SESSION['login_id']) && isset($_SESSION['login_auth'])){
         <input id = "forgetPassword" class="button"  type="button" onClick="location.href='forgetPassword.php'" value="Forgot your password?">
     </div>    
     <div id="label"> 
-        <input id = "contact" class="labelButton"  type="button" onClick="contact.html" value="Contact">
-        <input id = "donate" class="labelButton" type="button" onClick="donate.html" value="Donate">
+        <input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">
+        <input id = "contact" class="labelButton"  type="button" onClick="location.href='contact.html'" value="Contact">
+        <input id = "donate" class="labelButton"  type="button" onClick="location.href='donate.html'" value="Donate">
     </div>
 	<div id="main_body">&nbsp;
 			<div id="form_container">

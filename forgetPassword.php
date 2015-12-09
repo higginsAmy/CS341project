@@ -36,6 +36,11 @@ require_once('PHPMailer/class.phpmailer.php');
 		</a>
 		<input id = "log" class="button" type="button" onClick="location.href='loginPage.php'" value="Log in">
 		</div>
+		<div id="label">
+			<input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">
+            <input id = "contact" class="labelButton"  type="button" onClick="location.href='contact.html'" value="Contact">
+            <input id = "donate" class="labelButton"  type="button" onClick="location.href='donate.html'" value="Donate">
+		</div>
 		<div id="main_body">&nbsp;
 			<div id="form_container" style="height: 300px;">
 				<h2>&nbsp;<a style="width: 637px">Forgot your password?</a></h2>

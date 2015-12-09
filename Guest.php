@@ -28,8 +28,9 @@
         </div>
         
         <div id="label">
+			<input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">
             <input id = "contact" class="labelButton"  type="button" onClick="location.href='contact.html'" value="Contact">
-            <input id = "donate" class="labelButton"  type="button" onClick="location.href='donate.php'" value="Donate">
+            <input id = "donate" class="labelButton"  type="button" onClick="location.href='donate.html'" value="Donate">
         </div>
 		<div id="body" style="margin: 0 5px 5px 5px;">
 			<div id='calendar' style="background:white; position:relative; top: 10px; width:75%; display:inline-block;"></div>

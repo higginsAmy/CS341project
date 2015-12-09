@@ -43,6 +43,7 @@ case "V":
 			<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
 		</div>      
 		<div id="label">
+			<input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">
 			<input id = "searchData" class="labelButton"  type="button" onClick="location.href='SearchData.php'" value="Search for Events">
 			<input id = "addEvent" class="labelButton"  type="button" onClick="location.href='newEvent.php'" value="Add event">
 			<input id = "modifyEvent" class="labelButton"  type="button" onClick="location.href='modifyEvent.php'" value="Modify event">
@@ -60,7 +61,7 @@ case "V":
 						<li style="left: 0px; top: -3px; width: 45%; height: 65px">
 							<label class="description">Search by user </label>
 							<div>
-								<select name="users">
+								<select name="user">
 									<option value=""></option>
 									<?php
 									// Create connection
@@ -72,14 +73,14 @@ case "V":
 										echo "</div>";
 									}
 									$query2 = mysqli_query($connection, "SELECT creator from events");
-									$query = "SELECT first, last, id FROM users WHERE username IN (SELECT creator from events)";
+									$query = "SELECT DISTINCT id, first, last FROM users WHERE id IN (SELECT creator from events)";
 									$result=mysqli_query($connection, $query);
 									
 									while($row = mysqli_fetch_assoc($result)) {
 										$first = $row['first'];
 										$last = $row['last'];
 										$userid = $row['id'];
-										echo "<option value='$userid'>".$first. " " .$last."</option>";
+										echo "<option value=$userid>".$first. " " .$last."</option>";
 									}
 									?>
 								</select>
@@ -88,31 +89,18 @@ case "V":
 						
 						<li style="left: 342px; top: -73px; width: 41%; height: 65px">
 							<label class="description">Search by date </label>
-							<div>
-								<select name="date">
-									<option value=""></option>
-									<?php
-									// Create connection
-									$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
-									// Check connection
-									if (mysqli_connect_errno($connection)) {
-										echo "<div>";
-										echo "Failed to connect to MySQL: " . mysqli_connect_error();
-										echo "</div>";
-									}
-									$query = "SELECT startDateTime from events";
-									
-									$result=mysqli_query($connection, $query);
-									while($row = mysqli_fetch_assoc($result)) {
-										$N_datetime = $row['startDateTime'];
-										$timestamp = strtotime($N_datetime);
-										$N_date = date('m/d/y', $timestamp);
-										
-										echo('<option value="'.$N_datetime.'">'.$N_date.'</option>');
-									}
-									?>
-								</select>
-							</div>
+							<span>
+								<input id="SMonth" name="SMonth" class="element text" size="3" maxlength="2" value="" type="text" /> /
+								<label for="SMonth">MM</label>
+							</span>
+							<span>
+								<input id="SDay" name="SDay" class="element text" size="3" maxlength="2" value="" type="text" /> /
+								<label for="SDay">DD</label>
+						</span>
+							<span>
+								<input id="SYear" name="SYear" class="element text" size="5" maxlength="4" value="" type="text" />
+								<label for="SYear">YYYY</label>
+							</span>
 						</li>
 						<li class="buttons" style="left: 4px; top: -100px">
 							<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
@@ -129,8 +117,8 @@ case "V":
 if (isset($_POST['submit'])) {
 	$byUser=$_POST['user'];
 	$byDate=$_POST['date'];
-	
-	if (!isset($_POST['user']) && !isset($_POST['date'])){
+	echo "<div style='position: absolute; top: 300px; left: 100px;'>".$byUser."</div>";
+	if (!isset($_POST['user']) && !isset($_POST['SMonth']) && !isset($_POST['SDay']) && !isset($_POST['SYear'])){
 		echo ("<script>$.confirm({
 				'title'		: '',
 				'message'	: '<div align=\"center\">Please fill out one or both fields to search</div>',
@@ -141,16 +129,31 @@ if (isset($_POST['submit'])) {
 						},
 				});</script>");
 	} else {
-		if (isset($_POST['user']) && isset($_POST['date'])){
+		if (isset($_POST['user']) && isset($_POST['SMonth']) && isset($_POST['SDay']) && isset($_POST['SYear'])){
 			$sql = "SELECT * FROM events WHERE creator = $byUser AND startDateTime = $byDate";
 		}
-		else if (isset($_POST['user'])){
+		else if ($byUser > 0){
+			echo "<div style='position: absolute; top: 300px; left: 200px;'>I got here!!</div>";
 			$sql = "SELECT * FROM events WHERE creator = $byUser";
 		}
-		else {
-			$sql = "SELECT * FROM events WHERE startDateTime = $byDate";
+		else if (isset($_POST['SMonth']) && isset($_POST['SDay']) && isset($_POST['SYear'])){
+			$sql = "SELECT * FROM events WHERE startDateTime LIKE '".$SYear."-".$SMonth."-".$SDay."%'";
 		}
-		$result = mysqli_query($connection, $sql);
+		else {
+			echo ("<script>$.confirm({
+					'title'		: '',
+					'message'	: '<div align=\"center\">Incomplete search criteria</div>',
+					'buttons'	: {
+						'OK'	: {
+									'class'	: 'blue',
+								}
+							},
+					});</script>");			
+		}
+		if($result = mysqli_query($connection, $sql)){
+			$row = mysqli_fetch_assoc($result);
+			echo "<div>".$row['title']."</div>";
+		}
 	}
 }
 ?>
