@@ -58,11 +58,19 @@ case "V":
 						Search events based on one or all search criteria below.
 					</div>
 					<ul style="width: 103%;">
-						<li style="left: 0px; top: -3px; width: 45%; height: 65px">
+						<li style="left: 0px; top: -3px; width: 100%; height: 65px">
+							<span>
+								<input type="radio" name="searchType" value="user" checked>Search by username
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="searchType" value="date">Search by date
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="searchType" value="both">Search by both
+							</span>
+						<li style="left: 0px; top: -48px; width: 45%; height: 65px">
 							<label class="description">Search by user </label>
 							<div>
 								<select name="user">
-									<option value=""></option>
+									<option value=-1></option>
 									<?php
 									// Create connection
 									$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
@@ -72,7 +80,6 @@ case "V":
 										echo "Failed to connect to MySQL: " . mysqli_connect_error();
 										echo "</div>";
 									}
-									$query2 = mysqli_query($connection, "SELECT creator from events");
 									$query = "SELECT DISTINCT id, first, last FROM users WHERE id IN (SELECT creator from events)";
 									$result=mysqli_query($connection, $query);
 									
@@ -87,7 +94,7 @@ case "V":
 							</div>
 						</li>
 						
-						<li style="left: 342px; top: -73px; width: 41%; height: 65px">
+						<li style="left: 342px; top: -107px; width: 41%; height: 65px">
 							<label class="description">Search by date </label>
 							<span>
 								<input id="SMonth" name="SMonth" class="element text" size="3" maxlength="2" value="" type="text" /> /
@@ -116,43 +123,69 @@ case "V":
 <?php
 if (isset($_POST['submit'])) {
 	$byUser=$_POST['user'];
-	$byDate=$_POST['date'];
-	echo "<div style='position: absolute; top: 300px; left: 100px;'>".$byUser."</div>";
-	if (!isset($_POST['user']) && !isset($_POST['SMonth']) && !isset($_POST['SDay']) && !isset($_POST['SYear'])){
+	$searchType=$_POST['searchType'];
+	$user=$_POST['user'];
+	$month=$_POST['SMonth'];
+	$day=$_POST['SDay'];
+	$year=$_POST['SYear'];
+	
+	if ($searchType == "user" && $user){
+		$sql = "SELECT * FROM events WHERE creator = $byUser";
+	}
+	else if ($searchType == "date" && $month && $day && $year){
+		$sql = "SELECT * FROM events WHERE startDateTime LIKE '".$year."-".$month."-".$day."%'";
+	}
+	else if ($searchType == "both" && $user && $month && $day && $year){
+		$sql = "SELECT * FROM events WHERE creator = $byUser AND startDateTime LIKE '$year-$month-$day%'";
+	}
+	else {
 		echo ("<script>$.confirm({
 				'title'		: '',
-				'message'	: '<div align=\"center\">Please fill out one or both fields to search</div>',
+				'message'	: '<div align=\"center\">Incomplete search criteria</div>',
 				'buttons'	: {
 					'OK'	: {
 								'class'	: 'blue',
 							}
 						},
-				});</script>");
-	} else {
-		if (isset($_POST['user']) && isset($_POST['SMonth']) && isset($_POST['SDay']) && isset($_POST['SYear'])){
-			$sql = "SELECT * FROM events WHERE creator = $byUser AND startDateTime = $byDate";
-		}
-		else if ($byUser > 0){
-			echo "<div style='position: absolute; top: 300px; left: 200px;'>I got here!!</div>";
-			$sql = "SELECT * FROM events WHERE creator = $byUser";
-		}
-		else if (isset($_POST['SMonth']) && isset($_POST['SDay']) && isset($_POST['SYear'])){
-			$sql = "SELECT * FROM events WHERE startDateTime LIKE '".$SYear."-".$SMonth."-".$SDay."%'";
-		}
-		else {
-			echo ("<script>$.confirm({
-					'title'		: '',
-					'message'	: '<div align=\"center\">Incomplete search criteria</div>',
-					'buttons'	: {
-						'OK'	: {
-									'class'	: 'blue',
-								}
-							},
-					});</script>");			
-		}
-		if($result = mysqli_query($connection, $sql)){
-			$row = mysqli_fetch_assoc($result);
-			echo "<div>".$row['title']."</div>";
+				});</script>");			
+	}
+	if ($sql){	
+		//echo "<div style='position: absolute; top: 300px; left: 200px;'>".$sql."</div>";
+		$result = mysqli_query($connection, $sql);
+		if (mysqli_num_rows($result)) {
+			echo '<div style="position: relative; left: 25%; top: 0px; display: inline-block; float: left;"><label class="description">Event Title</label></div>
+				<div style="position: relative; left: 28%; float: left; display: inline-block;"><label class="description"># Students</label></div>
+				<div style="position: relative; left: 31%; float: left; display: inline-block;"><label class="description"># Volunteers</label></div>
+				<div style="position: relative; left: 36%; float: left; display: inline-block;"><label class="description">Starts</label></div>
+				<div style="position: relative; left: 41%; float: left; display: inline-block;"><label class="description">Ends</label></div>
+				<div style="position: relative; left: 46%; float: left; display: inline-block;"><label class="description">Delete</label></div>
+				<table style="position: relative; top: 10px; left: -12%;" cellpadding="25">';
+			// output data of each row
+			while($row = mysqli_fetch_assoc($result)) {
+				$id = $row['eventId'];
+				$numStudents = 0;
+				$numVolunteers = 0;
+				if (!$result2 = mysqli_query($connection, "SELECT * FROM eventParticipation WHERE eventId=$id AND type='S'")){
+					echo "<div>Database error finding student count</div>";
+				}
+				else {
+					$numStudents = mysqli_num_rows($result2);
+				}
+				if (!$result2 = mysqli_query($connection, "SELECT * FROM eventParticipation WHERE eventId=$id AND type='V'")){
+					echo "<div>Database error finding volunteer count</div>";
+				}
+				else {
+					$numVolunteers = mysqli_num_rows($result2);
+				}
+				echo '<tr><form class="appnitro" method="post" action=""><input type="hidden" name="event" value="'
+					.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$numStudents."</td><td>".$numVolunteers
+					."</td><td>".$row["startDateTime"]."</td><td>"
+					.$row["endDateTime"].'</td><td><input id="delete" class="button_text" type="submit" name="submit" 
+					value="Delete Event"></td></form><td><input onClick="location.href=\'eventPage.php?event='
+					.$id.'\'" id="signup2" class="button_text" type="submit" name="EditSubmit"
+					value="Edit Event"></td></tr>';	
+			}
+			echo "</table>";
 		}
 	}
 }
