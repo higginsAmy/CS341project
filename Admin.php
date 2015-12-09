@@ -27,8 +27,93 @@ case "V":
 	<script src='fullcalendar/lib/jquery.min.js'></script>
 	<script src='fullcalendar/lib/moment.min.js'></script>
 	<script src='fullcalendar/fullcalendar.js'></script>
+<<<<<<< HEAD
 	<script src="jquery.confirm/jquery.confirm.js"></script>
 	<?php include ('adminCal.php'); ?>
+=======
+	<script>
+		$(document).ready(function() {
+    		// page is now ready, initialize the calendar...
+    		$('#calendar').fullCalendar({
+				editable: true,
+        		weekmode: 'variable',
+        		eventSources: [
+				// your event source
+					{
+						var events:  [
+   							 <?php
+								
+								// Create connection
+								$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
+								// Check connection
+								if (mysqli_connect_errno($connection)) {
+									echo "<div>";
+									echo "Failed to connect to MySQL: " . mysqli_connect_error();
+									echo "</div>";
+								}
+								
+        						$query = mysql_query("SELECT * FROM Event");
+        						while ($event = mysql_fetch_assoc($query)) {
+									
+            						$title = $event["Title"];
+									
+									$StartTime = $event["StartTime"];
+									
+									$EndTime = $event["EndTime"];
+									
+									$StartDate = $event["StartDate"];
+									
+									$EndDate = $event["EndDate"];
+									
+									$MinVols = $event["MinVols"];
+									
+									$MaxVols = $event["MaxVols"];
+									
+									$MinStud = $event["MinStud"];
+									
+									$MaxStud = $event["MaxStud"];
+									
+									$Desc = $event["Desc"];
+								
+									
+									echo "{";
+									
+            						echo "title : '$title'";
+									
+									echo "StartTime : '$StartTime'";
+									
+									echo "EndTime : '$EndTime'";
+									
+									echo "StartDate: '$EndDate'";
+									
+									echo "EndDate: '$EndDate'";
+									
+									echo "MinVols: '$MinVols'";
+									
+									echo "MaxVols: '$MaxVols'";
+									
+									echo "MinStud: '$MinStud'";
+									
+									echo "MaxStud: '$MaxStud'";
+									
+									echo "Desc : '$Desc'";
+									
+									
+									echo "},";
+        						}
+    						?>
+						];
+						,
+						color: 'blue',     // an option!
+						textColor: 'white' // an option!
+					}
+					// any other event sources...
+
+				]
+    		})
+		});
+	</script>
+>>>>>>> origin/backend-stuff
   </head>
   <body>
   <div id = "title">
