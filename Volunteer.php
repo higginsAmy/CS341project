@@ -51,3 +51,40 @@ case "S":
 		</div>
 	</body>
 </html>
+<?php
+$userid = $_SESSION['login_id'];
+$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
+// Check connection
+if (mysqli_connect_errno($connection)) {
+	echo "<div>";
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	echo "</div>";
+}
+$eventsAttended = mysqli_query($connection, "SELECT * FROM eventParticipation WHERE userId = $userid");
+$rowsNumber = $eventsAttended->num_rows;
+if($rowsNumber>=2){
+		while($rows = $eventsAttended->fetch_object()){
+			$theEvent = mysqli_query($connection, "select * from events WHERE eventId = $rows->eventId");
+			$theRow = $theEvent->fetch_object();
+			$end = $theRow->endDateTime;
+			$start = $theRow->startDateTime;
+			$arrStartTime[]=$start;
+			$arrEndTime[]=$end;
+		}
+		$overlap = false;
+		for($i = 0; $i < $rowsNumber-1; $i++){
+			$thisStart = $arrStartTime[$i];
+			$thisEnd = $arrEndTime[$i];
+			for($j = $i+1; $j < $rowsNumber; $j++){
+				$CompareStart = $arrStartTime[$j];
+				$CompareEnd = $arrEndTime[$j];
+				if($thisStart <= $CompareEnd && $thisEnd >= $CompareStart){
+					$overlap = true;
+				}
+			}
+		}
+		if($overlap){
+			echo '<a href="conflictPage.php" style="position: absolute; top: 250px; font-size: 18px; left:900px; Color:red;">Current schedule has conflict.<br> Click here to delete conflict Events.</a>';
+		}
+}
+?>

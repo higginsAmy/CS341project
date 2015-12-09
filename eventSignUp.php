@@ -13,7 +13,7 @@ case "A":
 	break;
 case "V":
 	header("location: Volunteer.php"); // Redirecting To Volunteer Page
-	break;			
+	break;
 }
 ?>
 
@@ -37,21 +37,21 @@ case "V":
 		<div id="title">
 			<a href="Student.php">
 				<h2 id="titleName">
-					<img id="titleIcon" src="img/bot2.jpg"  alt="icon"> Holmen High School Robotics Club 
+					<img id="titleIcon" src="img/bot2.jpg"  alt="icon"> Holmen High School Robotics Club
 				</h2>
 			</a>
 			<input id="log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
 			<input id="changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
-		</div>      
+		</div>
 		<div id="label">
-			<input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">        
+			<input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">
 			<input id = "eventSignUp" class = "labelButton" type = "button" onClick="location.href='eventSignUp.php'" value="Event Sign Up">
 			<input id = "eventUnEnroll" class = "labelButton" type = "button" onClick="location.href='eventUnenroll.php'" value="Event Unenroll">
 		</div>
 		<div id="main_body">
 			<div id="form_container">
 				<h2>&nbsp;<a style="width: 637px">Event Signup</a></h2>
-				<?php 
+				<?php
 				// Create connection
 				$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
 				// Check connection
@@ -62,7 +62,7 @@ case "V":
 				}
 				// Get userId
 				$userid = $_SESSION['login_id'];
-				
+
 				// Gets results for events that have not been removed and have not reached their maximum number of students
 				// (decremented upon signup).
 				$result = mysqli_query($connection, "select * from events where removed != 1 AND maxStudents > 0");
@@ -72,7 +72,7 @@ case "V":
 						<div style="float: left; width: 25%; display: inline-block;"><label class="description">Ends</label></div>
 						<div style="float: left; width: 20%; display: inline-block;"><label class="description">Sign up</label></div>
 						<table cellpadding="25" style="width: 90%;">';
-					// output data of each row  
+					// output data of each row
 					while($row = mysqli_fetch_assoc($result)) {
 						$eventsAttended = mysqli_query($connection, "select * from eventParticipation where userId = $userid");
 						$check = true;
@@ -87,7 +87,7 @@ case "V":
 							.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]
 							."</td>".'<td><input id="signup" class="button_text" type="submit" name="submit" value="Sign Up"></td></form></tr>';
 						}
-					}	
+					}
 					echo "</table>";
 				} else {
 					echo "0 results";
@@ -98,8 +98,8 @@ case "V":
 		</div>
 	</body>
 </html>
-			
-<?php 
+
+<?php
 // Handles submission of form - event signup
 if (isset($_POST['submit'])) {
 	$maxStud = 0;
@@ -128,14 +128,14 @@ if (isset($_POST['submit'])) {
 	}
 	if($overlap == false){
 		// Check if student previously signed up and then cancelled
-		$sql = "INSERT INTO eventParticipation (eventId, userId, type, removed) VALUES($event, $userid, 'S')";
+		$sql = "INSERT INTO eventParticipation (eventId, userId, type) VALUES($event, $userid, 'S')";
 		if (mysqli_query($connection, $sql)){
 			echo '<meta http-equiv="refresh" content="0">';
 			$maxStud --;
 			if (!mysqli_query($connection, "UPDATE events SET maxStudents=$maxStud where eventId=$event")){
 				echo "<div>Error!!!</div>";
 			}
-			else { 
+			else {
 				echo ("<script>$.confirm({
 					'title'		: '',
 					'message'	: '<div align=\"center\">Signup successful</div>',
