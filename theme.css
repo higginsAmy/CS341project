@@ -213,6 +213,26 @@ body {
     font-size: 15px;
 }
 
+#paragraphBodyLong{
+    height: 120px;
+    width: 600px;
+    top: 5px;
+    left: 55%;
+    font-size: 14px;
+    padding: 20px;
+    background-color: lightslategrey;
+}
+
+#paragraphBodyShort{
+    height: 80px;
+    width: 600px;
+    top: 5px;
+    left: 55%;
+    font-size: 14px;
+    padding: 20px;
+    background-color: lightslategrey;
+}
+
 a {
     text-decoration: none;
 }
