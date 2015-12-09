@@ -30,6 +30,7 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script type="text/javascript" src="forms/view.js"></script>
 		<script src="jquery.confirm/jquery.confirm.js"></script>
+
 	</head>
 	<body>
 		<div id = "title">
@@ -61,12 +62,15 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 					echo "Failed to connect to MySQL: " . mysqli_connect_error();
 					echo "</div>";
 				}
+				$userObject = mysqli_query($connection, "select * from users WHERE username = '$user' ");
+				$row = $userObject->fetch_object();
+				$userid = $row->id;
 				// SQL query to fetch events created by user
 				if ($type == 'A'){
 					$query = "select * from events where removed !=1 GROUP BY startDateTime";
 				}
 				else {
-					$query = "select * from events where creator='$user' and removed!=1 GROUP BY startDateTime";
+					$query = "select * from events where creator=$userid and removed!=1 GROUP BY startDateTime";
 				}
 				$result = mysqli_query($connection, $query);
 				if (mysqli_num_rows($result)) {
@@ -97,8 +101,10 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 						echo '<tr><form class="appnitro" method="post" action=""><input type="hidden" name="event" value="'
 							.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$numStudents."</td><td>".$numVolunteers
 							."</td><td>".$row["startDateTime"]."</td><td>"
-							.$row["endDateTime"].'</td><td><input id="signup" class="button_text" type="submit" name="submit" 
-							value="Delete Event"></td></form></tr>';	
+							.$row["endDateTime"].'</td><td><input id="delete" class="button_text" type="submit" name="delete" 
+							value="Delete Event"></td></form><td><input onClick="location.href=\'eventPage.php?event='
+							.$id.'\'" id="signup2" class="button_text" type="submit" name="EditSubmit"
+							value="Edit Event"></td></tr>';	
 					}
 					echo "</table>";
 				}
