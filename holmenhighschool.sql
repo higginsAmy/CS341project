@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Dec 07, 2015 at 09:36 AM
+-- Generation Time: Dec 08, 2015 at 04:27 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.5.30
 
@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `eventId` int(11) NOT NULL,
   `title` text NOT NULL,
   `description` text NOT NULL,
+  `location` text NOT NULL,
   `startDateTime` datetime NOT NULL COMMENT 'Format YYYY-MM-DD HH:MM:SS',
   `endDateTime` datetime NOT NULL COMMENT 'format YYYY-MM-DD HH:MM:SS',
   `minVolunteers` int(11) NOT NULL,
@@ -64,10 +65,10 @@ CREATE TABLE IF NOT EXISTS `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`eventId`, `title`, `description`, `startDateTime`, `endDateTime`, `minVolunteers`, `maxVolunteers`, `minStudents`, `maxStudents`, `creator`, `removed`) VALUES
-(18, 'Overlap1', '22', '2015-12-12 10:20:00', '2015-12-12 20:20:00', 22, 22, 22, 16, 11, 0),
-(19, 'Overlap2', '2123', '2015-12-12 11:00:00', '2015-12-12 14:00:00', 1, 11, 11, 9, 11, 0),
-(20, 'Overlap3', '123', '2015-12-12 16:22:00', '2015-12-12 18:22:00', 1, 11, 11, 9, 11, 0);
+INSERT INTO `events` (`eventId`, `title`, `description`, `location`, `startDateTime`, `endDateTime`, `minVolunteers`, `maxVolunteers`, `minStudents`, `maxStudents`, `creator`, `removed`) VALUES
+(18, 'Overlap1', '22', '', '2015-12-12 10:20:00', '2015-12-12 20:20:00', 22, 22, 22, 16, 11, 0),
+(19, 'Overlap2', '2123', '', '2015-12-12 11:00:00', '2015-12-12 14:00:00', 1, 11, 11, 9, 11, 0),
+(20, 'Overlap3', '123', '', '2015-12-12 16:22:00', '2015-12-12 18:22:00', 1, 11, 11, 9, 11, 0);
 
 -- --------------------------------------------------------
 

@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
 		echo "</div>";
 	}
 	else{
-		//$hash = password_hash($password, PASSWORD_DEFAULT);
+		$hash = password_hash($password, PASSWORD_DEFAULT);
 		//echo "<div style='position: absolute; top: 200px;'>$hash</div>";
 		// Create connection
 		$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
 			$auth = $row['auth'];
 			$pwd = $row['password'];
 			// Verify plaintext password against hash
-			if ($password==$pwd){
+			if (password_verify($hash, $pwd)){
 				$_SESSION['login_user']=$username; // Initializing Session
 				$_SESSION['login_auth']=$auth;
 				switch($auth){

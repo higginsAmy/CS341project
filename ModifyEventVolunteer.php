@@ -11,8 +11,12 @@ switch($_SESSION['login_auth']){
 	case "S":
 		header("location: Student.php"); // Redirecting To Student Page
 		break;
+  case "A":
+  		header("location: Admin.php"); // Redirecting To Student Page
+  		break;
 
 }
+
 $success=''; // Variable to hold reporting of success or failure of mySQL update.
 ?>
 <!doctype html>
@@ -31,12 +35,17 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 		<script type="text/javascript" src="forms/view.js"></script>
 		<script src="jquery.confirm/jquery.confirm.js"></script>
 
+    <script type="text/javascript">
+    function volunteerEventPage() {
+    window.location.replace("volunteerEventPage.php");
+}
+</script>
 	</head>
 	<body>
 		<div id = "title">
 			<a href="Volunteer.php">
 				<h2 id = "titleName">
-					<img id = "titleIcon" src = "img/bot2.jpg"  alt="icon"> Holmen High School Robotics Club 
+					<img id = "titleIcon" src = "img/bot2.jpg"  alt="icon"> Holmen High School Robotics Club
 				</h2>
 			</a>
 			<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
@@ -46,11 +55,11 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 			<div id="form_container">
 				<h2>&nbsp;<a style="width: 637px">Modify An Event</a></h2>
 				<div class="form_description">
-					You may modify only events that you have created, 
-					unless you are an administrator.  If you have not created any events, 
+					You may modify only events that you have created,
+					unless you are an administrator.  If you have not created any events,
 					none will show up here.
 				</div>
-				<?php 
+				<?php
 				// Fetch username from session
 				$user = $_SESSION['login_user'];
 				$type = $_SESSION['login_auth'];
@@ -62,9 +71,9 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 					echo "Failed to connect to MySQL: " . mysqli_connect_error();
 					echo "</div>";
 				}
-				$userObject = mysqli_query($connection, "select * from users WHERE username = '$user' ");
-				$row = $userObject->fetch_object();
-				$userid = $row->id;
+        $userObject = mysqli_query($connection, "select * from users WHERE username = '$user' ");
+        $row = $userObject->fetch_object();
+        $userid = $row->id;
 				// SQL query to fetch events created by user
 				if ($type == 'A'){
 					$query = "select * from events where removed !=1 GROUP BY startDateTime";
@@ -74,12 +83,13 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 				}
 				$result = mysqli_query($connection, $query);
 				if (mysqli_num_rows($result)) {
-					echo '<div style="position: relative; left: 10px; top: 0px; width: 20%; display: inline-block; float: left;"><label class="description">Event Title</label></div>
-						<div style="float: left; width: 12%; display: inline-block;"><label class="description"># Students</label></div>
+					echo '<div style="position: relative; left: 10px; top: 0px; width: 15%; display: inline-block; float: left;"><label class="description">Event Title</label></div>
+						<div style="float: left; width: 15%; display: inline-block;"><label class="description"># Students</label></div>
 						<div style="float: left; width: 15%; display: inline-block;"><label class="description"># Volunteers</label></div>
-						<div style="float: left; width: 18%; display: inline-block;"><label class="description">Starts</label></div>
-						<div style="float: left; width: 20%; display: inline-block;"><label class="description">Ends</label></div>
-						<div style="float: left; width: 15%; display: inline-block;"><label class="description">Delete</label></div>
+						<div style="float: left; width: 15%; display: inline-block;"><label class="description">Starts</label></div>
+						<div style="float: left; width: 15%; display: inline-block;"><label class="description">Ends</label></div>
+            <div style="float: left; width: 10%; display: inline-block;"><label class="description">Delete</label></div>
+						<div style="float: left; width: 10%; display: inline-block;"><label class="description">Edit</label></div>
 						<table align="center" cellpadding="25">';
 					// output data of each row
 					while($row = mysqli_fetch_assoc($result)) {
@@ -101,10 +111,10 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 						echo '<tr><form class="appnitro" method="post" action=""><input type="hidden" name="event" value="'
 							.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$numStudents."</td><td>".$numVolunteers
 							."</td><td>".$row["startDateTime"]."</td><td>"
-							.$row["endDateTime"].'</td><td><input id="delete" class="button_text" type="submit" name="delete" 
-							value="Delete Event"></td></form><td><input onClick="location.href=\'eventPage.php?event='
-							.$id.'\'" id="signup2" class="button_text" type="submit" name="EditSubmit"
-							value="Edit Event"></td></tr>';	
+							.$row["endDateTime"].'</td><td><input id="signup" class="button_text" type="submit" name="submit"
+							value="Delete Event"></td></form><form class="appnitro" method="post" action="volunteerEventPage.php"><input type="hidden" name="event" value="'
+  							.$row["eventId"].'"><td><input onClick="volunteerEventPage()" id="signup2" class="button_text" type="submit" name="EditSubmit"
+							value="Edit Event"></td></form></tr>';
 					}
 					echo "</table>";
 				}
@@ -118,8 +128,8 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 		</div>
 	</body>
 </html>
-				
-<?php 
+
+<?php
 // Logic that handles submission of the form
 if (isset($_POST['submit'])) {
 	$event = $_POST['event'];
