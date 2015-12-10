@@ -84,7 +84,18 @@ if($rowsNumber>=2){
 			}
 		}
 		if($overlap){
-			echo '<a href="conflictPage.php" style="position: absolute; top: 250px; font-size: 18px; left:900px; Color:red;">Current schedule has conflict.<br> Click here to delete conflict Events.</a>';
+			echo ("<script>$.confirm({
+					'title'		: '',
+					'message'	: '<div align=\"center\">Current schedule has conflict.<br> Click here to delete conflicting event(s)</div>',
+					'buttons'	: {
+						'OK'	: {
+									'class'	: 'blue',
+									'action' : function(){
+										window.location.replace('conflictPage.php');
+									}
+								}
+							},
+					});</script>");
 		}
 }
 ?>
