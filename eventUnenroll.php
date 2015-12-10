@@ -11,9 +11,7 @@ switch($_SESSION['login_auth']){
 case "A":
 	header("location: Admin.php"); // Redirecting To Admin Page
 	break;
-case "V":
-	header("location: Volunteer.php"); // Redirecting To Volunteer Page
-	break;			
+		
 }
 ?>
 
@@ -21,7 +19,7 @@ case "V":
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="utf-8">
-		<title>Student Event Unenroll</title>
+		<title>Event Unenroll</title>
 		<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="theme.css" />
