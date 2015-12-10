@@ -42,9 +42,7 @@ case "A":
 			<input id="changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
 		</div>      
 		<div id="label">
-			<input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">        
-			<input id = "eventSignUp" class = "labelButton" type = "button" onClick="location.href='eventSignUp.php'" value="Event Sign Up">
-			<input id = "eventUnEnroll" class = "labelButton" type = "button" onClick="location.href='eventUnenroll.php'" value="Event Unenroll">
+			<input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">
 		</div>
 		<div id="main_body">
 			<div id="form_container">
@@ -99,28 +97,55 @@ if (isset($_POST['submit'])) {
 	if($eventData->num_rows){
 		$row = $eventData->fetch_object();
 		$maxStud = $row->maxStudents;
+		$maxVol = $row->maxVolunteers;
 		$sql = "DELETE FROM eventParticipation where (eventId=$event AND userId=$userid)";
 		
 		if (mysqli_query($connection, $sql)){
 			echo '<meta http-equiv="refresh" content="0">';
-			$maxStud ++;
-			if (!mysqli_query($connection, "UPDATE events SET maxStudents=$maxStud where eventId=$event")){
-				echo "<div>Events Database Error!!!</div>";
+			if ($_SESSION['login_auth'] == 'V'){
+				$maxVol++;
+				if (!mysqli_query($connection, "UPDATE events SET maxVolunteers=$maxVol where eventId=$event")){
+					echo "<div>Events Database Error!!!</div>";
+				}
+				else { 
+					echo ("<script>$.confirm({
+						'title'		: '',
+						'message'	: '<div align=\"center\">Unenrolled successfully</div>',
+						'buttons'	: {
+								'OK'	: {
+											'class'	: 'blue',
+										}
+									},
+						});</script>");
+				}
 			}
-			else { 
-				echo ("<script>$.confirm({
-					'title'		: '',
-					'message'	: '<div align=\"center\">Unenrolled successfully</div>',
-					'buttons'	: {
-							'OK'	: {
-										'class'	: 'blue',
-									}
-								},
-					});</script>");
+			else{
+				$maxStud ++;
+				if (!mysqli_query($connection, "UPDATE events SET maxStudents=$maxStud where eventId=$event")){
+					echo "<div>Events Database Error!!!</div>";
+				}
+				else { 
+					echo ("<script>$.confirm({
+						'title'		: '',
+						'message'	: '<div align=\"center\">Unenrolled successfully</div>',
+						'buttons'	: {
+								'OK'	: {
+											'class'	: 'blue',
+										}
+									},
+						});</script>");
+				}
 			}
-		}
-		else {
-			echo '<div style="position: absolute; top: 150; left: 100;">Unenroll not completed.</div>';
+		}else {
+			echo ("<script>$.confirm({
+						'title'		: '',
+						'message'	: '<div align=\"center\">Unenroll not completed</div>',
+						'buttons'	: {
+								'OK'	: {
+											'class'	: 'blue',
+										}
+									},
+						});</script>");
 		}
 	}
 	mysqli_close($connection); // Closing Connection;
