@@ -66,7 +66,7 @@ case "V":
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="radio" name="searchType" value="both">Search by both
 							</span>
-						<li style="left: 0px; top: -48px; width: 45%; height: 65px">
+						<li style="left: 0px; top: -36px; width: 45%; height: 65px">
 							<label class="description">Search by user </label>
 							<div>
 								<select name="user">
@@ -159,6 +159,7 @@ if (isset($_POST['submit'])) {
 				<div style="position: relative; left: 36%; float: left; display: inline-block;"><label class="description">Starts</label></div>
 				<div style="position: relative; left: 41%; float: left; display: inline-block;"><label class="description">Ends</label></div>
 				<div style="position: relative; left: 46%; float: left; display: inline-block;"><label class="description">Delete</label></div>
+				<div style="position: relative; left: 52%; float: left; display: inline-block;"><label class="description">Modify</label></div>
 				<table style="position: relative; top: 10px; left: -12%;" cellpadding="25">';
 			// output data of each row
 			while($row = mysqli_fetch_assoc($result)) {
@@ -178,12 +179,12 @@ if (isset($_POST['submit'])) {
 					$numVolunteers = mysqli_num_rows($result2);
 				}
 				echo '<tr><form class="appnitro" method="post" action=""><input type="hidden" name="event" value="'
-					.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$numStudents."</td><td>".$numVolunteers
-					."</td><td>".$row["startDateTime"]."</td><td>"
-					.$row["endDateTime"].'</td><td><input id="delete" class="button_text" type="submit" name="delete" 
-					value="Delete Event"></td></form><td><input onClick="location.href=\'eventPage.php?event='
+					.$row["eventId"].'"><td width="180px">'.$row["title"].'</td><td width="60px">'.$numStudents.'</td><td width="60px">'
+					.$numVolunteers.'</td><td width="90px">'.$row["startDateTime"].'</td><td width="90px">'
+					.$row["endDateTime"].'</td><td width="60px"><input id="delete" class="button_text" type="submit" name="delete" 
+					value="Delete"></td></form><td width="60px"><input onClick="location.href=\'eventPage.php?event='
 					.$id.'\'" id="signup2" class="button_text" type="submit" name="EditSubmit"
-					value="Edit Event"></td></tr>';	
+					value="Edit"></td></tr>';	
 			}
 			echo "</table>";
 		}

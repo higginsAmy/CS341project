@@ -65,12 +65,12 @@ case "A":
 				// Gets results for events that have not been removed that students have signed up for
 				$result = mysqli_query($connection, "select * from events join eventParticipation on 
 										events.eventId = eventParticipation.eventId where events.removed != 1 
-										AND eventParticipation.removed != 1 AND eventParticipation.userId = $userid");
+										AND eventParticipation.userId = $userid");
 				if (mysqli_num_rows($result)) {
 					echo '<div style="position: relative; left: 25px; top: 0px; width: 30%; display: inline-block; float: left;"><label class="description">Title</label></div>
 						<div style="float: left; width: 25%; display: inline-block;"><label class="description">Starts</label></div>
 						<div style="float: left; width: 25%; display: inline-block;"><label class="description">Ends</label></div>
-						<div style="float: left; width: 20%; display: inline-block;"><label class="description">Sign up</label></div>
+						<div style="float: left; width: 20%; display: inline-block;"><label class="description">Unenroll</label></div>
 						<table cellpadding="25" style="width: 90%;">';
 					// output data of each row  
 					while($row = mysqli_fetch_assoc($result)) {

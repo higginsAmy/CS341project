@@ -188,21 +188,85 @@ if (isset($_POST['submit'])) {
 	$startDateTime = $_POST['SYear']. "-" .$_POST['SMonth']. "-" .$_POST['SDay']. " " .$_POST['SHour']. ":" .$_POST['SMin']. ":00";
 	$endDateTime = $_POST['EYear']. "-" .$_POST['EMonth']. "-" .$_POST['EDay']. " " .$_POST['EHour']. ":" .$_POST['EMin']. ":00";
 	if(!checkDateTime($startDateTime)){
-		echo "<div>Start Date is not a valid date.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Start Date is not a valid date</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if(!checkDateTime($endDateTime)){
-		echo "<div>End Date is not a valid date.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">End Date is not a valid date</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if(!ctype_digit( $maxVol )){
-		echo "<div>Max Volunteer number is not a integer.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Max Volunteer number is not a integer</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if(!ctype_digit( $minVol )){
-		echo "<div>Min Volunteer number is not a integer.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Min Volunteer number is not a integer</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if(!ctype_digit( $minStud )){
-		echo "<div>Min Student number is not a integer.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Min Student number is not a integer</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if(!ctype_digit( $maxStud )){
-		echo "<div>Max Student number is not a integer.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Max Student number is not a integer</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if($today > $startDateTime  ){
-		echo "<div>Start Date is not onward.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Start date is not onward from today</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if($endDateTime < $startDateTime  ){
-		echo "<div>End Date is before Start Date.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">End date is before start date</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}
 	else{
 		$title = mysqli_real_escape_string($connection, $_POST['Title']);

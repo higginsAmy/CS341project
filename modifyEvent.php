@@ -75,12 +75,13 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 				}
 				$result = mysqli_query($connection, $query);
 				if (mysqli_num_rows($result)) {
-					echo '<div style="position: relative; left: 10px; top: 0px; width: 20%; display: inline-block; float: left;"><label class="description">Event Title</label></div>
-						<div style="float: left; width: 12%; display: inline-block;"><label class="description"># Students</label></div>
-						<div style="float: left; width: 15%; display: inline-block;"><label class="description"># Volunteers</label></div>
-						<div style="float: left; width: 18%; display: inline-block;"><label class="description">Starts</label></div>
-						<div style="float: left; width: 20%; display: inline-block;"><label class="description">Ends</label></div>
-						<div style="float: left; width: 15%; display: inline-block;"><label class="description">Delete</label></div>
+					echo '<div style="position: relative; left: 10px; top: 0px; width: 15%; display: inline-block; float: left;"><label class="description">Title</label></div>
+						<div style="float: left; width: 13%; display: inline-block;"><label class="description"># Students</label></div>
+						<div style="float: left; width: 16%; display: inline-block;"><label class="description"># Volunteers</label></div>
+						<div style="float: left; width: 14%; display: inline-block;"><label class="description">Starts</label></div>
+						<div style="float: left; width: 15%; display: inline-block;"><label class="description">Ends</label></div>
+						<div style="float: left; width: 14%; display: inline-block;"><label class="description">Delete</label></div>
+						<div style="float: left; width: 7%; display: inline-block;"><label class="description">Modify</label></div>
 						<table align="center" cellpadding="25">';
 					// output data of each row
 					while($row = mysqli_fetch_assoc($result)) {
@@ -103,9 +104,9 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 							.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$numStudents."</td><td>".$numVolunteers
 							."</td><td>".$row["startDateTime"]."</td><td>"
 							.$row["endDateTime"].'</td><td><input id="delete" class="button_text" type="submit" name="submit" 
-							value="Delete Event"></td></form><td><input onClick="location.href=\'eventPage.php?event='
+							value="Delete"></td></form><td><input onClick="location.href=\'eventPage.php?event='
 							.$id.'\'" id="signup2" class="button_text" type="submit" name="EditSubmit"
-							value="Edit Event"></td></tr>';	
+							value="Edit"></td></tr>';	
 					}
 					echo "</table>";
 				}
