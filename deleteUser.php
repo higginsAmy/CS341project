@@ -16,13 +16,13 @@ switch($_SESSION['login_auth']){
 		break;			
 }
 // Fetch username from GET variable
-$user = htmlspecialchars($_GET["username"]);
+$userid = htmlspecialchars($_GET["userid"]);
 ?>
 <!doctype html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Delete User <?php echo $user; ?></title>
+		<title>Delete User</title>
 		<!-- Styles --> 
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="theme.css" />
@@ -53,9 +53,9 @@ $user = htmlspecialchars($_GET["username"]);
 	  </div>
 	  <div id="main_body">&nbsp;
 		<div id="form_container" style="height: 250px;">
-			<h2>&nbsp;<a style="width: 637px">Delete <?php echo $user; ?></a></h2>
+			<h2>&nbsp;<a style="width: 637px">Delete User</a></h2>
 			<?php 
-			if (!$user){
+			if (!$userid){
 				echo "<div align='center'>No user selected for delete.</div>";
 			}
 			else {
@@ -68,8 +68,10 @@ $user = htmlspecialchars($_GET["username"]);
 					echo "</div>";
 				}
 				// SQL query to fetch information from target user.
-				$result = mysqli_query($connection, "select * from users where username ='$user'");
+				$result = mysqli_query($connection, "select * from users where id ='$userid'");
 				if ($result) {
+					$userRow = mysqli_fetch_assoc($result);
+					$user = $userRow['username'];
 					echo '<form class="appnitro" method="post" action=""><ul style="width: 103%;">
 						<li style="left: 0px; top: -3px; width: 45%; height: 65px"><label class="description">
 						Are you sure you want to delete '.$user.'? </label></li>
@@ -81,7 +83,7 @@ $user = htmlspecialchars($_GET["username"]);
 				}
 				// Logic that handles submission of the form
 				if (isset($_POST['submit'])) {
-					if(mysqli_query($connection, "DELETE FROM users WHERE username='$user'")){
+					if(mysqli_query($connection, "DELETE FROM users WHERE id = $userid")){
 						echo ("<script>$.confirm({
 							'title'		: '',
 							'message'	: '<div align=\"center\">User deleted successfully.</div>',
@@ -108,6 +110,8 @@ $user = htmlspecialchars($_GET["username"]);
 				mysqli_close($connection); // Closing Connection;
 			}
 			?>
-	  </div>
+			</div>
+			<img id="bottom" src="forms/bottom.png" alt="">
+		</div>
   </body>
 </html>

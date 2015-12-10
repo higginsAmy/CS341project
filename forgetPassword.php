@@ -113,7 +113,16 @@ if (isset($_POST['submit'])) {
 		$hash = password_hash($newPassword, PASSWORD_DEFAULT);
 		$sql = "UPDATE Users SET password='$hash' WHERE username='$user'";
 		if (!mysqli_query($connection, $sql)) {
-			echo "<div>Error updating record: " .mysqli_error($conn). "</div>";
+			echo ("<script>$.confirm({
+				'title'		: '',
+				'message'	: '<div align=\"center\">Error updating record: " .mysqli_error($conn). "</div>',
+				'buttons'	: {
+						'OK'	: {
+									'class'	: 'blue',
+								}
+							},
+				});</script>");
+			echo "<div></div>";
 		}
 		// Setup to send email
 		$mail = new PHPMailer(); // defaults to using php "mail()"
@@ -133,7 +142,15 @@ if (isset($_POST['submit'])) {
 		$mail->Body = $message;
 
 		if(!$mail->Send()) {
-			$msg = "Message failed! Mailer Error: " . $mail->ErrorInfo;
+			echo ("<script>$.confirm({
+				'title'		: '',
+				'message'	: '<div align=\"center\">Message failed! Mailer Error: " .$mail->ErrorInfo. "</div>',
+				'buttons'	: {
+						'OK'	: {
+									'class'	: 'blue',
+								}
+							},
+				});</script>");
 		}
 		else {
 			echo ("<script>$.confirm({

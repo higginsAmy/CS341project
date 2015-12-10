@@ -16,9 +16,14 @@ case "V":
 	header("location: Volunteer.php"); // Redirecting To Volunteer Page
 	break;			
 }
-
+?>
+<!doctype html>
+<html>
+<head></head>
+<body>
+<?php
 // Fetch username from GET variable
-$user = htmlspecialchars($_GET["username"]);
+$userid = htmlspecialchars($_GET["userid"]);
 // Create connection
 $connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
 // Check connection
@@ -28,12 +33,13 @@ if (mysqli_connect_errno($connection)) {
 	echo "</div>";
 }
 // SQL query to fetch information from target user.
-$result = mysqli_query($connection, "select * from users where username ='$user'");
+$result = mysqli_query($connection, "select * from users where id = $userid");
 if ($result) {
 	$userRow = mysqli_fetch_assoc($result);
 	$email = $userRow['email'];
 	$first = $userRow['first'];
 	$last = $userRow['last'];
+	$user = $userRow['username'];
 	$newPassword = "";
 	$i = 0;
 	
@@ -58,9 +64,18 @@ if ($result) {
 	}
 	// Hash password
 	$hash = password_hash($newPassword, PASSWORD_DEFAULT);
-	$sql = "UPDATE Users SET password='$hash' WHERE username='$user'";
+	$sql = "UPDATE Users SET password='$hash' WHERE id = $userid";
 	if (!mysqli_query($connection, $sql)) {
-		echo "Error updating record: " . mysqli_error($conn);
+		echo ("<script>$.confirm({
+				'title'		: '',
+				'message'	: '<div align=\"center\">Error updating record: " .mysqli_error($conn). "</div>',
+				'buttons'	: {
+						'OK'	: {
+									'class'	: 'blue',
+								}
+							},
+				});</script>");
+			echo "<div></div>";
 	}
 	// Setup to send email
 	$mail = new PHPMailer(); // defaults to using php "mail()"
@@ -80,11 +95,43 @@ if ($result) {
 	$mail->Body = $message;
 
 	if(!$mail->Send()) {
-		echo "Message failed! Mailer Error: " . $mail->ErrorInfo;
+		echo ("<script>$.confirm({
+				'title'		: '',
+				'message'	: '<div align=\"center\">Message failed! Mailer Error: " .$mail->ErrorInfo. "</div>',
+				'buttons'	: {
+						'OK'	: {
+									'class'	: 'blue',
+								}
+							},
+				});</script>");
+		echo "<script> window.location.replace('modifyUser.php') </script>";
+	}
+	else {
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Password reset successful</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
+		echo "<script> window.location.replace('modifyUser.php') </script>";
 	}
 }
 else {
-	echo "Zero results.";
+	echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Username invalid.  Please contact an administrator.</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
+	echo "<script> window.location.replace('modifyUser.php') </script>";
 }
 mysqli_close($connection); // Closing Connection
 ?>
+</body>
+</html>

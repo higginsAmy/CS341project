@@ -54,11 +54,11 @@ case "V":
 			echo "</div>";
 		}
 		// SQL query to fetch information of registerd users and finds user match.
-		$user = $_SESSION['login_id'];
-		$result = mysqli_query($connection, "select * from users where username !='$user'");
+		$userid = $_SESSION['login_id'];
+		$result = mysqli_query($connection, "select * from users where id != $userid");
 		if ($result) {
 			echo '<table><tr><th>First Name</th><th>Last Name</th><th>Email</th>'
-				.'<th>Username</th><th>Type</th><th>Password</th><th>Change User Type</th><th>Delete</th></tr>';
+				.'<th>Username</th><th>Type</th><th>Change User Type</th><th>Delete</th></tr>';
 			// output data of each row
 			while($row = mysqli_fetch_assoc($result)) {
 				switch ($row["auth"]){
@@ -74,8 +74,7 @@ case "V":
 				}
 				echo "<tr><td>".$row["first"]."</td><td>".$row["last"]."</td><td>".$row["email"]."</td><td>"
 					.$row["username"]."<a href='changeUsername.php?userid="
-					.$row["id"]."'> (Change)</a></td><td>".$userType."</td><td><a href='resetPassword.php?userid="
-					.$row["id"]."'>Reset Password</a></td><td><a href='changeAuth.php?userid="
+					.$row["id"]."'> (Change)</a></td><td>".$userType."</td><td><a href='changeAuth.php?userid="
 					.$row["id"]."'>Change User Type</a></td><td><a href='deleteUser.php?userid="
 					.$row["id"]."'>Delete User</a></td></tr>";
 			}

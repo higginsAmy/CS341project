@@ -16,13 +16,13 @@ switch($_SESSION['login_auth']){
 		break;			
 }
 // Fetch username from GET variable
-$user = htmlspecialchars($_GET["username"]);
+$userid = htmlspecialchars($_GET["userid"]);
 ?>
 <!doctype html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Change <?php echo $user; ?> User Type</title>
+		<title>Change User Type</title>
 		<!-- Styles --> 
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="theme.css" />
@@ -53,7 +53,7 @@ $user = htmlspecialchars($_GET["username"]);
 		</div>
 		<div id="main_body">&nbsp;
 			<div id="form_container" style="height: 250px;">
-				<h2>&nbsp;<a style="width: 637px">Change Authorization Type of <?php echo $user; ?></a></h2>
+				<h2>&nbsp;<a style="width: 637px">Change Authorization Type</a></h2>
 				<?php 
 				// Create connection
 				$connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
@@ -64,8 +64,10 @@ $user = htmlspecialchars($_GET["username"]);
 					echo "</div>";
 				}
 				// SQL query to fetch information from target user.
-				$result = mysqli_query($connection, "select * from users where username ='$user'");
+				$result = mysqli_query($connection, "select * from users where id = $userid");
 				if ($result) {
+					$userRow = mysqli_fetch_assoc($result);
+					$user = $userRow['username'];
 					echo '<form class="appnitro" method="post" action=""><div class="form_description">
 						Change the user type and level of authorization for '.$user.'</div><ul style="width: 103%;">
 						<li style="left: 0px; top: -3px; width: 45%; height: 65px"><label class="description">

@@ -20,7 +20,7 @@ $userid = htmlspecialchars($_GET["userid"]);
 
 <html>
 	<head>
-		<title>Change <?php echo $user; ?> Username</title>
+		<title>Change Username</title>
 		<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="theme.css" />
@@ -51,10 +51,10 @@ $userid = htmlspecialchars($_GET["userid"]);
 		</div>
 		<div id="main_body">&nbsp;
 			<div id="form_container" style="height: 250px;">
-				<h2>&nbsp;<a style="width: 637px">Change Username of <?php echo $user; ?></a></h2>
+				<h2>&nbsp;<a style="width: 637px">Change Username</a></h2>
 				<form class="appnitro" method="post" action="">
 					<div class="form_description">
-						Fill in the new username for <?php echo $user; ?>
+						Fill in the new username
 					</div>
 					<ul style="width: 103%;">
 						<li style="left: 0px; top: -3px; width: 45%; height: 65px">
@@ -77,9 +77,9 @@ $userid = htmlspecialchars($_GET["userid"]);
 					<div id="message">
 						<?php if(isset($message)){ echo $message; } ?>
 					</div>
-					<img id="bottom" src="forms/bottom.png" alt="">
 				</form>
 			</div>
+			<img id="bottom" src="forms/bottom.png" alt="">
 		</div>
 	</body>
 </html>
