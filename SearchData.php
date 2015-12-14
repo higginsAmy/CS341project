@@ -26,13 +26,11 @@ case "V":
 		<link rel="stylesheet" type="text/css" href="forms/view.css" media="all" />
 		<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" />
 		<link rel="Stylesheet" href="Dropit-1.1.1/dropit.css" type="text/css" />
-		
 		<!-- Scripts -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-			<script type="text/javascript" src="forms/view.js"></script>
-			<script src="jquery.confirm/jquery.confirm.js"></script>
+		<script type="text/javascript" src="forms/view.js"></script>
+		<script src="jquery.confirm/jquery.confirm.js"></script>
 		<script src="Dropit-1.1.1/dropit.js"></script>
-
 	</head>
 	<body>
 		<div id = "title">
@@ -168,12 +166,16 @@ if (isset($_POST['submit'])) {
 				$id = $row['eventId'];
 				$numStudents = 0;
 				$numVolunteers = 0;
+				
+				// Fetch count of students who are signed up for this event
 				if (!$result2 = mysqli_query($connection, "SELECT * FROM eventParticipation WHERE eventId=$id AND type='S'")){
 					echo "<div>Database error finding student count</div>";
 				}
 				else {
 					$numStudents = mysqli_num_rows($result2);
 				}
+				
+				// Fetch count of volunteers who are signed up to help for this event
 				if (!$result2 = mysqli_query($connection, "SELECT * FROM eventParticipation WHERE eventId=$id AND type='V'")){
 					echo "<div>Database error finding volunteer count</div>";
 				}
@@ -195,6 +197,7 @@ if (isset($_POST['submit'])) {
 		}
 	}
 }
+
 // Logic that handles pressing the "Delete" button
 if (isset($_POST['delete'])) {
 	$event = $_POST['event'];

@@ -189,6 +189,8 @@ if (isset($_POST['submit'])) {
 	$today = date("Y-m-d H:i:s");
 	$startDateTime = $_POST['SYear']. "-" .$_POST['SMonth']. "-" .$_POST['SDay']. " " .$_POST['SHour']. ":" .$_POST['SMin']. ":00";
 	$endDateTime = $_POST['EYear']. "-" .$_POST['EMonth']. "-" .$_POST['EDay']. " " .$_POST['EHour']. ":" .$_POST['EMin']. ":00";
+	
+	// Check if values entered are valid
 	if(!checkDateTime($startDateTime)){
 		echo ("<script>$.confirm({
 			'title'		: '',

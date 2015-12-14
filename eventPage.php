@@ -1,7 +1,7 @@
 <?php
-//error_reporting(-1);
-//ini_set('display_errors', 'On');
-//set_error_handler("var_dump");
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler("var_dump");
 
 include('session.php');
 if (!isset($_SESSION['login_auth'])){
@@ -223,22 +223,88 @@ if (isset($_POST['submit'])) {
 	$today = date("Y-m-d H:i:s");
 	$startDateTime = $_POST['SYear']. "-" .$_POST['SMonth']. "-" .$_POST['SDay']. " " .$_POST['SHour']. ":" .$_POST['SMin']. ":00";
 	$endDateTime = $_POST['EYear']. "-" .$_POST['EMonth']. "-" .$_POST['EDay']. " " .$_POST['EHour']. ":" .$_POST['EMin']. ":00";
+	
+	// Check if values entered are valid
 	if(!checkDateTime($startDateTime)){
-		echo "<div>Start Date is not a valid date.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Start Date is not a valid date</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if(!checkDateTime($endDateTime)){
-		echo "<div>End Date is not a valid date.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">End Date is not a valid date</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if(!ctype_digit( $maxVol )){
-		echo "<div>Max Volunteer number is not a integer.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Max Volunteer number is not a integer</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if(!ctype_digit( $minVol )){
-		echo "<div>Min Volunteer number is not a integer.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Min Volunteer number is not a integer</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if(!ctype_digit( $minStud )){
-		echo "<div>Min Student number is not a integer.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Min Student number is not a integer</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if(!ctype_digit( $maxStud )){
-		echo "<div>Max Student number is not a integer.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Max Student number is not a integer</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if($today > $startDateTime  ){
-		echo "<div>Start Date is not onward.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">Start date is not onward from today</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}else if($endDateTime < $startDateTime  ){
-		echo "<div>End Date is before Start Date.</div>";
+		echo ("<script>$.confirm({
+			'title'		: '',
+			'message'	: '<div align=\"center\">End date is before start date</div>',
+			'buttons'	: {
+					'OK'	: {
+								'class'	: 'blue',
+							}
+						},
+			});</script>");
 	}
 	else{
 		// Create connection
@@ -254,7 +320,7 @@ if (isset($_POST['submit'])) {
 		$location = mysqli_real_escape_string($connection, $_POST['Location']);
 		$description = mysqli_real_escape_string($connection, $_POST['Desc']);
 
-		// Insert event into database
+		// Modify event in database
 		$newQuery = "UPDATE events SET title='$title', description='$description', location='$location', startDateTime='$startDateTime',
 			endDateTime='$endDateTime', minVolunteers=$minVol, maxVolunteers=$maxVol, minStudents=$minStud, maxStudents=$maxStud where eventId=$event";
 

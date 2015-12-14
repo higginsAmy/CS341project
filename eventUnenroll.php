@@ -106,6 +106,7 @@ if (isset($_POST['submit'])) {
 			echo '<meta http-equiv="refresh" content="0">';
 			if ($_SESSION['login_auth'] == 'V'){
 				$maxVol++;
+				// Increment maxVolunteers in database (used to control volunteer signup) if user is a volunteer
 				if (!mysqli_query($connection, "UPDATE events SET maxVolunteers=$maxVol where eventId=$event")){
 					echo "<div>Events Database Error!!!</div>";
 				}
@@ -123,6 +124,7 @@ if (isset($_POST['submit'])) {
 			}
 			else{
 				$maxStud ++;
+				// Increment maxStudents in database (used to control student signup) if user is a student
 				if (!mysqli_query($connection, "UPDATE events SET maxStudents=$maxStud where eventId=$event")){
 					echo "<div>Events Database Error!!!</div>";
 				}

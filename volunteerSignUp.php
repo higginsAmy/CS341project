@@ -65,7 +65,7 @@ case "S":
 					echo "</div>";
 				}
 
-				//get user id
+				// Get user id
 				$userid = $_SESSION['login_id'];
 				
 				// Gets results for events that have not been removed and have not reached their maximum number of Volunteers
@@ -77,7 +77,7 @@ case "S":
 						<div style="float: left; width: 25%; display: inline-block;"><label class="description">Ends</label></div>
 						<div style="float: left; width: 20%; display: inline-block;"><label class="description">Sign up</label></div>
 						<table cellpadding="25" style="width: 90%;">';
-					// output data of each row
+					// Output data of each row
 					while($row = mysqli_fetch_assoc($result)) {
 						$eventsAttended = mysqli_query($connection, "select * from eventParticipation where userId = $userid");
 						$check = true;
@@ -86,7 +86,7 @@ case "S":
 								$check = false;
 							}
 						}
-						// Only displays events that the students are not already signed up for.
+						// Only display events that the volunteer is not already signed up for.
 						if ($check){
 							echo '<tr><form action="" class="appnitro" method="post"><input type="hidden" name="event" value="'
 							.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]
@@ -131,11 +131,11 @@ if (isset($_POST['submit'])) {
 		}
 	}
 	if($overlap == false){
-		// Check if student previously signed up and then cancelled
 		$sql = "INSERT INTO eventParticipation (eventId, userId, type) VALUES($event, $userid, 'V')";
 		if (mysqli_query($connection, $sql)){
 			echo '<meta http-equiv="refresh" content="0">';
 			$maxVols --;
+			// Decrement maxVolunteers in database (used to control volunteer signup)
 			if (!mysqli_query($connection, "UPDATE events SET maxVolunteers=$maxVols where eventId=$event")){
 				echo "<div>Error!!!</div>";
 			}

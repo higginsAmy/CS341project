@@ -66,6 +66,8 @@ if (mysqli_connect_errno($connection)) {
 }
 $eventsAttended = mysqli_query($connection, "SELECT * FROM eventParticipation WHERE userId = $userid");
 $rowsNumber = $eventsAttended->num_rows;
+
+// Check for schedule overlap
 if($rowsNumber>=2){
 		while($rows = $eventsAttended->fetch_object()){
 			$theEvent = mysqli_query($connection, "select * from events WHERE eventId = $rows->eventId");

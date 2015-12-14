@@ -32,7 +32,6 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script type="text/javascript" src="forms/view.js"></script>
 		<script src="jquery.confirm/jquery.confirm.js"></script>
-
 	</head>
 	<body>
 		<div id = "title">
@@ -52,8 +51,8 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 				<h2>&nbsp;<a style="width: 637px">Modify An Event</a></h2>
 				<div class="form_description">
 					You may modify only events that you have created, 
-					unless you are an administrator.  If you have not created any events, 
-					none will show up here.
+					unless you are an administrator.  If you are a volunteer and have not 
+					created any events, none will show up here.
 				</div>
 				<?php 
 				// Fetch username from session
@@ -68,10 +67,11 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 					echo "</div>";
 				}
 				
-				// SQL query to fetch events created by user
+				// If user is admin, fetch all events
 				if ($type == 'A'){
 					$query = "select * from events where removed !=1 GROUP BY startDateTime";
 				}
+				// If user is not admin (volunteer), fetch events created by user
 				else {
 					$query = "select * from events where creator=$userid and removed!=1 GROUP BY startDateTime";
 				}
@@ -130,7 +130,7 @@ if (isset($_POST['submit'])) {
 	// SQL query to fetch information from target user.
 	$result = mysqli_query($connection, "select * from events where eventId=$event");
 	if (mysqli_num_rows($result)) {
-		if(mysqli_query($connection, "Update events SET removed=1 WHERE eventID=$event")){
+		if(mysqli_query($connection, "UPDATE events SET removed=1 WHERE eventID=$event")){
 			echo '<meta http-equiv="refresh" content="0">';
 			echo ("<script>$.confirm({
 				'title'		: '',

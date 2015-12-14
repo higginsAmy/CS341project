@@ -15,7 +15,7 @@ switch($_SESSION['login_auth']){
 		header("location: Volunteer.php"); // Redirecting To Volunteer Page
 		break;			
 }
-// Fetch username from GET variable
+// Fetch userid from GET variable
 $userid = htmlspecialchars($_GET["userid"]);
 ?>
 <!doctype html>

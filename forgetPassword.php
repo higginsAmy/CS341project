@@ -143,6 +143,7 @@ if (isset($_POST['submit'])) {
 		$mail->Subject    = "[Auto-Notification] Holmen Robotics Password Reset";
 		$mail->Body = $message;
 
+		// Alert user if mail not sent
 		if(!$mail->Send()) {
 			echo ("<script>$.confirm({
 				'title'		: '',

@@ -55,13 +55,13 @@ case "V":
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 			echo "</div>";
 		}
-		// SQL query to fetch information of registerd users and finds user match.
+		// SQL query to fetch information of registered users except for the current user.
 		$userid = $_SESSION['login_id'];
 		$result = mysqli_query($connection, "select * from users where id != $userid");
 		if ($result) {
 			echo '<table><tr><th>First Name</th><th>Last Name</th><th>Email</th>'
 				.'<th>Username</th><th>Type</th><th>Change User Type</th><th>Delete</th></tr>';
-			// output data of each row
+			// Output data of each row
 			while($row = mysqli_fetch_assoc($result)) {
 				switch ($row["auth"]){
 					case "A":

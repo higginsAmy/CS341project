@@ -23,7 +23,7 @@ case "V":
 		<meta charset="utf-8">
 		<meta name="description" content="Student event signup page for the Holmen High School Robotics Team">
 		<meta name="author" content="Adam Geipel, Amy Higgins, Changsong Li">
-		<title>Student Event SignUp</title>
+		<title>Student | Event SignUp</title>
 		<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="theme.css" />
@@ -83,7 +83,7 @@ case "V":
 								$check = false;
 							}
 						}
-						// Only displays events that the students are not already signed up for.
+						// Only display events that the student is not already signed up for.
 						if ($check){
 							echo '<tr><form action="" class="appnitro" method="post"><input type="hidden" name="event" value="'
 							.$row["eventId"].'"><td>'.$row["title"]."</td><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]
@@ -133,6 +133,7 @@ if (isset($_POST['submit'])) {
 		if (mysqli_query($connection, $sql)){
 			echo '<meta http-equiv="refresh" content="0">';
 			$maxStud --;
+			// Decrement maxStudent count (used to control student signup)
 			if (!mysqli_query($connection, "UPDATE events SET maxStudents=$maxStud where eventId=$event")){
 				echo "<div>Error!!!</div>";
 			}

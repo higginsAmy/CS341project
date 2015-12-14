@@ -137,8 +137,9 @@ if (isset($_POST['submit'])) {
 		$password = $_POST['password'];
 		$auth = $_POST['type'];
 		$hash = password_hash($password, PASSWORD_DEFAULT);
-		$query = "INSERT INTO users (first, last, email, username, password, auth) VALUES "
-			."('$first', '$last', '$email', '$username', '$hash', '$auth')";
+		$query = "INSERT INTO users (first, last, email, username, password, auth) VALUES 
+			('$first', '$last', '$email', '$username', '$hash', '$auth')";
+			
 		if(mysqli_query($connection, $query)){
 			echo ("<script>$.confirm({
 					'title'		: '',
