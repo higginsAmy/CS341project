@@ -21,6 +21,8 @@ case "S":
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="utf-8">
+		<meta name="description" content="Volunteer signup page for the Holmen High School Robotics Team">
+		<meta name="author" content="Adam Geipel, Amy Higgins, Changsong Li">
 		<title>Volunteer Event Sign Up</title>
 		<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />

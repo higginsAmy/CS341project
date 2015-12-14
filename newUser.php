@@ -20,6 +20,8 @@ switch($_SESSION['login_auth']){
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="description" content="New user admin page for the Holmen High School Robotics Team">
+		<meta name="author" content="Adam Geipel, Amy Higgins, Changsong Li">
 		<title>Add New User</title>
 		<!-- Styles --> 
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />

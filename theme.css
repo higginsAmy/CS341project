@@ -132,22 +132,6 @@ body {
     font-size: 15px;
 }
 
-#viewNote{
-    height:30px;
-	width:120px;
-    top:5px;
-    left:8%;
-    font-size: 15px;
-}
-
-#clockIn{
-    height:30px;
-	width:95px;
-    top:5px;
-    left:25%;
-    font-size: 15px;
-}
-
 #eventSignUp{
     height:30px;
     width: 160px;

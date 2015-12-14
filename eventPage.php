@@ -53,7 +53,9 @@ if($connection){
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="description" content="Event modification page for the Holmen High School Robotics Team">
+		<meta name="author" content="Adam Geipel, Amy Higgins, Changsong Li">
 		<title>Event Creator</title>
 		<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />

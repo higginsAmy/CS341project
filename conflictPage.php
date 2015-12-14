@@ -19,6 +19,8 @@ $success='';
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="description" content="Event time conflict student page for the Holmen High School Robotics Team">
+		<meta name="author" content="Adam Geipel, Amy Higgins, Changsong Li">
 		<title>Modify Event</title>
 		<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
@@ -30,7 +32,6 @@ $success='';
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script type="text/javascript" src="forms/view.js"></script>
 		<script src="jquery.confirm/jquery.confirm.js"></script>
-
 	</head>
 	<body>
 		<div id = "title">

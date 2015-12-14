@@ -20,6 +20,9 @@ $userid = htmlspecialchars($_GET["userid"]);
 
 <html>
 	<head>
+	  	<meta charset="utf-8">
+		<meta name="description" content="Change username admin page for the Holmen High School Robotics Team">
+		<meta name="author" content="Adam Geipel, Amy Higgins, Changsong Li">
 		<title>Change Username</title>
 		<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />

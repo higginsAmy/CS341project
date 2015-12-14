@@ -23,6 +23,8 @@ if(isset($_SESSION['login_id']) && isset($_SESSION['login_auth'])){
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="description" content="Login page for the Holmen High School Robotics Site">
+		<meta name="author" content="Adam Geipel, Amy Higgins, Changsong Li">
 		<title>Holmen Robotics Login</title>
 		<!-- Styles --> 
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />

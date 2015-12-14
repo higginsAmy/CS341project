@@ -14,22 +14,24 @@ case "S":
 ?>
 <!doctype html>
 <html>
-  <head>
-  	<meta charset="utf-8">
-    <title>Volunteer | Holmen Robotics</title>
-    <!-- Styles -->
-	<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="theme.css" />
-    <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
-	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cuprum&amp;subset=latin' />
-	<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" />
-	<!-- Scripts -->
-	<script src='fullcalendar/lib/jquery.min.js'></script>
-	<script src='fullcalendar/lib/moment.min.js'></script>
-	<script src='fullcalendar/fullcalendar.js'></script>
-	<script src="jquery.confirm/jquery.confirm.js"></script>
-	<?php include ('volCal.php'); ?>
-  </head>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Volunteer main page for the Holmen High School Robotics Team">
+		<meta name="author" content="Adam Geipel, Amy Higgins, Changsong Li">
+		<title>Volunteer | Holmen Robotics</title>
+		<!-- Styles -->
+		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="theme.css" />
+		<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+		<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cuprum&amp;subset=latin' />
+		<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" />
+		<!-- Scripts -->
+		<script src='fullcalendar/lib/jquery.min.js'></script>
+		<script src='fullcalendar/lib/moment.min.js'></script>
+		<script src='fullcalendar/fullcalendar.js'></script>
+		<script src="jquery.confirm/jquery.confirm.js"></script>
+		<?php include ('volCal.php'); ?>
+	</head>
     <body>
         <div id = "title">
             <a href="Volunteer.php">
@@ -52,6 +54,7 @@ case "S":
 		</div>
 	</body>
 </html>
+
 <?php
 $userid = $_SESSION['login_id'];
 $connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
@@ -85,7 +88,18 @@ if($rowsNumber>=2){
 			}
 		}
 		if($overlap){
-			echo '<a href="conflictPage.php" style="position: absolute; top: 250px; font-size: 18px; left:900px; Color:red;">Current schedule has conflict.<br> Click here to delete conflict Events.</a>';
+			echo ("<script>$.confirm({
+					'title'		: '',
+					'message'	: '<div align=\"center\">Current schedule has conflict.<br> Click here to delete conflicting event(s)</div>',
+					'buttons'	: {
+						'OK'	: {
+									'class'	: 'blue',
+									'action' : function(){
+										window.location.replace('conflictPage.php');
+									}
+								}
+							},
+					});</script>");
 		}
 }
 ?>

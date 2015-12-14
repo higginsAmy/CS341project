@@ -12,6 +12,8 @@ if (!isset($_SESSION['login_auth'])){
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="description" content="Change password page for the Holmen High School Robotics Team">
+		<meta name="author" content="Adam Geipel, Amy Higgins, Changsong Li">
 		<title>Change Password</title>
 		<!-- Styles --> 
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />

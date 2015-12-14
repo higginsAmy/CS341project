@@ -7,26 +7,26 @@ include('session.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-  	<meta charset="utf-8">
-    <title>View Event</title>
- 	<!-- Styles --> 
-    <link rel="stylesheet" type="text/css" href="theme.css">
-	<link rel="stylesheet" type="text/css" href="forms/view.css" media="all">
-  </head>
-  <body>
-	  <div id = "title">
-		<a href="Student.php">
-			<h2 id = "titleName">
-			  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
-			</h2>
-		</a>
-		<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
-		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
-	  </div>      
-	  <div id="label">
-	  </div>
-	  <div id="main_body">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="View event page for the Holmen High School Robotics Team">
+		<meta name="author" content="Adam Geipel, Amy Higgins, Changsong Li">
+		<title>View Event</title>
+		<!-- Styles --> 
+		<link rel="stylesheet" type="text/css" href="theme.css">
+		<link rel="stylesheet" type="text/css" href="forms/view.css" media="all">
+	</head>
+	<body>
+		<div id = "title">
+			<a href="Student.php">
+				<h2 id = "titleName">
+				  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
+				</h2>
+			</a>
+			<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
+			<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
+		</div>      
+		<div id="main_body">
 		<?php 
 		// Fetch username from GET variable
 		$eventID = htmlspecialchars($_GET["eventID"]);

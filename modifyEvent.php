@@ -19,6 +19,8 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="description" content="Modify event page for the Holmen High School Robotics Team">
+		<meta name="author" content="Adam Geipel, Amy Higgins, Changsong Li">
 		<title>Modify Event</title>
 		<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />

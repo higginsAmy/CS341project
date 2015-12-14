@@ -19,26 +19,36 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 ?>
 <!doctype html>
 <html>
-  <head>
-  	<meta charset="utf-8">
-    <title>Delete Event</title>
- 	<!-- Styles --> 
-    <link rel="stylesheet" type="text/css" href="theme.css">
-  </head>
-  <body>
-	  <div id = "title">
-		<a href="Volunteer.php">
-			<h2 id = "titleName">
-			  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
-			</h2>
-		</a>
-		<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
-		<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
-	  </div>      
-	  <div id="label">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Delete event admin page for the Holmen High School Robotics Team">
+		<meta name="author" content="Adam Geipel, Amy Higgins, Changsong Li">
+		<title>Delete Event</title>
+		<!-- Styles -->
+		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="theme.css" />
+		<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cuprum&amp;subset=latin' />
+		<link rel="stylesheet" type="text/css" href="forms/view.css" media="all">
+		<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" />
+		<!-- Scripts -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script type="text/javascript" src="forms/view.js"></script>
+		<script src="jquery.confirm/jquery.confirm.js"></script>
+	</head>
+	<body>
+		<div id = "title">
+			<a href="Volunteer.php">
+				<h2 id = "titleName">
+				  <img id = "titleIcon" src = "calendar-icon.png"  alt="icon"> Holmen High School Robotics Club 
+				</h2>
+			</a>
+			<input id = "log" class="button"  type="button" onClick="location.href='logout.php'" value="Log out">
+			<input id = "changePassword" class="button"  type="button" onClick="location.href='changePassword.php'" value="Change password">
+		</div>      
+		<div id="label">
 			<input id = "help" class="labelButton"  type="button" onClick="location.href='help.html'" value="Help">
 		</div>
-	  <div id="body">
+		<div id="body">
 		<?php 
 		// Fetch eventID from GET variable
 		$event = htmlspecialchars($_GET["eventID"]);
@@ -66,6 +76,6 @@ $success=''; // Variable to hold reporting of success or failure of mySQL update
 		mysql_close($connection); // Closing Connection;
 		?>
 		<div style="position: absolute; top: 350px; left: 500px;"><?php echo $success; ?></div>
-	  </div>
-  </body>
+		</div>
+	</body>
 </html>
