@@ -17,8 +17,10 @@ $event = htmlspecialchars($_GET["event"]);
 
 $connection = mysqli_connect("localhost", "root", "091904", "holmenHighSchool");
 if($connection){
+	// get event by the eventID
 	$eventObject = mysqli_query($connection, "SELECT * FROM events WHERE eventId =".$event);
 	if($eventObject){
+		//fecth all previous imformation from database and fill to the placeholes to the page
 		$row = $eventObject->fetch_object();
 		$eventTitle = $row->title;
 		$minVolunteers = $row->minVolunteers;
@@ -28,9 +30,11 @@ if($connection){
 		$description = $row->description;
 		$location = $row->location;
 
+		//get startDateTime and endDateTime
 		$startDateTime = $row->startDateTime;
 		$endDateTime = $row->endDateTime;
 
+		// break two DateTime to year, month, day, hour and minutes.
 		$SYear = $startDateTime{0}.$startDateTime{1}.$startDateTime{2}.$startDateTime{3};
 		$SMonth = $startDateTime{5}.$startDateTime{6};
 		$SDay = $startDateTime{8}.$startDateTime{9};
@@ -44,10 +48,7 @@ if($connection){
 		$EMin = $endDateTime{14}.$endDateTime{15};
 	}
 	mysqli_close($connection);
-}else{
-
 }
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -223,7 +224,7 @@ if (isset($_POST['submit'])) {
 	$today = date("Y-m-d H:i:s");
 	$startDateTime = $_POST['SYear']. "-" .$_POST['SMonth']. "-" .$_POST['SDay']. " " .$_POST['SHour']. ":" .$_POST['SMin']. ":00";
 	$endDateTime = $_POST['EYear']. "-" .$_POST['EMonth']. "-" .$_POST['EDay']. " " .$_POST['EHour']. ":" .$_POST['EMin']. ":00";
-	
+
 	// Check if values entered are valid
 	if(!checkDateTime($startDateTime)){
 		echo ("<script>$.confirm({
