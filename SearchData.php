@@ -50,7 +50,7 @@ case "V":
 			<input id = "modifyUser" class="labelButton"  type="button" onClick="location.href='modifyUser.php'" value="Modify user">
 		</div>
 	  
-		<div id="main_body">
+		<div id="main_body">&nbsp;
 			<div id="form_container">
 				<h2>&nbsp;<a style="width: 637px">Search Events</a></h2>
 				<form class="appnitro" method="post" action="">

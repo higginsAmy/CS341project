@@ -334,6 +334,7 @@ if (isset($_POST['submit'])) {
 									}
 								},
 					});</script>");
+					echo "<script> window.location.replace('modifyEvent.php') </script>";
 		}
 		else {
 			echo ("<script>$.confirm({

@@ -52,7 +52,7 @@ case "S":
 			<input id = "eventSignUp" class="labelButton"  type="button" onClick="location.href='volunteerSignUp.php'" value="Sign up for event">
 			<input id = "eventUnEnroll" class="labelButton"  type="button" onClick="location.href='eventUnenroll.php'" value="Event Unenroll">
 		</div>
-		<div id="main_body">
+		<div id="main_body">&nbsp;
 			<div id="form_container">
 				<h2>&nbsp;<a style="width: 637px">Event Signup</a></h2>
 				<?php
