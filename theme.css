@@ -1,4 +1,9 @@
+body {
+	font-family: 'Cuprum','Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
 #body{
+	margin: 0 20px 40px 5px;
 	position:relative;
 	overflow:hidden;
 	width: 100%;
@@ -9,7 +14,7 @@
 #label{
     position:relative;
     overflow:hidden;
-    border-bottom: 2px solid #3366CC;
+    border-bottom: 2px solid rgb(75,148,255);
     width: 100%;
     height: 40px;
     background: #E6E6E6;
@@ -18,72 +23,72 @@
 #title{
     position:relative;
     overflow:hidden;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid rgb(75,148,255);
     width: 100%;
     height: 100px;
-    background: black;
+    background: grey;
 }
 
 #titleName{
     position: relative;
     top: 10px;
     font-size: 30px;
-    color: white;
-    left: 190px;
+    color: rgb(121,189,219);
+    left: 150px;
     width: 50%; 
 }
+
 #titleIcon{
     height: 100px;
     width: 100px;
     position: absolute;
-    left: -110px;
+    left: -140px;
     top: -35px;
 }
 
 .button{
     position: absolute; 
 }
-#log{
-    height:40px;
-	width:100px;
-    color: white;
-    background-color: black;
-    border-color: white;
-    top:55px;
-    left:85%;
-    font-size: 25px;
-    border-style: solid; 
-}
 
 #changePassword{
     border: hidden;
-    height:20px;
+    height:25px;
 	width:100px;
-    color: white;
-    background-color: black;
-    top:30px;
+    color: rgb(121,189,219);
+    background-color: #888888;
+    top:25px;
     left: 85%;
-    font-size: 9px;
+    font-size: 13px;
     border: 1px solid white; 
+}
+
+#changePassword:hover{
+    color: black;
+    background-color: white;
 }
 
 #forgetPassword{
     border: hidden;
-    height:20px;
+    height:25px;
 	width:100px;
-    color: white;
-    background-color: black;
-    top:30px;
+    color: rgb(121,189,219);
+    background-color: #888888;
+    top:25px;
     left: 85%;
-    font-size: 9px;
+    font-size: 10.25px;
     border: 1px solid white; 
+}
+
+#forgetPassword:hover{
+    color: black;
+    background-color: white;
 }
 
 #log{
     height:40px;
 	width:100px;
-    color: white;
-    background-color: black;
+    color: rgb(121,189,219);
+    background-color: #888888;
     border-color: white;
     top:55px;
     left:85%;
@@ -98,86 +103,114 @@
 
 .labelButton:hover{
     color: white;
-    background-color: #3366CC;
+    background-color: rgb(75,173,255);
 }
 
 .labelButton{
     position: absolute; 
-    color: #3366CC;
+    color: rgb(75,173,255);
     background-color: #E6E6E6;
-    border-color: #3366CC;
+    border-color: rgb(75,173,255);
     font-weight: 900;
     border-style:hidden;
-    border-bottom: 2px solid #3366CC;
+    border-bottom: 2px solid rgb(75,148,255);
 }
+
 #contact{
     height:30px;
 	width:95px;
     top:5px;
     left:25%;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 #donate{
     height:30px;
 	width:95px;
     top:5px;
-    left:10%;
-    font-size: 20px;
+    left:15%;
+    font-size: 15px;
 }
 
-#viewNote{
+#eventSignUp{
     height:30px;
-	width:120px;
+    width: 160px;
     top:5px;
-    left:8%;
-    font-size: 20px;
+    left: 40%;
+    font-size: 15px;
 }
 
-#clockIn{
+#eventUnEnroll{
     height:30px;
-	width:95px;
+    width: 160px;
     top:5px;
-    left:25%;
-    font-size: 20px;
+    left: 75%;
+    font-size: 15px;
 }
 
-#ModifykHours{
+#help{
     height:30px;
-	width:180px;
+	width:80px;
     top:5px;
     left:5%;
-    font-size: 12px;
-}#addevent{
+    font-size: 15px;
+}
+
+#addEvent{
     height:30px;
 	width:110px;
     top:5px;
     left:25%;
-    font-size: 12px;
-}#modifyuser{
-    height:30px;
-	width:110px;
-    top:5px;
-    left:40%;
-    font-size: 12px;
-}#modifyItems{
+    font-size: 15px;
+
+}
+
+#modifyEvent{
     height:30px;
 	width:110px;
     top:5px;
     left:55%;
-    font-size: 12px;
-}#seeMessage{
+    font-size: 15px;    
+}
+
+#modifyUser{
     height:30px;
 	width:110px;
+    top:5px;
+    left:40%;
+    font-size: 15px;
+}
+
+#searchData{
+    height:30px;
+	width:150px;
     top:5px;
     left:70%;
-    font-size: 12px;
-}#adminHome{
-    height:30px;
-	width:110px;
-    top:5px;
-    left:85%;
-    font-size: 12px;
+    font-size: 15px;
+}
+
+#paragraphBodyLong{
+    height: 140px;
+    width: 600px;
+    top: 5px;
+    left: 55%;
+    font-size: 14px;
+    padding: 20px;
+    background-color: #888888;
+}
+
+#paragraphBodyShort{
+    height: 80px;
+    width: 600px;
+    top: 5px;
+    left: 55%;
+    font-size: 14px;
+    padding: 20px;
+    background-color: #888888;
+}
+
+a {
+    text-decoration: none;
 }
 
 .required{
